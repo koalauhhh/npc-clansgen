@@ -30,7 +30,7 @@ from scripts.housekeeping.version import get_version_info, SAVE_VERSION_NUMBER
 from scripts.utility import (
     get_current_season,
     quit,
-    clan_symbol_sprite, get_living_clan_cat_count,
+    clan_symbol_sprite, get_living_clan_cat_count, create_new_cat
 )  # pylint: disable=redefined-builtin
 
 
@@ -217,7 +217,7 @@ class Clan:
                     "deputy",
                     "elder",
                 ]
-            ),
+            ), clan=self.name
         )
         self.instructor.dead = True
         self.instructor.dead_for = randint(20, 200)
@@ -264,7 +264,10 @@ class Clan:
                     + names.names_dict["clan_prefixes"]
                 )
             other_clan = OtherClan(name=other_clan_name)
+            other_clan.create_clan_cats()
             self.all_clans.append(other_clan)
+
+        game.save_cats()
         self.save_clan()
         game.save_clanlist(self.name)
         game.switches["clan_list"] = game.read_clans()
@@ -347,7 +350,7 @@ class Clan:
                 self.med_cat_list.remove(cat.ID)
                 self.med_cat_predecessors += 1
 
-    def add_to_clan(self, cat):
+    def add_to_clan(self, cat, other_clan=None):
         """
         TODO: DOCS
         """
@@ -355,10 +358,20 @@ class Clan:
             cat.ID in Cat.all_cats
             and not cat.outside
             and not cat.dead
+            and cat.clan is None
             and cat.ID in Cat.outside_cats
-        ):
+        ): # if cat from outside
             # The outside-value must be set to True before the cat can go to cotc
             Cat.outside_cats.pop(cat.ID)
+            cat.clan = str(game.clan.name)
+        elif (
+            cat.ID in Cat.all_cats
+            and not cat.outside
+            and not cat.dead
+            and cat.clan == other_clan
+        ): # if cat from other clan
+            # The outside-value must be set to True and clan value set correctly before the cat can go to oc
+            other_clan.clan_cats.pop(cat.ID)
             cat.clan = str(game.clan.name)
 
     def add_to_outside(self, cat):  # same as add_cat
@@ -366,9 +379,28 @@ class Clan:
         Places the gone cat into cotc.
         It should not be removed from the list of cats in the clan
         """
-        if cat.ID in Cat.all_cats and cat.outside and cat.ID not in Cat.outside_cats:
+        if (
+            cat.ID in Cat.all_cats
+            and cat.outside
+            and cat.ID not in Cat.outside_cats
+        ):
             # The outside-value must be set to True before the cat can go to cotc
             Cat.outside_cats.update({cat.ID: cat})
+    
+    def add_to_oc(self, cat, other_clan):  # same as add_cat
+        """
+        Places the gone cat into specified oc.
+        It should not be removed from the list of cats in the clan
+        """
+        if (
+            cat.ID in Cat.all_cats
+            and cat.outside
+            and not cat.dead
+            and cat.clan == other_clan
+            and cat.ID not in other_clan.clan_cats
+        ):
+            # The outside + other_clan-values must be set to True and clan value set correctly before the cat can go to oc
+            other_clan.clan_cats.update({cat.ID: cat})
 
     def remove_cat(self, ID):  # ID is cat.ID
         """
@@ -521,7 +553,40 @@ class Clan:
         clan_data["patrolled_cats"] = [str(i) for i in game.patrolled]
 
         # OTHER CLANS
-        clan_data["other_clans"] = [vars(i) for i in self.all_clans]
+        # TODO: watch other clan save order in order to figure out load order
+        clan_data["other_clans"] = []
+        for other_clan in self.all_clans:
+            other_clan_data = {
+                "name": other_clan.name,
+                "biome": other_clan.biome,
+                "chosen_symbol": other_clan.chosen_symbol,
+                "relations": other_clan.relations,
+                "temperament": other_clan.temperament,
+            }
+            # OC LEADER
+            if self.leader:
+                other_clan_data["leader"] = other_clan.leader.ID
+                other_clan_data["leader_lives"] = other_clan.leader_lives
+            else:
+                other_clan_data["leader"] = None
+            
+            # OC DEPUTY
+            if self.deputy:
+                other_clan_data["deputy"] = other_clan.deputy.ID
+            else:
+                other_clan_data["deputy"] = None
+
+            # MED CAT DATA
+            if other_clan.medicine_cat:
+                other_clan_data["medicine_cat"] = other_clan.medicine_cat.ID
+            else:
+                other_clan_data["medicine_cat"] = None
+            other_clan_data["medicine_cat_number"] = other_clan.med_cat_number
+
+            # LIST OF CLAN CATS
+            other_clan_data["clan_cats"] = ",".join([str(i) for i in other_clan.clan_cats])
+
+            clan_data["other_clans"].append(other_clan_data)
 
         clan_data["war"] = self.war
 
@@ -735,7 +800,7 @@ class Clan:
                 other_clan_info = other_clan.split(";")
                 self.all_clans.append(
                     OtherClan(
-                        other_clan_info[0], int(other_clan_info[1]), other_clan_info[2]
+                        name=other_clan_info[0], relations=int(other_clan_info[1]), temperament=other_clan_info[2]
                     )
                 )
 
@@ -851,34 +916,45 @@ class Clan:
         else:
             game.clan.chosen_symbol = clan_symbol_sprite(game.clan, return_string=True)
 
-        if "other_clans" in clan_data:
+        if "other_clans" in clan_data: # if save made from mod
             for other_clan in clan_data["other_clans"]:
-                game.clan.all_clans.append(
-                    OtherClan(
-                        other_clan["name"],
-                        int(other_clan["relations"]),
-                        other_clan["temperament"],
-                        other_clan["chosen_symbol"],
+                oc = OtherClan(
+                        name=other_clan["name"],
+                        leader=Cat.all_cats[other_clan["leader"]],
+                        deputy=Cat.all_cats[other_clan["deputy"]],
+                        medicine_cat=Cat.all_cats[other_clan["medicine_cat"]],
+                        biome=other_clan["biome"],
+                        chosen_symbol=other_clan["chosen_symbol"],
+                        relations=int(other_clan["relations"]),
+                        temperament=other_clan["temperament"],
                     )
-                )
-        else:
+                oc.leader_lives=other_clan["leader_lives"]
+                oc.medicine_cat_number=other_clan["medicine_cat_number"]
+                for id in other_clan["clan_cats"].split(","):
+                    if id in Cat.all_cats:
+                             oc.clan_cats.append(id)
+                    else:
+                        print("WARNING: Cat not found:", id)
+                game.clan.all_clans.append(oc)
+        else: # if save not made from mod
             if "other_clan_chosen_symbol" not in clan_data:
                 for name, relation, temper in zip(
                     clan_data["other_clans_names"].split(","),
                     clan_data["other_clans_relations"].split(","),
                     clan_data["other_clan_temperament"].split(","),
                 ):
-                    game.clan.all_clans.append(OtherClan(name, int(relation), temper))
+                    game.clan.all_clans.append(OtherClan(name=name, relations=int(relation), temperament=temper))
+                    # TODO: set up for old saves to be loaded
             else:
                 for name, relation, temper, symbol in zip(
                     clan_data["other_clans_names"].split(","),
                     clan_data["other_clans_relations"].split(","),
                     clan_data["other_clan_temperament"].split(","),
-                    clan_data["other_clan_chosen_symbol"].split(","),
                 ):
                     game.clan.all_clans.append(
-                        OtherClan(name, int(relation), temper, symbol)
+                        OtherClan(name=name, relations=int(relation), temperament=temper, chosen_symbol=symbol)
                     )
+                    # TODO: set up for old saves to be loaded
 
         for cat in clan_data["clan_cats"].split(","):
             if cat in Cat.all_cats:
@@ -1315,10 +1391,26 @@ class OtherClan:
         "gracious",
     ]
 
-    def __init__(self, name="", relations=0, temperament="", chosen_symbol=""):
+    leader_lives = 0
+    medicine_cat_number = 0
+    clan_cats = []
+
+    def __init__(self, name="", leader=None, deputy=None, medicine_cat=None, biome="Forest", chosen_symbol="", relations=0, temperament=""):
         clan_names = names.names_dict["normal_prefixes"]
         clan_names.extend(names.names_dict["clan_prefixes"])
         self.name = name or choice(clan_names)
+        
+        self.leader = leader
+        self.leader_lives = 9
+        self.deputy = deputy
+        self.medicine_cat = medicine_cat
+        self.med_cat_list = []
+        self.clan_cats = []
+        self.med_cat_number = len(
+            self.med_cat_list
+        )  # Must do this after the medicine cat is added to the list.
+        self.biome = biome or choice(["Forest", "Plains", "Mountainous", "Beach"])
+
         self.relations = relations or randint(8, 12)
         self.temperament = temperament or choice(self.temperament_list)
         if self.temperament not in self.temperament_list:
@@ -1334,8 +1426,103 @@ class OtherClan:
         )
 
     def __repr__(self):
-        return f"{self.name}Clan"
+        if self.name is not None:
+            _ = (
+                f"{self.name}: NPC clan led by {self.leader.name}"
+                f"with {self.medicine_cat.name} as med. cat"
+            )
+            return _
 
+        else:
+            return "No Clan"
+        
+    def create_clan_cats(self):
+        """
+        TODO: DOCS
+        """
+
+        self.leader = create_new_cat(
+            Cat,
+            other_clan=True,
+            backstory="clanborn",
+            status="warrior",
+            alive=True,
+            outside=True,
+            npc_clan=True,
+            clan=self.name
+        )[0]
+        self.new_leader(self.leader)
+        self.deputy = create_new_cat(
+            Cat,
+            other_clan=True,
+            backstory="clanborn",
+            status="warrior",
+            alive=True,
+            outside=True,
+            npc_clan=True,
+            clan=self.name
+        )[0]
+        self.new_deputy(self.deputy)
+        self.medicine_cat = create_new_cat(
+            Cat,
+            other_clan=True,
+            backstory="clanborn",
+            status="warrior",
+            alive=True,
+            outside=True,
+            npc_clan=True,
+            clan=self.name
+        )[0]
+        self.new_medicine_cat(self.medicine_cat)
+
+        for _ in range(random.randrange(4, 8)):
+            random_status = choice(
+                ["kitten", "apprentice", "warrior", "warrior", "elder"]
+            )
+            self.clan_cats.append(create_new_cat(
+            Cat,
+            other_clan=True,
+            backstory="clanborn",
+            status=random_status,
+            alive=True,
+            outside=True,
+            npc_clan=True,
+            clan=self.name
+        )[0].ID)
+
+    def new_leader(self, leader):
+        """
+        TODO: DOCS
+        """
+        if leader:
+            self.leader = leader
+            Cat.all_cats[leader.ID].status_change("leader")
+            self.leader_lives = 9
+            self.clan_cats.append(leader.ID)
+        game.switches["new_leader"] = None
+
+    def new_deputy(self, deputy):
+        """
+        TODO: DOCS
+        """
+        if deputy:
+            self.deputy = deputy
+            Cat.all_cats[deputy.ID].status_change("deputy")
+            self.clan_cats.append(deputy.ID)
+
+    def new_medicine_cat(self, medicine_cat):
+        """
+        TODO: DOCS
+        """
+        if medicine_cat:
+            if medicine_cat.status != "medicine cat":
+                Cat.all_cats[medicine_cat.ID].status_change("medicine cat")
+            if medicine_cat.ID not in self.med_cat_list:
+                self.med_cat_list.append(medicine_cat.ID)
+            med_cat = self.med_cat_list[0]
+            self.medicine_cat = Cat.all_cats[med_cat]
+            self.med_cat_number = len(self.med_cat_list)
+            self.clan_cats.append(med_cat)
 
 class StarClan:
     """

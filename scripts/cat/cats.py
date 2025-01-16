@@ -121,6 +121,7 @@ class Cat:
         faded=False,
         skill_dict=None,
         pelt: Pelt = None,
+        clan = None,
         loading_cat=False,  # Set to true if you are loading a cat at start-up.
         **kwargs,
     ):
@@ -185,6 +186,7 @@ class Cat:
         self.dead = False
         self.exiled = False
         self.outside = False
+        self.clan = None
         self.driven_out = False
         self.dead_for = 0  # moons
         self.thought = ""
@@ -1604,6 +1606,7 @@ class Cat:
             and not iter_cat.outside
             and not iter_cat.exiled
             and not iter_cat.dead
+            and self.clan == iter_cat.clan
         ]
         # if there are no cats to interact, stop
         if not cats_to_choose:
@@ -3454,6 +3457,7 @@ class Cat:
                 "former_apprentices": list(self.former_apprentices),
                 "df": self.df,
                 "outside": self.outside,
+                "clan": self.clan,
                 "faded_offspring": self.faded_offspring,
                 "opacity": self.pelt.opacity,
                 "prevent_fading": self.prevent_fading,
@@ -3504,8 +3508,8 @@ class Cat:
 
 
 # Creates a random cat
-def create_cat(status, moons=None, biome=None):
-    new_cat = Cat(status=status, biome=biome)
+def create_cat(status, moons=None, biome=None, clan=None):
+    new_cat = Cat(status=status, biome=biome, clan=clan)
 
     if moons is not None:
         new_cat.moons = moons
