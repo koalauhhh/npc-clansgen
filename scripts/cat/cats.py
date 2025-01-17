@@ -186,7 +186,7 @@ class Cat:
         self.dead = False
         self.exiled = False
         self.outside = False
-        self.clan = None
+        self.clan = clan if clan else None
         self.driven_out = False
         self.dead_for = 0  # moons
         self.thought = ""

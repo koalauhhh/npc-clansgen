@@ -3,6 +3,7 @@ from re import sub
 from typing import Optional
 
 import i18n
+import itertools
 import pygame
 import pygame_gui
 from pygame_gui.core import ObjectID
@@ -1267,14 +1268,14 @@ class MakeClanScreen(Screens):
             self.symbol_selected = f"symbol{self.clan_name.upper()}0"
         else:
             self.symbol_selected = choice(sprites.clan_symbols)
-        self.leader = create_cat(status="warrior")
-        self.deputy = create_cat(status="warrior")
-        self.med_cat = create_cat(status="warrior")
+        self.leader = create_cat(status="warrior", clan=self.clan_name)
+        self.deputy = create_cat(status="warrior", clan=self.clan_name)
+        self.med_cat = create_cat(status="warrior", clan=self.clan_name)
         for _ in range(randrange(4, 8)):
             random_status = choice(
                 ["kitten", "apprentice", "warrior", "warrior", "elder"]
             )
-            self.members.append(create_cat(status=random_status))
+            self.members.append(create_cat(status=random_status, clan=self.clan_name))
 
     def random_clan_name(self):
         clan_names = (
@@ -2147,9 +2148,34 @@ class MakeClanScreen(Screens):
         game.mediated.clear()
         game.patrolled.clear()
         game.cat_to_fade.clear()
+        game.clan.clan_cats.clear()
+        Cat.all_cats.clear()
+        Cat.all_cats_list.clear()
         Cat.outside_cats.clear()
         Patrol.used_patrols.clear()
+        game.clan = None
         convert_camp = {1: "camp1", 2: "camp2", 3: "camp3", 4: "camp4"}
+
+        # resetting ids bc it drives me up the walls
+        self.leader.clan = self.clan_name
+        self.leader.ID = '1'
+        Cat.all_cats['1'] = self.leader
+        Cat.all_cats_list.append(self.leader)
+        self.deputy.clan = self.clan_name
+        self.deputy.ID = '2'
+        Cat.all_cats['2'] = self.deputy
+        Cat.all_cats_list.append(self.deputy)
+        self.med_cat.clan = self.clan_name
+        self.med_cat.ID = '3'
+        Cat.all_cats['3'] = self.med_cat
+        Cat.all_cats_list.append(self.med_cat)
+        for i, cat in enumerate(self.members, start=4):
+            cat.clan = self.clan_name
+            cat.ID = str(i)
+            Cat.all_cats[str(i)] = cat
+            Cat.all_cats_list.append(cat)
+        Cat.id_iter = itertools.count(len(self.members) + 3)
+        
         game.clan = Clan(
             name=self.clan_name,
             leader=self.leader,

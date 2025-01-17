@@ -79,6 +79,11 @@ class ListScreen(Screens):
         self.sort_by_buttons: Dict[str, Optional[UISurfaceImageButton]] = {
             "view_your_clan_button": None,
             "view_cotc_button": None,
+            "view_oc0_button": None,
+            "view_oc1_button": None,
+            "view_oc2_button": None,
+            "view_oc3_button": None,
+            "view_oc4_button": None,
             "view_starclan_button": None,
             "view_unknown_residence_button": None,
             "view_dark_forest_button": None,
@@ -196,6 +201,16 @@ class ListScreen(Screens):
                     self.get_your_clan_cats()
                 elif element == self.choose_group_buttons["view_cotc_button"]:
                     self.get_cotc_cats()
+                elif element == self.choose_group_buttons["view_oc0_button"]:
+                    self.get_oc_cats(0)
+                elif element == self.choose_group_buttons["view_oc1_button"]:
+                    self.get_oc_cats(1)
+                elif element == self.choose_group_buttons["view_oc2_button"]:
+                    self.get_oc_cats(2)
+                elif element == self.choose_group_buttons["view_oc3_button"]:
+                    self.get_oc_cats(3)
+                elif element == self.choose_group_buttons["view_oc4_button"]:
+                    self.get_oc_cats(4)
                 elif element == self.choose_group_buttons["view_starclan_button"]:
                     self.get_sc_cats()
                 elif (
@@ -379,10 +394,19 @@ class ListScreen(Screens):
         )
 
         y_pos = 0
-        for text, object_id in (
-            ["screens.list.your_clan", "#view_your_clan_button"],
+        screens_list = [
+            ("screens.list.your_clan", "#view_your_clan_button"),
             ["screens.list.cotc", "#view_cotc_button"],
-        ):
+            [f"{game.clan.all_clans[0].name}Clan", "#view_oc0_button"],
+            [f"{game.clan.all_clans[1].name}Clan", "#view_oc1_button"],
+            [f"{game.clan.all_clans[2].name}Clan", "#view_oc2_button"],
+        ]
+        if (len(game.clan.all_clans) >= 4) :
+            screens_list.append((f"{game.clan.all_clans[3].name}Clan", "#view_oc3_button"))
+        if (len(game.clan.all_clans) == 5) :
+            screens_list.append((f"{game.clan.all_clans[4].name}Clan", "#view_oc4_button"))
+
+        for text, object_id in screens_list:
             self.choose_group_buttons[object_id.strip("#")] = UISurfaceImageButton(
                 ui_scale(pygame.Rect((0, y_pos), (190, 34))),
                 text,
@@ -768,6 +792,21 @@ class ListScreen(Screens):
         elif self.current_group == "cotc":
             self.set_bg(None)
             self.update_heading_text("screens.list.cotc")
+        elif self.current_group == "oc0":
+            self.set_bg(None)
+            self.update_heading_text(game.clan.all_clans[0].name + "Clan")
+        elif self.current_group == "oc1":
+            self.set_bg(None)
+            self.update_heading_text(game.clan.all_clans[1].name + "Clan")
+        elif self.current_group == "oc2":
+            self.set_bg(None)
+            self.update_heading_text(game.clan.all_clans[2].name + "Clan")
+        elif len(game.clan. all_clans) >= 4 and self.current_group == "oc3":
+            self.set_bg(None)
+            self.update_heading_text(game.clan.all_clans[3].name + "Clan")
+        elif len(game.clan. all_clans) == 5 and self.current_group == "oc4":
+            self.set_bg(None)
+            self.update_heading_text(game.clan.all_clans[4].name + "Clan")
         elif self.current_group == "sc":
             self.set_bg("sc")
             self.update_heading_text("general.starclan")
@@ -814,7 +853,18 @@ class ListScreen(Screens):
         self.death_status = "living"
         self.full_cat_list = []
         for the_cat in Cat.all_cats_list:
-            if not the_cat.dead and the_cat.outside and not the_cat.driven_out:
+            if not the_cat.dead and the_cat.outside and the_cat.clan is None and not the_cat.driven_out:
+                self.full_cat_list.append(the_cat)
+    
+    def get_oc_cats(self, clan_number):
+        """
+        grabs cats from other clans
+        """
+        self.current_group = "oc" + str(clan_number)
+        self.death_status = "living"
+        self.full_cat_list = []
+        for the_cat in Cat.all_cats_list:
+            if not the_cat.dead and the_cat.outside and the_cat.clan == (game.clan.all_clans[clan_number]).name:
                 self.full_cat_list.append(the_cat)
 
     def get_sc_cats(self):
