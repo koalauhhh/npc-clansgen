@@ -2148,15 +2148,16 @@ class MakeClanScreen(Screens):
         game.mediated.clear()
         game.patrolled.clear()
         game.cat_to_fade.clear()
-        game.clan.clan_cats.clear()
-        Cat.all_cats.clear()
-        Cat.all_cats_list.clear()
-        Cat.outside_cats.clear()
         Patrol.used_patrols.clear()
         game.clan = None
         convert_camp = {1: "camp1", 2: "camp2", 3: "camp3", 4: "camp4"}
 
-        # resetting ids bc it drives me up the walls
+        # resetting ids bc it drives me up the walls, theres a nicer way to do this im sure
+        game.clan.clan_cats.clear()
+        Cat.all_cats.clear()
+        Cat.all_cats_list.clear()
+        Cat.outside_cats.clear()
+
         self.leader.clan = self.clan_name
         self.leader.ID = '1'
         Cat.all_cats['1'] = self.leader

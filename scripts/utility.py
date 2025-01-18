@@ -48,7 +48,7 @@ def get_alive_clan_queens(living_cats):
     living_kits = [
         cat
         for cat in living_cats
-        if not (cat.dead or cat.outside) and cat.status in ["kitten", "newborn"]
+        if not cat.dead and cat.status in ["kitten", "newborn"]
     ]
 
     queen_dict = {}
@@ -59,7 +59,89 @@ def get_alive_clan_queens(living_cats):
             cat.fetch_cat(i)
             for i in parents
             if cat.fetch_cat(i)
-               and not (cat.fetch_cat(i).dead or cat.fetch_cat(i).outside)
+               and not cat.fetch_cat(i).dead
+        ]
+        if not parents:
+            continue
+
+        if (
+                len(parents) == 1
+                or len(parents) > 2
+                or all(i.gender == "male" for i in parents)
+                or parents[0].gender == "female"
+        ):
+            if parents[0].ID in queen_dict:
+                queen_dict[parents[0].ID].append(cat)
+                living_kits.remove(cat)
+            else:
+                queen_dict[parents[0].ID] = [cat]
+                living_kits.remove(cat)
+        elif len(parents) == 2:
+            if parents[1].ID in queen_dict:
+                queen_dict[parents[1].ID].append(cat)
+                living_kits.remove(cat)
+            else:
+                queen_dict[parents[1].ID] = [cat]
+                living_kits.remove(cat)
+    return queen_dict, living_kits
+
+def get_alive_outside_queens(living_cats):
+    living_kits = [
+        cat
+        for cat in living_cats
+        if not (cat.dead or cat.driven_out) and cat.status in ["kitten", "newborn"]
+    ]
+
+    queen_dict = {}
+    for cat in living_kits.copy():
+        parents = cat.get_parents()
+        # Fetch parent object, only alive and not outside.
+        parents = [
+            cat.fetch_cat(i)
+            for i in parents
+            if cat.fetch_cat(i)
+               and not (cat.fetch_cat(i).dead or cat.fetch_cat(i).driven_out)
+        ]
+        if not parents:
+            continue
+
+        if (
+                len(parents) == 1
+                or len(parents) > 2
+                or all(i.gender == "male" for i in parents)
+                or parents[0].gender == "female"
+        ):
+            if parents[0].ID in queen_dict:
+                queen_dict[parents[0].ID].append(cat)
+                living_kits.remove(cat)
+            else:
+                queen_dict[parents[0].ID] = [cat]
+                living_kits.remove(cat)
+        elif len(parents) == 2:
+            if parents[1].ID in queen_dict:
+                queen_dict[parents[1].ID].append(cat)
+                living_kits.remove(cat)
+            else:
+                queen_dict[parents[1].ID] = [cat]
+                living_kits.remove(cat)
+    return queen_dict, living_kits
+
+def get_alive_oc_queens(living_cats):
+    living_kits = [
+        cat
+        for cat in living_cats
+        if not cat.dead and cat.status in ["kitten", "newborn"]
+    ]
+
+    queen_dict = {}
+    for cat in living_kits.copy():
+        parents = cat.get_parents()
+        # Fetch parent object, only alive and not outside.
+        parents = [
+            cat.fetch_cat(i)
+            for i in parents
+            if cat.fetch_cat(i)
+               and not cat.fetch_cat(i).dead
         ]
         if not parents:
             continue

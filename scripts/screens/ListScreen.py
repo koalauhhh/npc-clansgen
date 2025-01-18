@@ -830,6 +830,16 @@ class ListScreen(Screens):
                 self.get_ur_cats()
             elif game.last_list_forProfile == "cotc":
                 self.get_cotc_cats()
+            elif game.last_list_forProfile == "oc0":
+                self.get_oc_cats(0)
+            elif game.last_list_forProfile == "oc1":
+                self.get_oc_cats(1)
+            elif game.last_list_forProfile == "oc2":
+                self.get_oc_cats(2)
+            elif game.last_list_forProfile == "oc3":
+                self.get_oc_cats(3)
+            elif game.last_list_forProfile == "oc4":
+                self.get_oc_cats(4)
             else:
                 self.get_your_clan_cats()
         else:
