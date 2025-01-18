@@ -668,7 +668,7 @@ class ProfileScreen(Screens):
         if self.open_tab == "history" and self.open_sub_tab == "user notes":
             self.load_user_notes()
 
-        if self.the_cat.status == "leader" and not self.the_cat.dead:
+        if self.the_cat.status == "leader" and not self.the_cat.dead and not self.the_cat.outside:
             self.profile_elements["leader_ceremony"] = UIImageButton(
                 ui_scale(pygame.Rect((383, 110), (34, 34))),
                 "",
@@ -806,7 +806,7 @@ class ProfileScreen(Screens):
 
         # STATUS
         if (
-            the_cat.outside
+            (the_cat.outside and the_cat.clan is None)
             and not the_cat.exiled
             and the_cat.status not in ["kittypet", "loner", "rogue", "former Clancat"]
         ):
@@ -816,7 +816,7 @@ class ProfileScreen(Screens):
                 f"<font color='#FF0000'>{i18n.t('general.exiled', count=1)}</font>"
             )
         else:
-            output += i18n.t(f"general.{the_cat.status}", count=1)
+            output += i18n.t(f"{the_cat.clan}Clan {the_cat.status}", count=1)
 
         # NEWLINE ----------
         output += "\n"
@@ -928,7 +928,7 @@ class ProfileScreen(Screens):
                 "rogue",
                 "former Clancat",
                 "exiled",
-            ]:
+            ] and the_cat.clan == game.clan.name:
                 nutr = None
                 if the_cat.ID in game.clan.freshkill_pile.nutrition_info:
                     nutr = game.clan.freshkill_pile.nutrition_info[the_cat.ID]
