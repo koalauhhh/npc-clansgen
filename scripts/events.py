@@ -136,9 +136,10 @@ class Events:
 
         # Calling of "one_moon" functions.
         for cat in Cat.all_cats.copy().values():
-            if not cat.outside or cat.dead:
-                self.one_moon_cat(cat)
-            else:
+            if not (cat.outside and cat.clan is None) or cat.dead:
+                cat_clan = get_other_clan(cat.clan)
+                self.one_moon_cat(cat, cat_clan)
+            elif cat.clan is None and cat.outside:
                 self.one_moon_outside_cat(cat)
 
         # keeping this commented out till disasters are more polished
@@ -179,6 +180,8 @@ class Events:
             shaken_cats = []
             extra_event = None
             for ghost in Cat.dead_cats:
+                if ghost.clan != game.clan.name and ghost.clan is not None:
+                    pass
                 ghost_names.append(str(ghost.name))
             insert = adjust_list_text(ghost_names)
 
@@ -803,12 +806,12 @@ class Events:
         if not predetermined_cat_IDs:
             eligible_cats = []
             for cat in Cat.all_cats.values():
-                if cat.outside and cat.ID not in Cat.outside_cats:
+                if (cat.outside and cat.clan is None) and cat.ID not in Cat.outside_cats:
                     # The outside-value must be set to True before the cat can go to cotc
                     Cat.outside_cats.update({cat.ID: cat})
 
                 if (
-                    cat.outside
+                    cat.outside and cat.clan is None
                     and cat.status
                     not in [
                         "kittypet",
@@ -829,6 +832,7 @@ class Events:
             cat_IDs.append(lost_cat.ID)
 
             lost_cat.outside = False
+            lost_cat.clan = game.clan.name
             additional_cats = lost_cat.add_to_clan()
             cat_IDs.extend(additional_cats)
             text = i18n.t(f"hardcoded.event_lost{random.choice(range(1,5))}")
@@ -852,11 +856,11 @@ class Events:
             ]:
                 if x.moons >= 15:
                     if x.status == "medicine cat apprentice":
-                        self.ceremony(x, "medicine cat")
+                        self.ceremony(x, "medicine cat", game.clan)
                     elif x.status == "mediator apprentice":
-                        self.ceremony(x, "mediator")
+                        self.ceremony(x, "mediator", game.clan)
                     else:
-                        self.ceremony(x, "warrior")
+                        self.ceremony(x, "warrior", game.clan)
                 elif (
                     x.status
                     not in [
@@ -866,7 +870,7 @@ class Events:
                     ]
                     and x.moons >= 6
                 ):
-                    self.ceremony(x, "apprentice")
+                    self.ceremony(x, "apprentice", game.clan)
             elif x.status != "medicine cat":
                 if x.moons == 0:
                     x.status = "newborn"
@@ -942,18 +946,18 @@ class Events:
         exiled cat events
         """
         # aging the cat
-        cat.one_moon()
+        cat.one_moon(None)
         cat.manage_outside_trait()
 
         self.handle_outside_EX(cat)
 
-        cat.skills.progress_skill(cat)
+        cat.skills.progress_skill(cat, None)
         Pregnancy_Events.handle_having_kits(cat, clan=game.clan)
 
         if not cat.dead:
             OutsiderEvents.killing_outsiders(cat)
 
-    def one_moon_cat(self, cat):
+    def one_moon_cat(self, cat, cat_clan):
         """
         Triggers various moon events for a cat.
         -If dead, cat is given thought, dead_for count increased, and fading handled (then function is returned)
@@ -978,7 +982,7 @@ class Events:
 
         # all actions, which do not trigger an event display and
         # are connected to cats are located in there
-        cat.one_moon()
+        cat.one_moon(cat_clan)
 
         # Handle Mediator Events
         # TODO: this is not a great way to handle them, ideally they should be converted to ShortEvent format
@@ -989,6 +993,7 @@ class Events:
         if (
             game.clan.game_mode in ["expanded", "cruel season"]
             and game.clan.freshkill_pile
+            and cat.clan == game.clan.name
         ):
             Condition_Events.handle_nutrient(
                 cat, game.clan.freshkill_pile.nutrition_info
@@ -1025,8 +1030,8 @@ class Events:
 
         self.handle_apprentice_EX(cat)  # This must be before perform_ceremonies!
         # this HAS TO be before the cat.is_disabled() so that disabled kits can choose a med cat or mediator position
-        self.perform_ceremonies(cat)
-        cat.skills.progress_skill(cat)  # This must be done after ceremonies.
+        self.perform_ceremonies(cat, cat_clan)
+        cat.skills.progress_skill(cat, cat_clan)  # This must be done after ceremonies.
 
         # check for death/reveal/risks/retire caused by permanent conditions
         if cat.is_disabled():
@@ -1044,16 +1049,16 @@ class Events:
         cat.thoughts()
 
         # relationships have to be handled separately, because of the ceremony name change
-        if not cat.dead and not cat.outside:
+        if not cat.dead and not (cat.outside and cat_clan is None or cat_clan is game.clan):
             Relation_Events.handle_relationships(cat)
 
         # now we make sure ill and injured cats don't get interactions they shouldn't
-        if cat.is_ill() or cat.is_injured():
+        if cat.is_ill() or cat.is_injured() and cat.clan == game.clan.name:
             return
 
         self.invite_new_cats(cat)
         self.other_interactions(cat)
-        self.gain_accessories(cat)
+        self.gain_accessories(cat, cat_clan)
 
         # switches between the two death handles
         if random.getrandbits(1):
@@ -1074,6 +1079,25 @@ class Events:
         self.handle_murder(cat)
 
         game.switches["skip_conditions"].clear()
+
+        # if other clan cat got injured, immediately heal/die
+        if (cat_clan is not game.clan) and (cat.is_ill() or cat.is_injured()):
+            if cat.is_ill() and cat.is_injured():
+                if random.getrandbits(1):
+                    triggered_death = Condition_Events.handle_injuries(cat)
+                    if not triggered_death:
+                        Condition_Events.handle_illnesses(cat)
+                else:
+                    triggered_death = Condition_Events.handle_illnesses(cat)
+                    if not triggered_death:
+                        Condition_Events.handle_injuries(cat)
+            elif cat.is_ill():
+                Condition_Events.handle_illnesses(cat)
+            else:
+                Condition_Events.handle_injuries(cat)
+            game.switches["skip_conditions"].clear()
+            if cat.dead:
+                return
 
     def load_war_resources(self):
         if Events.war_lang == i18n.config.get("locale"):
@@ -1175,16 +1199,16 @@ class Events:
         )
         game.cur_events_list.append(Single_Event(event, "other_clans"))
 
-    def perform_ceremonies(self, cat):
+    def perform_ceremonies(self, cat, cat_clan):
         """
         ceremonies
         """
         # TODO: hardcoded events, not good, consider how to convert to ShortEvent
         #  we *do* have a ceremony dict and format, not sure why it isn't being used here
         # PROMOTE DEPUTY TO LEADER, IF NEEDED -----------------------
-        if game.clan.leader:
-            leader_dead = game.clan.leader.dead
-            leader_outside = game.clan.leader.outside
+        if cat_clan.leader:
+            leader_dead = cat_clan.leader.dead
+            leader_outside = cat_clan.leader.outside and cat_clan is None or cat_clan is game.clan
         else:
             leader_dead = True
             # If leader is None, treat them as dead (since they are dead - and faded away.)
@@ -1192,17 +1216,17 @@ class Events:
 
         # If a Clan deputy exists, and the leader is dead,
         #  outside, or doesn't exist, make the deputy leader.
-        if game.clan.deputy:
+        if cat_clan.deputy:
             if (
-                game.clan.deputy is not None
-                and not game.clan.deputy.dead
-                and not game.clan.deputy.outside
+                cat_clan.deputy is not None
+                and not cat_clan.deputy.dead
+                and not (cat_clan.deputy.outside and cat_clan is None or cat_clan is game.clan)
                 and (leader_dead or leader_outside)
             ):
-                game.clan.new_leader(game.clan.deputy)
-                game.clan.leader_lives = 9
+                cat_clan.new_leader(cat_clan.deputy)
+                cat_clan.leader_lives = 9
                 text = ""
-                if game.clan.deputy.personality.trait == "bloodthirsty":
+                if cat_clan.deputy.personality.trait == "bloodthirsty":
                     text = i18n.t("hardcoded.ceremony_leader_bloodthirsty")
                 else:
                     c = random.randint(1, 3)
@@ -1221,7 +1245,7 @@ class Events:
                     Single_Event(text, "ceremony", game.clan.deputy.ID)
                 )
                 self.ceremony_accessory = True
-                self.gain_accessories(cat)
+                self.gain_accessories(cat, cat_clan)
                 game.clan.deputy = None
 
         # OTHER CEREMONIES ---------------------------------------
@@ -1233,10 +1257,10 @@ class Events:
             cat_dead = True
 
         if not cat_dead:
-            if cat.status == "deputy" and game.clan.deputy is None:
-                game.clan.deputy = cat
-            if cat.status == "medicine cat" and game.clan.medicine_cat is None:
-                game.clan.medicine_cat = cat
+            if cat.status == "deputy" and cat_clan.deputy is None:
+                cat_clan.deputy = cat
+            if cat.status == "medicine cat" and cat_clan.medicine_cat is None:
+                cat_clan.medicine_cat = cat
 
             # retiring to elder den
             if (
@@ -1250,8 +1274,8 @@ class Events:
                     random.random() * (-0.7 * cat.moons + 100)
                 ):
                     if cat.status == "deputy":
-                        game.clan.deputy = None
-                    self.ceremony(cat, "elder")
+                        cat_clan.deputy = None
+                    self.ceremony(cat, "elder", cat_clan)
 
             # apprentice a kitten to either med or warrior
             if cat.moons == cat_class.age_moons[CatAgeEnum.ADOLESCENT][0]:
@@ -1260,7 +1284,7 @@ class Events:
                         i
                         for i in Cat.all_cats_list
                         if i.status in ["medicine cat", "medicine cat apprentice"]
-                        and not (i.dead or i.outside)
+                        and not (i.dead or (i.outside and i.clan != game.clan.name) or i.clan != cat.clan)
                     ]
 
                     # check if the medicine cat is an elder
@@ -1323,16 +1347,16 @@ class Events:
                         chance = 1
 
                     if not has_med_app and not int(random.random() * chance):
-                        self.ceremony(cat, "medicine cat apprentice")
+                        self.ceremony(cat, "medicine cat apprentice", cat_clan)
                         self.ceremony_accessory = True
-                        self.gain_accessories(cat)
+                        self.gain_accessories(cat, cat_clan)
                     else:
                         # Chance for mediator apprentice
                         mediator_list = list(
                             filter(
                                 lambda x: x.status == "mediator"
                                 and not x.dead
-                                and not x.outside,
+                                and not x.outside and x.clan != cat.clan,
                                 Cat.all_cats_list,
                             )
                         )
@@ -1365,13 +1389,13 @@ class Events:
                             and not has_mediator_apprentice
                             and not int(random.random() * chance)
                         ):
-                            self.ceremony(cat, "mediator apprentice")
+                            self.ceremony(cat, "mediator apprentice", cat_clan)
                             self.ceremony_accessory = True
-                            self.gain_accessories(cat)
+                            self.gain_accessories(cat, cat_clan)
                         else:
-                            self.ceremony(cat, "apprentice")
+                            self.ceremony(cat, "apprentice", cat_clan)
                             self.ceremony_accessory = True
-                            self.gain_accessories(cat)
+                            self.gain_accessories(cat, cat_clan)
 
             # graduate
             if cat.status in [
@@ -1401,20 +1425,20 @@ class Events:
                             preparedness = "prepared"
 
                     if cat.status == "apprentice":
-                        self.ceremony(cat, "warrior", preparedness)
+                        self.ceremony(cat, "warrior", cat_clan, preparedness)
                         self.ceremony_accessory = True
-                        self.gain_accessories(cat)
+                        self.gain_accessories(cat, cat_clan)
 
                     # promote to med cat
                     elif cat.status == "medicine cat apprentice":
-                        self.ceremony(cat, "medicine cat", preparedness)
+                        self.ceremony(cat, "medicine cat", cat_clan, preparedness)
                         self.ceremony_accessory = True
-                        self.gain_accessories(cat)
+                        self.gain_accessories(cat, cat_clan)
 
                     elif cat.status == "mediator apprentice":
                         self.ceremony(cat, "mediator", preparedness)
                         self.ceremony_accessory = True
-                        self.gain_accessories(cat)
+                        self.gain_accessories(cat, cat_clan)
 
     def load_ceremonies(self):
         """
@@ -1436,7 +1460,7 @@ class Events:
 
         Events.ceremony_lang = i18n.config.get("locale")
 
-    def ceremony(self, cat, promoted_to, preparedness="prepared"):
+    def ceremony(self, cat, promoted_to, cat_clan, preparedness="prepared"):
         """
         promote cats and add to events list
         """
@@ -1502,7 +1526,7 @@ class Events:
             # is being promoted too.
             valid_living_former_mentors = []
             for c in cat.former_mentor:
-                if not (Cat.fetch_cat(c).dead or Cat.fetch_cat(c).outside):
+                if not (Cat.fetch_cat(c).dead or cat.clan != Cat.fetch_cat(c).clan):
                     if promoted_to in mentor_type:
                         if Cat.fetch_cat(c).status in mentor_type[promoted_to]:
                             valid_living_former_mentors.append(c)
@@ -1542,7 +1566,7 @@ class Events:
                     # who are also the leader are not counted.
                     elif (
                         not Cat.fetch_cat(p).dead
-                        and not Cat.fetch_cat(p).outside
+                        and not Cat.fetch_cat(p).outside and cat.clan != p.clan
                         and Cat.fetch_cat(p).status != "leader"
                     ):
                         living_parents.append(Cat.fetch_cat(p))
@@ -1574,9 +1598,9 @@ class Events:
 
             tags = []
             if (
-                game.clan.leader
-                and not game.clan.leader.dead
-                and not game.clan.leader.outside
+                cat_clan.leader
+                and not cat_clan.leader.dead
+                and not (cat_clan.leader.outside and cat_clan is game.clan)
             ):
                 tags.append("yes_leader")
             else:
@@ -1672,7 +1696,7 @@ class Events:
         # Gather additional involved cats
         for tag in ceremony_tags:
             if tag == "yes_leader":
-                involved_cats.append(game.clan.leader.ID)
+                involved_cats.append(cat_clan.leader.ID)
             elif tag in ["yes_mentor", "yes_leader_mentor"]:
                 involved_cats.append(cat.mentor)
             elif tag == "dead_mentor":
@@ -1693,12 +1717,17 @@ class Events:
         # remove duplicates
         involved_cats = list(set(involved_cats))
 
-        game.cur_events_list.append(
-            Single_Event(ceremony_text, "ceremony", involved_cats)
-        )
+        if cat_clan in game.clan.all_clans:
+            game.cur_events_list.append(
+                Single_Event(ceremony_text, ["ceremony", "other_clans"], involved_cats)
+            )
+        else:
+            game.cur_events_list.append(
+                Single_Event(ceremony_text, "ceremony", involved_cats)
+            )
         # game.ceremony_events_list.append(f'{cat.name}{ceremony_text}')
 
-    def gain_accessories(self, cat):
+    def gain_accessories(self, cat, cat_clan):
         """
         accessories
         """
@@ -1706,7 +1735,7 @@ class Events:
         if not cat:
             return
 
-        if cat.dead or cat.outside:
+        if cat.dead or (cat.outside and cat_clan is None or cat_clan is game.clan):
             return
 
         # check if cat already has acc
@@ -2325,141 +2354,143 @@ class Events:
 
     def check_and_promote_leader(self):
         """Checks if a new leader need to be promoted, and promotes them, if needed."""
-        # check for leader
-        if game.clan.leader:
-            leader_invalid = game.clan.leader.dead or game.clan.leader.outside
-        else:
-            leader_invalid = True
-
-        if leader_invalid:
-            self.perform_ceremonies(
-                game.clan.leader
-            )  # This is where the deputy will be make leader
-
-            if game.clan.leader:
-                leader_dead = game.clan.leader.dead
-                leader_outside = game.clan.leader.outside
+        for iter_clan in (game.clan.all_clans + [game.clan]):
+            # check for leader
+            if iter_clan.leader:
+                leader_invalid = iter_clan.leader.dead or (iter_clan.leader.outside and iter_clan is game.clan)
             else:
-                leader_dead = True
-                leader_outside = True
+                leader_invalid = True
 
-            if leader_dead or leader_outside:
-                game.cur_events_list.insert(
-                    0,
-                    Single_Event(
-                        event_text_adjust(
-                            Cat, i18n.t("defaults.warn_no_leader"), clan=game.clan
-                        )
-                    ),
-                )
+            if leader_invalid:
+                self.perform_ceremonies(
+                    iter_clan.leader, iter_clan
+                )  # This is where the deputy will be make leader
+
+                if iter_clan.leader:
+                    leader_dead = iter_clan.leader.dead
+                    leader_outside = iter_clan.leader.outside and iter_clan is game.clan
+                else:
+                    leader_dead = True
+                    leader_outside = True
+
+                if leader_dead or leader_outside:
+                    game.cur_events_list.insert(
+                        0,
+                        Single_Event(
+                            event_text_adjust(
+                                Cat, i18n.t("defaults.warn_no_leader"), clan=game.clan
+                            )
+                        ),
+                    )
 
     def check_and_promote_deputy(self):
         # TODO: can these events be handled as ceremony events?
 
         """Checks if a new deputy needs to be appointed, and appointed them if needed."""
-        if (
-            not game.clan.deputy
-            or game.clan.deputy.dead
-            or game.clan.deputy.outside
-            or game.clan.deputy.status == "elder"
-        ):
-            if not game.clan.clan_settings.get("deputy"):
-                game.cur_events_list.insert(0, Single_Event("defaults.warn_no_deputy"))
-                return
-            # This determines all the cats who are eligible to be deputy.
-            possible_deputies = list(
-                filter(
-                    lambda x: not x.dead
-                    and not x.outside
-                    and x.status == "warrior"
-                    and (x.apprentice or x.former_apprentices),
-                    Cat.all_cats_list,
-                )
-            )
-
-            # If there are possible deputies, choose from that list.
-            if possible_deputies:
-                random_cat = random.choice(possible_deputies)
-                involved_cats = [random_cat.ID]
-
-                # Gather deputy and leader status, for determination of the text.
-                if game.clan.leader:
-                    if game.clan.leader.dead or game.clan.leader.outside:
-                        leader_status = "not_here"
-                    else:
-                        leader_status = "here"
-                else:
-                    leader_status = "not_here"
-
-                if game.clan.deputy:
-                    if game.clan.deputy.dead or game.clan.deputy.outside:
-                        deputy_status = "not_here"
-                    else:
-                        deputy_status = "here"
-                else:
-                    deputy_status = "not_here"
-
-                if leader_status == "here" and deputy_status == "not_here":
-                    if random_cat.personality.trait == "bloodthirsty":
-                        text = i18n.t("hardcoded.ceremony_deputy_bloodthirsty")
-                        # No additional involved cats
-                    else:
-                        if game.clan.deputy:
-                            previous_deputy_mention = i18n.t(
-                                f"hardcoded.ceremony_deputy_prev{random.choice(range(0, 3))}"
-                            )
-                            involved_cats.append(game.clan.deputy.ID)
-
-                        else:
-                            previous_deputy_mention = ""
-
-                        text = i18n.t(
-                            "hardcoded.ceremony_deputy",
-                            previous=previous_deputy_mention,
-                        )
-
-                        involved_cats.append(game.clan.leader.ID)
-                elif leader_status == "not_here" and deputy_status == "here":
-                    text = i18n.t("hardcoded.ceremony_deputy_nolead_retireddep")
-                elif leader_status == "not_here" and deputy_status == "not_here":
-                    text = i18n.t("hardcoded.ceremony_deputy_nolead_nodep")
-                elif leader_status == "here" and deputy_status == "here":
-                    # No additional involved cats
-                    text = i18n.t(
-                        f"hardcoded.ceremony_deputy_lead_retireddep{random.choice(range(0, 5))}"
-                    )
-                else:
-                    # This should never happen. Failsafe.
-                    text = i18n.t("defaults.deputy_event")
-            else:
-                # If there are no possible deputies, choose someone else, with special text.
-                all_warriors = list(
-                    filter(
-                        lambda x: not x.dead
-                        and not x.outside
-                        and x.status == "warrior",
-                        Cat.all_cats_list,
-                    )
-                )
-                if all_warriors:
-                    random_cat = random.choice(all_warriors)
-                    involved_cats = [random_cat.ID]
-                    text = i18n.t("hardcoded.ceremony_deputy_unsuitable")
-
-                else:
-                    # If there are no warriors at all, no one is named deputy.
-                    game.cur_events_list.append(
-                        Single_Event(
-                            i18n.t("hardcoded.ceremony_deputy_none"), "ceremony"
-                        )
-                    )
+        for iter_clan in (game.clan.all_clans + [game.clan]):
+            if (
+                not iter_clan.deputy
+                or iter_clan.deputy.dead
+                or (iter_clan.deputy.outside and iter_clan is game.clan)
+                or iter_clan.deputy.status == "elder"
+            ):
+                if iter_clan is game.clan and not game.clan.clan_settings.get("deputy"):
+                    game.cur_events_list.insert(0, Single_Event("defaults.warn_no_deputy"))
                     return
+                # This determines all the cats who are eligible to be deputy.
+                possible_deputies = list(
+                    filter(
+                        lambda x: not Cat.fetch_cat(x).dead
+                        and not (Cat.fetch_cat(x).outside and Cat.fetch_cat(x).clan is None)
+                        and Cat.fetch_cat(x).status == "warrior"
+                        and (Cat.fetch_cat(x).apprentice or Cat.fetch_cat(x).former_apprentices),
+                        iter_clan.clan_cats,
+                    )
+                )
 
-            text = event_text_adjust(Cat, text, main_cat=random_cat, clan=game.clan)
-            random_cat.status_change("deputy")
-            game.clan.deputy = random_cat
+                # If there are possible deputies, choose from that list.
+                if possible_deputies:
+                    random_cat = Cat.fetch_cat(random.choice(possible_deputies))
+                    involved_cats = [random_cat.ID]
 
-            game.cur_events_list.append(Single_Event(text, "ceremony", involved_cats))
+                    # Gather deputy and leader status, for determination of the text.
+                    if iter_clan.leader:
+                        if iter_clan.leader.dead or (iter_clan.leader.outside and iter_clan is game.clan):
+                            leader_status = "not_here"
+                        else:
+                            leader_status = "here"
+                    else:
+                        leader_status = "not_here"
+
+                    if iter_clan.deputy:
+                        if iter_clan.deputy.dead or (iter_clan.deputy.outside and iter_clan is game.clan):
+                            deputy_status = "not_here"
+                        else:
+                            deputy_status = "here"
+                    else:
+                        deputy_status = "not_here"
+
+                    if leader_status == "here" and deputy_status == "not_here":
+                        if random_cat.personality.trait == "bloodthirsty":
+                            text = i18n.t("hardcoded.ceremony_deputy_bloodthirsty")
+                            # No additional involved cats
+                        else:
+                            if iter_clan.deputy:
+                                previous_deputy_mention = i18n.t(
+                                    f"hardcoded.ceremony_deputy_prev{random.choice(range(0, 3))}"
+                                )
+                                involved_cats.append(iter_clan.deputy.ID)
+
+                            else:
+                                previous_deputy_mention = ""
+
+                            text = i18n.t(
+                                "hardcoded.ceremony_deputy",
+                                previous=previous_deputy_mention,
+                            )
+
+                            involved_cats.append(iter_clan.leader.ID)
+                    elif leader_status == "not_here" and deputy_status == "here":
+                        text = i18n.t("hardcoded.ceremony_deputy_nolead_retireddep")
+                    elif leader_status == "not_here" and deputy_status == "not_here":
+                        text = i18n.t("hardcoded.ceremony_deputy_nolead_nodep")
+                    elif leader_status == "here" and deputy_status == "here":
+                        # No additional involved cats
+                        text = i18n.t(
+                            f"hardcoded.ceremony_deputy_lead_retireddep{random.choice(range(0, 5))}"
+                        )
+                    else:
+                        # This should never happen. Failsafe.
+                        text = i18n.t("defaults.deputy_event")
+                else:
+                    # If there are no possible deputies, choose someone else, with special text.
+                    all_warriors = list(
+                        filter(
+                            lambda x: not Cat.fetch_cat(x).dead
+                            and not (Cat.fetch_cat(x).outside and Cat.fetch_cat(x).clan is None)
+                            and Cat.fetch_cat(x).status == "warrior",
+                            iter_clan.clan_cats,
+                        )
+                    )
+                    if all_warriors:
+                        random_cat = Cat.fetch_cat(random.choice(all_warriors))
+                        involved_cats = [random_cat.ID]
+                        text = i18n.t("hardcoded.ceremony_deputy_unsuitable")
+
+                    else:
+                        # If there are no warriors at all, no one is named deputy.
+                        game.cur_events_list.append(
+                            Single_Event(
+                                i18n.t("hardcoded.ceremony_deputy_none"), "ceremony"
+                            )
+                        )
+                        return
+
+                text = event_text_adjust(Cat, text, main_cat=random_cat, clan=game.clan)
+                random_cat.status_change("deputy")
+                iter_clan.deputy = random_cat
+
+                game.cur_events_list.append(Single_Event(text, "ceremony", involved_cats))
 
 
 events_class = Events()

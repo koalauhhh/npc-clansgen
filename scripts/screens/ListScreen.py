@@ -207,9 +207,9 @@ class ListScreen(Screens):
                     self.get_oc_cats(1)
                 elif element == self.choose_group_buttons["view_oc2_button"]:
                     self.get_oc_cats(2)
-                elif element == self.choose_group_buttons["view_oc3_button"]:
+                elif "view_oc3_button" in self.choose_group_buttons and element == self.choose_group_buttons["view_oc3_button"]:
                     self.get_oc_cats(3)
-                elif element == self.choose_group_buttons["view_oc4_button"]:
+                elif "view_oc4_button" in self.choose_group_buttons and element == self.choose_group_buttons["view_oc4_button"]:
                     self.get_oc_cats(4)
                 elif element == self.choose_group_buttons["view_starclan_button"]:
                     self.get_sc_cats()

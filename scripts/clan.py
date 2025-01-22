@@ -30,7 +30,10 @@ from scripts.housekeeping.version import get_version_info, SAVE_VERSION_NUMBER
 from scripts.utility import (
     get_current_season,
     quit,
-    clan_symbol_sprite, get_living_clan_cat_count, create_new_cat
+    clan_symbol_sprite, 
+    get_living_clan_cat_count, 
+    create_new_cat,
+    get_other_clan,
 )  # pylint: disable=redefined-builtin
 
 
@@ -301,6 +304,7 @@ class Clan:
         Places the dead cat into StarClan.
         It should not be removed from the list of cats in the clan
         """
+        cat_clan = get_other_clan(cat.clan)
         if (
             cat.ID in Cat.all_cats
             and cat.dead
@@ -313,7 +317,7 @@ class Clan:
                 self.darkforest_cats.remove(cat.ID)
             if cat.ID in self.unknown_cats:
                 self.unknown_cats.remove(cat.ID)
-            if cat.ID in self.med_cat_list:
+            if cat.ID in cat_clan.med_cat_list:
                 self.med_cat_list.remove(cat.ID)
                 self.med_cat_predecessors += 1
 

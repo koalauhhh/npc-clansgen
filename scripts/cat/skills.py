@@ -3,6 +3,7 @@ from enum import Enum, Flag, auto
 from typing import Union
 
 import i18n
+from scripts.game_structure.game_essentials import game
 
 
 class SkillPath(Enum):
@@ -470,7 +471,7 @@ class CatSkills:
 
         return mentor.ID, path, amount_effect
 
-    def progress_skill(self, the_cat):
+    def progress_skill(self, the_cat, cat_clan):
         """
         this function should be run every moon for every cat to progress their skills accordingly
         :param the_cat: the cat object for affected cat
@@ -506,7 +507,7 @@ class CatSkills:
                     ),
                 )
 
-        if not (the_cat.outside or the_cat.exiled):
+        if not ((the_cat.outside and cat_clan is None or cat_clan is game.clan) or the_cat.exiled):
             if the_cat.status == "kitten":
                 # Check to see if the cat gains a secondary
                 if not self.secondary and not int(random.random() * 22):

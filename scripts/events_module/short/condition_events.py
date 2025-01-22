@@ -25,6 +25,7 @@ from scripts.utility import (
     event_text_adjust,
     get_alive_status_cats,
     get_leader_life_notice,
+    get_other_clan,
 )
 from scripts.game_structure.localization import load_lang_resource
 
@@ -523,6 +524,7 @@ class Condition_Events:
             got_condition = cat.get_permanent_condition(perm_condition, born_with)
 
         if got_condition is True:
+            print(f"{cat.name} got a condition")
             return perm_condition
 
     # ---------------------------------------------------------------------------- #
@@ -531,7 +533,8 @@ class Condition_Events:
 
     @staticmethod
     def handle_already_ill(cat):
-        starting_life_count = game.clan.leader_lives
+        cat_clan = get_other_clan(cat.clan)
+        starting_life_count = cat_clan.leader_lives
         cat.healed_condition = False
         event_list = []
         illness_progression = {
@@ -565,7 +568,7 @@ class Condition_Events:
 
             # death event text and break bc any other illnesses no longer matter
             if cat.dead or (
-                cat.status == "leader" and starting_life_count != game.clan.leader_lives
+                cat.status == "leader" and starting_life_count != cat_clan.leader_lives
             ):
                 try:
                     possible_string_list = Condition_Events.ILLNESS_DEATH_STRINGS[
@@ -603,11 +606,11 @@ class Condition_Events:
                 break
 
             # if the leader died, then break before handling other illnesses cus they'll be fully healed or dead-dead
-            if cat.status == "leader" and starting_life_count != game.clan.leader_lives:
+            if cat.status == "leader" and starting_life_count != cat_clan.leader_lives:
                 break
 
-            # heal the cat
-            elif cat.healed_condition is True:
+            # heal the cat, other clan cats heal immediately
+            elif cat.healed_condition is True or (cat.clan != game.clan.name and cat.clan is not None):
                 History.remove_possible_history(cat, illness)
                 game.switches["skip_conditions"].append(illness)
                 # gather potential event strings for healed illness
@@ -652,6 +655,7 @@ class Condition_Events:
         This function handles, when the cat is already injured
         Returns: True if an event was triggered, False if nothing happened
         """
+        cat_clan = get_other_clan(cat.clan)
         Condition_Events.rebuild_strings()
 
         triggered = False
@@ -660,7 +664,7 @@ class Condition_Events:
         injury_progression = {"poisoned": "redcough", "shock": "lingering shock"}
 
         # need to hold this number so that we can check if the leader has died
-        starting_life_count = game.clan.leader_lives
+        starting_life_count = cat_clan.leader_lives
 
         injuries = deepcopy(cat.injuries)
         for injury in injuries:
@@ -672,7 +676,7 @@ class Condition_Events:
                 continue
 
             if cat.dead or (
-                cat.status == "leader" and starting_life_count != game.clan.leader_lives
+                cat.status == "leader" and starting_life_count != cat_clan.leader_lives
             ):
                 triggered = True
 
@@ -712,7 +716,7 @@ class Condition_Events:
                 game.herb_events_list.append(event)
                 break
 
-            elif cat.healed_condition is True:
+            elif cat.healed_condition is True or (cat.clan != game.clan and cat.clan is not None):
                 game.switches["skip_conditions"].append(injury)
                 triggered = True
 

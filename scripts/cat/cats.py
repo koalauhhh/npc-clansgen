@@ -43,6 +43,7 @@ from scripts.utility import (
     event_text_adjust,
     update_sprite,
     leader_ceremony_text_adjust,
+    get_other_clan
 )
 from scripts.game_structure.localization import load_lang_resource
 
@@ -551,10 +552,11 @@ class Cat:
         that grief messages will align with body status
         - if it is None, a lost cat died and therefore not trigger grief, since the clan does not know
         """
+        cat_clan = get_other_clan(self.clan)
         if (
             self.status == "leader"
             and "pregnant" in self.injuries
-            and game.clan.leader_lives > 0
+            and cat_clan.leader_lives > 0
         ):
             self.illnesses.clear()
 
@@ -572,18 +574,18 @@ class Cat:
         darkforest = game.clan.instructor.df
         isoutside = self.outside
         if self.status == "leader":
-            if game.clan.leader_lives > 0:
-                lives_left = game.clan.leader_lives
+            if cat_clan.leader_lives > 0:
+                lives_left = cat_clan.leader_lives
                 death_thought = Thoughts.leader_death_thought(
                     self, lives_left, darkforest
                 )
                 final_thought = event_text_adjust(self, death_thought, main_cat=self)
                 self.thought = final_thought
                 return ""
-            elif game.clan.leader_lives <= 0:
+            elif cat_clan.leader_lives <= 0:
                 self.dead = True
                 game.just_died.append(self.ID)
-                game.clan.leader_lives = 0
+                cat_clan.leader_lives = 0
                 death_thought = Thoughts.leader_death_thought(self, 0, darkforest)
                 final_thought = event_text_adjust(self, death_thought, main_cat=self)
                 self.thought = final_thought
@@ -610,7 +612,7 @@ class Cat:
         if game.clan and not self.outside and not self.exiled:
             self.grief(body)
 
-        if not self.outside:
+        if not (self.outside and cat_clan is None):
             Cat.dead_cats.append(self)
             if game.clan.instructor.df is False:
                 self.df = False
@@ -889,6 +891,7 @@ class Cat:
                     'medicine cat', 'elder'.
         resort = If sorting type is 'rank', and resort is True, it will resort the cat list. This should
                 only be true for non-timeskip status changes."""
+        cat_clan = get_other_clan(self.clan)
         old_status = self.status
         self.status = new_status
         self.name.status = new_status
@@ -912,30 +915,30 @@ class Cat:
 
         elif self.status == "warrior":
             if old_status == "leader" and (
-                game.clan.leader and game.clan.leader.ID == self.ID
+                cat_clan.leader and cat_clan.leader.ID == self.ID
             ):
-                game.clan.leader = None
-                game.clan.leader_predecessors += 1
-            if game.clan and game.clan.deputy and game.clan.deputy.ID == self.ID:
-                game.clan.deputy = None
-                game.clan.deputy_predecessors += 1
+                cat_clan.leader = None
+                cat_clan.leader_predecessors += 1
+            if cat_clan and cat_clan.deputy and cat_clan.deputy.ID == self.ID:
+                cat_clan.deputy = None
+                cat_clan.deputy_predecessors += 1
 
         elif self.status == "medicine cat":
-            if game.clan is not None:
-                game.clan.new_medicine_cat(self)
+            if cat_clan is not None:
+                cat_clan.new_medicine_cat(self)
 
         elif self.status == "elder":
             if (
                 old_status == "leader"
-                and game.clan.leader
-                and game.clan.leader.ID == self.ID
+                and cat_clan.leader
+                and cat_clan.leader.ID == self.ID
             ):
-                game.clan.leader = None
-                game.clan.leader_predecessors += 1
+                cat_clan.leader = None
+                cat_clan.leader_predecessors += 1
 
-            if game.clan.deputy and game.clan.deputy.ID == self.ID:
-                game.clan.deputy = None
-                game.clan.deputy_predecessors += 1
+            if cat_clan.deputy and cat_clan.deputy.ID == self.ID:
+                cat_clan.deputy = None
+                cat_clan.deputy_predecessors += 1
 
         elif self.status == "mediator":
             pass
@@ -1481,7 +1484,7 @@ class Cat:
     #                              moon skip functions                             #
     # ---------------------------------------------------------------------------- #
 
-    def one_moon(self):
+    def one_moon(self, cat_clan):
         """Handles a moon skip for an alive cat."""
         old_age = self.age
         self.moons += 1
@@ -1489,7 +1492,7 @@ class Cat:
             self.status = "kitten"
         self.in_camp = 1
 
-        if self.exiled or self.outside:
+        if self.exiled or self.outside and cat_clan is None:
             # this is handled in events.py
             self.personality.set_kit(self.age.is_baby())
             self.thoughts()
@@ -1603,7 +1606,7 @@ class Cat:
             iter_cat
             for iter_cat in Cat.all_cats.values()
             if iter_cat.ID != self.ID
-            and not iter_cat.outside
+            and not iter_cat.clan != self.clan
             and not iter_cat.exiled
             and not iter_cat.dead
             and self.clan == iter_cat.clan
@@ -2268,7 +2271,7 @@ class Cat:
 
     def is_valid_mentor(self, potential_mentor: Cat):
         # Dead or outside cats can't be mentors
-        if potential_mentor.dead or potential_mentor.outside:
+        if potential_mentor.dead or self.clan != potential_mentor.clan:
             return False
         # Match jobs
         if (
@@ -2292,7 +2295,7 @@ class Cat:
         if "apprentice" not in self.status:
             return False
         # Dead cats don't need mentors
-        if self.dead or self.outside or self.exiled:
+        if self.dead or (self.outside and self.clan is None) or self.exiled:
             return False
         return True
 
@@ -2332,7 +2335,7 @@ class Cat:
         # Check if cat can have a mentor
         illegible_for_mentor = (
             self.dead
-            or self.outside
+            or (self.outside and self.clan is None)
             or self.exiled
             or self.status
             not in ["apprentice", "mediator apprentice", "medicine cat apprentice"]

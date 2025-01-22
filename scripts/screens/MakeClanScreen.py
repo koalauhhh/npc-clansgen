@@ -2149,7 +2149,6 @@ class MakeClanScreen(Screens):
         game.patrolled.clear()
         game.cat_to_fade.clear()
         Patrol.used_patrols.clear()
-        game.clan = None
         convert_camp = {1: "camp1", 2: "camp2", 3: "camp3", 4: "camp4"}
 
         # resetting ids bc it drives me up the walls, theres a nicer way to do this im sure

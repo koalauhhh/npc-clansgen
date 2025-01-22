@@ -815,6 +815,8 @@ class ProfileScreen(Screens):
             output += (
                 f"<font color='#FF0000'>{i18n.t('general.exiled', count=1)}</font>"
             )
+        elif (the_cat.outside and the_cat.clan is None):
+            output += i18n.t(f"general.{the_cat.status}", count=1)
         else:
             output += i18n.t(f"{the_cat.clan}Clan {the_cat.status}", count=1)
 

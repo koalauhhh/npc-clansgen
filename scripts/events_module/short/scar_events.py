@@ -246,6 +246,7 @@ class Scar_Events:
                 "hardcoded.scar_event1",
                 "hardcoded.scar_event2",
             ]
+            print(f"{cat.name} got a scar")
             return (
                 i18n.t(
                     random.choice(scar_gain_strings),

@@ -6,6 +6,7 @@ from scripts.game_structure.game_essentials import game
 from scripts.utility import (
     get_alive_status_cats,
     filter_relationship_type,
+    get_other_clan,
 )
 
 def event_for_location(locations: list) -> bool:
@@ -44,6 +45,7 @@ def event_for_tags(tags: list, cat, other_cat=None) -> bool:
     """
         checks if current tags disqualify the event
         """
+    cat_clan = get_other_clan(cat.clan)
     if not tags:
         return True
 
@@ -56,7 +58,7 @@ def event_for_tags(tags: list, cat, other_cat=None) -> bool:
 
     # check leader life tags
     if cat.status == "leader":
-        leader_lives = game.clan.leader_lives
+        leader_lives = cat_clan.leader_lives
 
         life_lookup = {
             "some_lives": 4,

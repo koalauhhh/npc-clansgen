@@ -797,6 +797,8 @@ def get_other_clan(clan_name):
     """
     returns the clan object of given clan name
     """
+    if clan_name == game.clan.name:
+        return game.clan
     for clan in game.clan.all_clans:
         if clan.name == clan_name:
             return clan
@@ -1804,13 +1806,13 @@ def change_relationship_values(
 # ---------------------------------------------------------------------------- #
 
 
-def get_leader_life_notice() -> str:
+def get_leader_life_notice(cat_clan=game.clan) -> str:
     """
     Returns a string specifying how many lives the leader has left or notifying of the leader's full death
     """
     if game.clan.instructor.df:
-        return i18n.t("cat.history.leader_lives_left_df", count=game.clan.leader_lives)
-    return i18n.t("cat.history.leader_lives_left_sc", count=game.clan.leader_lives)
+        return i18n.t("cat.history.leader_lives_left_df", count=cat_clan.leader_lives)
+    return i18n.t("cat.history.leader_lives_left_sc", count=cat_clan.leader_lives)
 
 
 def get_other_clan_relation(relation):

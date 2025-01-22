@@ -270,7 +270,7 @@ class Relation_Events:
         """Returns a list of cats, where the relationship from main_cat towards the cat fulfill the given constraints."""
         cat_list = list(
             filter(
-                lambda cat: (not cat.dead and not cat.outside and not cat.exiled),
+                lambda cat: (not cat.dead and not (cat.outside and cat.clan != main_cat.clan) and not cat.exiled),
                 Cat.all_cats.values(),
             )
         )
