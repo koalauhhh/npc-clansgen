@@ -1232,7 +1232,7 @@ class Events:
                     c = random.randint(1, 3)
                     text = i18n.t(
                         f"hardcoded.ceremony_leader_{c}",
-                        oldname=game.clan.deputy.name,
+                        oldname=cat_clan.deputy.name,
                         newname=cat.name,
                     )
 
@@ -1242,11 +1242,11 @@ class Events:
                 text = event_text_adjust(Cat, text, main_cat=cat)
 
                 game.cur_events_list.append(
-                    Single_Event(text, "ceremony", game.clan.deputy.ID)
+                    Single_Event(text, "ceremony", cat_clan.deputy.ID)
                 )
                 self.ceremony_accessory = True
                 self.gain_accessories(cat, cat_clan)
-                game.clan.deputy = None
+                cat_clan.deputy = None
 
         # OTHER CEREMONIES ---------------------------------------
 
@@ -2394,7 +2394,7 @@ class Events:
                 or (iter_clan.deputy.outside and iter_clan is game.clan)
                 or iter_clan.deputy.status == "elder"
             ):
-                if iter_clan is game.clan and not game.clan.clan_settings.get("deputy"):
+                if (iter_clan is game.clan) and not game.clan.clan_settings.get("deputy"):
                     game.cur_events_list.insert(0, Single_Event("defaults.warn_no_deputy"))
                     return
                 # This determines all the cats who are eligible to be deputy.

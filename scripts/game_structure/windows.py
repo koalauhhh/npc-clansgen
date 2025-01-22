@@ -58,6 +58,7 @@ from scripts.utility import (
     process_text,
     ui_scale_dimensions,
     ui_scale_offset,
+    get_other_clan,
 )
 
 if TYPE_CHECKING:
@@ -1050,6 +1051,7 @@ class KillCat(UIWindow):
         self.history = History()
         self.the_cat = cat
         self.take_all = False
+        self.cat_clan = get_other_clan(self.the_cat.clan)
         self.back_button = UIImageButton(
             ui_scale(pygame.Rect((420, 5), (22, 22))),
             "",
@@ -1204,9 +1206,9 @@ class KillCat(UIWindow):
                         )
 
                     if self.take_all:
-                        game.clan.leader_lives = 0
+                        self.cat_clan.leader_lives = 0
                     else:
-                        game.clan.leader_lives -= 1
+                        self.cat_clan.leader_lives -= 1
 
                 self.the_cat.die()
                 self.history.add_death(self.the_cat, death_message)

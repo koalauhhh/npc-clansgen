@@ -29,7 +29,8 @@ from scripts.utility import (
     ui_scale_dimensions,
     shorten_text_to_fit,
     ui_scale_offset,
-    adjust_list_text, )
+    adjust_list_text,
+    get_other_clan,)
 from .Screens import Screens
 from ..cat.history import History
 from ..game_structure.localization import get_new_pronouns
@@ -825,9 +826,10 @@ class ProfileScreen(Screens):
 
         # LEADER LIVES:
         # Optional - Only shows up for leaders
+        cat_clan = get_other_clan(the_cat.clan)
         if not the_cat.dead and "leader" in the_cat.status:
             output += i18n.t(
-                "screens.profile.lives_remaining_label", count=game.clan.leader_lives
+                "screens.profile.lives_remaining_label", count=cat_clan.leader_lives
             )
             # NEWLINE ----------
             output += "\n"
