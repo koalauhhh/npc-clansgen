@@ -232,11 +232,13 @@ def get_cats_same_age(Cat, cat, age_range=10):
     """
     cats = []
     for inter_cat in Cat.all_cats.values():
-        if inter_cat.dead or inter_cat.outside or inter_cat.exiled:
+        if inter_cat.dead or (inter_cat.outside and inter_cat.clan is None) or inter_cat.exiled:
             continue
         if inter_cat.ID == cat.ID:
             continue
-
+        
+        if inter_cat.ID not in cat.relationships and inter_cat.clan != cat.clan:
+            continue
         if inter_cat.ID not in cat.relationships:
             cat.create_one_relationship(inter_cat)
             if cat.ID not in inter_cat.relationships:
@@ -256,11 +258,13 @@ def get_free_possible_mates(cat):
     """Returns a list of available cats, which are possible mates for the given cat."""
     cats = []
     for inter_cat in cat.all_cats.values():
-        if inter_cat.dead or inter_cat.outside or inter_cat.exiled:
+        if inter_cat.dead or (inter_cat.outside and cat.clan is None) or inter_cat.exiled:
             continue
         if inter_cat.ID == cat.ID:
             continue
-
+        
+        if (inter_cat.ID not in cat.relationships) and (inter_cat.clan != cat.clan):
+            continue
         if inter_cat.ID not in cat.relationships:
             cat.create_one_relationship(inter_cat)
             if cat.ID not in inter_cat.relationships:
@@ -1183,11 +1187,13 @@ def get_cats_of_romantic_interest(cat):
     """Returns a list of cats, those cats are love interest of the given cat"""
     cats = []
     for inter_cat in cat.all_cats.values():
-        if inter_cat.dead or inter_cat.outside or inter_cat.exiled:
+        if inter_cat.dead or (inter_cat.outside and inter_cat.clan is None) or inter_cat.exiled:
             continue
         if inter_cat.ID == cat.ID:
             continue
 
+        if inter_cat.ID not in cat.relationships and inter_cat.clan != cat.clan:
+            continue
         if inter_cat.ID not in cat.relationships:
             cat.create_one_relationship(inter_cat)
             if cat.ID not in inter_cat.relationships:

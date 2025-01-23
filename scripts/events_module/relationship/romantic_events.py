@@ -357,7 +357,7 @@ class RomanticEvents:
             Cat.fetch_cat(x)
             for x in cat.relationships
             if isinstance(Cat.fetch_cat(x), Cat)
-            and not (Cat.fetch_cat(x).dead or Cat.fetch_cat(x).outside)
+            and not (Cat.fetch_cat(x).dead or (Cat.fetch_cat(x).outside and Cat.fetch_cat(x).clan is None))
         ]
         if not subset:
             return
@@ -400,7 +400,7 @@ class RomanticEvents:
             if (
                 cat_mate
                 and "grief stricken" not in cat.illnesses
-                and ((cat_mate.dead and cat_mate.dead_for >= 4) or cat_mate.outside)
+                and ((cat_mate.dead and cat_mate.dead_for >= 4) or (cat_mate.outside and cat_mate.clan is None))
             ):
                 # randint is a slow function, don't call it unless we have to.
                 if not cat_mate.no_mates and random.random() > 0.5:

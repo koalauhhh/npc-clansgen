@@ -1049,8 +1049,9 @@ class Events:
         cat.thoughts()
 
         # relationships have to be handled separately, because of the ceremony name change
-        if not cat.dead and not (cat.outside and cat_clan is None or cat_clan is game.clan):
+        if not cat.dead and not (cat.outside and cat_clan is None):
             Relation_Events.handle_relationships(cat)
+
 
         # now we make sure ill and injured cats don't get interactions they shouldn't
         if cat.is_ill() or cat.is_injured() and cat.clan == game.clan.name:

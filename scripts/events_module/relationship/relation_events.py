@@ -13,6 +13,7 @@ from scripts.utility import (
     get_cats_same_age,
     get_cats_of_romantic_interest,
     get_free_possible_mates,
+    get_other_clan,
 )
 
 
@@ -91,9 +92,11 @@ class Relation_Events:
         cat_to_choose_from = []
         for inter_cat in possible_cats:
             # toss out cats who are outside
-            if inter_cat.outside:
+            if inter_cat.outside and inter_cat.clan is None:
                 continue
 
+            if inter_cat.ID not in cat.relationships and inter_cat.clan != cat.clan:
+                continue
             if inter_cat.ID not in cat.relationships:
                 cat.create_one_relationship(inter_cat)
             if cat.ID not in inter_cat.relationships:
@@ -127,7 +130,7 @@ class Relation_Events:
             cat_to_choose_from = [
                 cat.all_cats[mate_id]
                 for mate_id in cat.mate
-                if not cat.all_cats[mate_id].dead and not cat.all_cats[mate_id].outside
+                if not cat.all_cats[mate_id].dead and not (cat.all_cats[mate_id].outside and cat.all_cats[mate_id].clan is None)
             ]
 
         if not cat_to_choose_from:
@@ -165,6 +168,7 @@ class Relation_Events:
         First it will be decided if a special type of group (found in relationship_events/group_interactions/group_types.json).
         As default all cats will be a possible 'group' of interaction.
         """
+        cat_clan = get_other_clan(cat.clan)
         if not Relation_Events.can_trigger_events(cat):
             return
 
@@ -181,7 +185,7 @@ class Relation_Events:
             chosen_type = "all"
         possible_interaction_cats = list(
             filter(
-                lambda cat: (not cat.dead and not cat.outside and not cat.exiled),
+                lambda cat: (not cat.dead and not (cat.outside and cat.clan is None) and not cat.exiled),
                 Cat.all_cats.values(),
             )
         )
@@ -282,6 +286,8 @@ class Relation_Events:
             cat_to = inter_cat
 
             if inter_cat.ID == main_cat.ID:
+                continue
+            if cat_to.ID not in cat_from.relationships and cat_to.clan != cat_from.clan:
                 continue
             if cat_to.ID not in cat_from.relationships:
                 cat_from.create_one_relationship(cat_to)
