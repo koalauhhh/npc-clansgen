@@ -888,7 +888,7 @@ class ListScreen(Screens):
             if (
                 the_cat.dead
                 and the_cat.ID != game.clan.instructor.ID
-                and not the_cat.outside
+                and not (the_cat.outside and the_cat.clan is None)
                 and not the_cat.df
                 and not the_cat.faded
             ):
