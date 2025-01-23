@@ -630,6 +630,7 @@ class Cat:
         status."""
         self.exiled = True
         self.outside = True
+        self.clan = None
         self.status = "exiled"
         if self.personality.trait == "vengeful":
             self.thought = "Swears their revenge for being exiled"
