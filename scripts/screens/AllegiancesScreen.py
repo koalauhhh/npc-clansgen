@@ -589,6 +589,7 @@ class AllegiancesScreen(Screens):
         
         living_kitties = []
         living_loners = []
+        living_rogues = []
         living_exiled = []
         
         for cat in self.living_cats:
@@ -596,6 +597,8 @@ class AllegiancesScreen(Screens):
                 living_kitties.append(cat)
             elif cat.status == "loner":
                 living_loners.append(cat)
+            elif cat.status == "rogue":
+                living_rogues.append(cat)
             elif cat.exiled:
                 living_exiled.append(cat)
         
@@ -607,7 +610,7 @@ class AllegiancesScreen(Screens):
             _box = ["", ""]
             _box[
                 0
-            ] = f"<b><u>{i18n.t('general.warrior', count=len(living_kitties)).upper()}</u></b>"
+            ] = f"<b><u>{i18n.t('kittypets', count=len(living_kitties)).upper()}</u></b>"
 
             _box[1] = "\n".join([self.generate_one_entry(i) for i in living_kitties])
             outputs.append(_box)
@@ -617,9 +620,19 @@ class AllegiancesScreen(Screens):
             _box = ["", ""]
             _box[
                 0
-            ] = f"<b><u>{i18n.t('general.warrior', count=len(living_loners)).upper()}</u></b>"
+            ] = f"<b><u>{i18n.t('loners', count=len(living_loners)).upper()}</u></b>"
 
             _box[1] = "\n".join([self.generate_one_entry(i) for i in living_loners])
+            outputs.append(_box)
+        
+        # Rogue Box:
+        if living_rogues:
+            _box = ["", ""]
+            _box[
+                0
+            ] = f"<b><u>{i18n.t('rouges', count=len(living_rogues)).upper()}</u></b>"
+
+            _box[1] = "\n".join([self.generate_one_entry(i) for i in living_rogues])
             outputs.append(_box)
 
         # Exiled Box:
@@ -627,7 +640,7 @@ class AllegiancesScreen(Screens):
             _box = ["", ""]
             _box[
                 0
-            ] = f"<b><u>{i18n.t('general.warrior', count=len(living_exiled)).upper()}</u></b>"
+            ] = f"<b><u>{i18n.t('exiled', count=len(living_exiled)).upper()}</u></b>"
 
             _box[1] = "\n".join([self.generate_one_entry(i) for i in living_exiled])
             outputs.append(_box)
