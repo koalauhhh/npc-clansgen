@@ -334,7 +334,8 @@ class Clan:
                 self.unknown_cats.remove(cat.ID)
             if cat.ID in cat_clan.med_cat_list:
                 cat_clan.med_cat_list.remove(cat.ID)
-                cat_clan.med_cat_predecessors += 1
+                if cat_clan is self:
+                    cat_clan.med_cat_predecessors += 1
 
     def add_to_darkforest(self, cat):  # Same as add_cat
         """

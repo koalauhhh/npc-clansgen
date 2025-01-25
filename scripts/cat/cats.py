@@ -572,7 +572,7 @@ class Cat:
         # Deal with leader death
         text = ""
         darkforest = game.clan.instructor.df
-        isoutside = self.outside
+        isoutside = self.outside if self.clan == game.clan.name or self.clan is None else False
         if self.status == "leader":
             if cat_clan.leader_lives > 0:
                 lives_left = cat_clan.leader_lives
@@ -584,6 +584,7 @@ class Cat:
                 return ""
             elif cat_clan.leader_lives <= 0:
                 self.dead = True
+                self.outside = isoutside
                 game.just_died.append(self.ID)
                 cat_clan.leader_lives = 0
                 death_thought = Thoughts.leader_death_thought(self, 0, darkforest)
@@ -597,6 +598,7 @@ class Cat:
                     text = "They've lost their last life and have travelled to the Dark Forest."
         else:
             self.dead = True
+            self.outside = isoutside
             game.just_died.append(self.ID)
             death_thought = Thoughts.new_death_thought(self, darkforest, isoutside)
             final_thought = event_text_adjust(self, death_thought, main_cat=self)
@@ -3479,15 +3481,25 @@ class Cat:
             the Cat object. Takes a function which takes in a Cat instance and
             returns a boolean.
         """
-        sorted_specific_list = [
-            check_cat
-            for check_cat in Cat.all_cats_list
-            if check_cat.dead == self.dead
-            and check_cat.outside == self.outside
-            and check_cat.clan == self.clan
-            and check_cat.df == self.df
-            and not check_cat.faded
-        ]
+        if self.dead:
+            sorted_specific_list = [
+                check_cat
+                for check_cat in Cat.all_cats_list
+                if check_cat.dead == self.dead
+                and check_cat.outside == self.outside
+                and check_cat.df == self.df
+                and not check_cat.faded
+            ]
+        else:
+            sorted_specific_list = [
+                check_cat
+                for check_cat in Cat.all_cats_list
+                if check_cat.dead == self.dead
+                and check_cat.outside == self.outside
+                and check_cat.clan == self.clan
+                and check_cat.df == self.df
+                and not check_cat.faded
+            ]
 
         if filter_func is not None:
             sorted_specific_list = [
