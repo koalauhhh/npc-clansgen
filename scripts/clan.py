@@ -200,6 +200,21 @@ class Clan:
             self.med_cat_list.append(self.medicine_cat.ID)
             if self.medicine_cat.status != "medicine cat":
                 Cat.all_cats[self.medicine_cat.ID].status_change("medicine cat")
+        
+        for other_clan in self.all_clans:
+            if other_clan.deputy is not None:
+                other_clan.deputy.status_change("deputy")
+                other_clan.clan_cats.append(other_clan.deputy.ID)
+
+            if other_clan.leader:
+                other_clan.leader.status_change("leader")
+                other_clan.clan_cats.append(other_clan.leader.ID)
+
+            if other_clan.medicine_cat is not None:
+                other_clan.clan_cats.append(other_clan.medicine_cat.ID)
+                other_clan.med_cat_list.append(other_clan.medicine_cat.ID)
+                if other_clan.medicine_cat.status != "medicine cat":
+                    Cat.all_cats[other_clan.medicine_cat.ID].status_change("medicine cat")
 
     def create_clan(self):
         """
@@ -318,8 +333,8 @@ class Clan:
             if cat.ID in self.unknown_cats:
                 self.unknown_cats.remove(cat.ID)
             if cat.ID in cat_clan.med_cat_list:
-                self.med_cat_list.remove(cat.ID)
-                self.med_cat_predecessors += 1
+                cat_clan.med_cat_list.remove(cat.ID)
+                cat_clan.med_cat_predecessors += 1
 
     def add_to_darkforest(self, cat):  # Same as add_cat
         """
@@ -877,7 +892,6 @@ class Clan:
             game_mode=clan_data["gamemode"],
             self_run_init_functions=False,
         )
-        game.clan.post_initialization_functions()
 
         game.clan.reputation = int(clan_data["reputation"])
 
@@ -959,6 +973,8 @@ class Clan:
                         OtherClan(name=name, relations=int(relation), temperament=temper, chosen_symbol=symbol)
                     )
                     # TODO: set up for old saves to be loaded
+
+        game.clan.post_initialization_functions()
 
         for cat in clan_data["clan_cats"].split(","):
             if cat in Cat.all_cats:

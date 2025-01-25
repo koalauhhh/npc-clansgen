@@ -189,19 +189,19 @@ class Thoughts:
         # this covers if living status isn't stated
         else:
             living_status = None
-            if random_cat and not random_cat.dead and not random_cat.outside:
+            if random_cat and not random_cat.dead and not (random_cat.outside and random_cat.clan != main_cat.clan):
                 living_status = "living"
             if living_status and living_status != "living":
                 return False
 
         if (
             random_cat
-            and random_cat.outside
+            and (random_cat.outside and random_cat.clan is None)
             and random_cat.status
             not in ["kittypet", "loner", "rogue", "former Clancat", "exiled"]
         ):
             outside_status = "lost"
-        elif random_cat and random_cat.outside:
+        elif random_cat and (random_cat.outside and random_cat.clan is None):
             outside_status = "outside"
         else:
             outside_status = "clancat"
@@ -210,7 +210,7 @@ class Thoughts:
                 return False
         else:
             if (
-                main_cat.outside
+                (main_cat.outside and main_cat.clan is None)
             ):  # makes sure that outsiders can get thoughts all the time
                 pass
             else:
@@ -350,7 +350,7 @@ class Thoughts:
                 spec_dir = "/darkforest"
             else:
                 spec_dir = "/starclan"
-        elif main_cat.outside:
+        elif main_cat.outside and main_cat.clan is None:
             spec_dir = "/alive_outside"
         else:
             spec_dir = ""

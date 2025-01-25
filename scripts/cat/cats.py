@@ -1574,6 +1574,7 @@ class Cat:
             while (
                 other_cat == self.ID
                 and len(all_cats) > 1
+                or all_cats.get(other_cat).clan != self.clan
                 or (other_cat not in self.relationships)
             ):
                 # or (self.status in ['kittypet', 'loner'] and not all_cats.get(other_cat).outside):
