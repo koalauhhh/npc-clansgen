@@ -2388,7 +2388,9 @@ class Events:
         # TODO: can these events be handled as ceremony events?
 
         """Checks if a new deputy needs to be appointed, and appointed them if needed."""
+        iter_clan_name = None
         for iter_clan in (game.clan.all_clans + [game.clan]):
+            iter_clan_name = iter_clan.name
             if (
                 not iter_clan.deputy
                 or iter_clan.deputy.dead
@@ -2401,11 +2403,12 @@ class Events:
                 # This determines all the cats who are eligible to be deputy.
                 possible_deputies = list(
                     filter(
-                        lambda x: not Cat.fetch_cat(x).dead
-                        and not (Cat.fetch_cat(x).outside and Cat.fetch_cat(x).clan is None)
-                        and Cat.fetch_cat(x).status == "warrior"
-                        and (Cat.fetch_cat(x).apprentice or Cat.fetch_cat(x).former_apprentices),
-                        iter_clan.clan_cats,
+                        lambda x: not x.dead
+                        and not (x.outside and x.clan is None)
+                        and x.clan == iter_clan_name
+                        and x.status == "warrior"
+                        and (x.apprentice or x.former_apprentices),
+                        Cat.all_cats,
                     )
                 )
 
@@ -2467,11 +2470,12 @@ class Events:
                     # If there are no possible deputies, choose someone else, with special text.
                     all_warriors = list(
                         filter(
-                            lambda x: not Cat.fetch_cat(x).dead
-                            and not (Cat.fetch_cat(x).outside and Cat.fetch_cat(x).clan is None)
-                            and Cat.fetch_cat(x).status == "warrior",
-                            iter_clan.clan_cats,
-                        )
+                        lambda x: not x.dead
+                        and not (x.outside and x.clan is None)
+                        and x.clan == iter_clan_name
+                        and x.status == "warrior",
+                        Cat.all_cats,
+                    )
                     )
                     if all_warriors:
                         random_cat = Cat.fetch_cat(random.choice(all_warriors))
