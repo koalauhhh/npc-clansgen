@@ -2408,7 +2408,7 @@ class Events:
                         and x.clan == iter_clan_name
                         and x.status == "warrior"
                         and (x.apprentice or x.former_apprentices),
-                        Cat.all_cats,
+                        Cat.all_cats_list,
                     )
                 )
 
@@ -2474,7 +2474,7 @@ class Events:
                         and not (x.outside and x.clan is None)
                         and x.clan == iter_clan_name
                         and x.status == "warrior",
-                        Cat.all_cats,
+                        Cat.all_cats_list,
                     )
                     )
                     if all_warriors:
