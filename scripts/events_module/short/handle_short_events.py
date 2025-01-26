@@ -201,7 +201,11 @@ class HandleShortEvents:
                 return
 
         # create new cats (must happen here so that new cats can be included in further changes)
-        self.handle_new_cats()
+        if self.chosen_event.new_cat:
+            if "meeting" in self.chosen_event.new_cat[0] and self.main_cat.clan != game.clan.name:
+                return
+            else:
+                self.handle_new_cats()
 
         # give accessory
         if self.chosen_event.new_accessory:
@@ -323,6 +327,8 @@ class HandleShortEvents:
         """
 
         if not self.chosen_event.new_cat:
+            return
+        if "meeting" in self.chosen_event.new_cat[0] and self.main_cat.clan != game.clan.name:
             return
 
         if "misc" not in self.types:

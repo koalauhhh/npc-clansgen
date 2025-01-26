@@ -626,13 +626,20 @@ def create_new_cat_block(
 
     # MEETING - DETERMINE IF THIS IS AN OUTSIDE CAT
     outside = False
+    clan = game.clan.name
+    npc = False
     if "meeting" in attribute_list:
         outside = True
+        clan = None
         status = cat_type
         new_name = False
         thought = i18n.t("hardcoded.thought_meeting")
         if age is not None and age <= 6 and not bs_override:
             chosen_backstory = "outsider1"
+    elif in_event_cats["m_c"].outside:
+        outside = True
+        clan = in_event_cats["m_c"].clan
+        npc = True
 
     # IS THE CAT DEAD?
     alive = True
@@ -644,7 +651,7 @@ def create_new_cat_block(
     chosen_cat = None
     if "exists" in attribute_list:
         existing_outsiders = [
-            i for i in Cat.all_cats.values() if i.outside and not i.dead
+            i for i in Cat.all_cats.values() if (i.outside and i.clan is None) and not i.dead
         ]
         possible_outsiders = []
         for cat in existing_outsiders:
@@ -663,6 +670,7 @@ def create_new_cat_block(
             game.clan.add_to_clan(chosen_cat)
             chosen_cat.status = status
             chosen_cat.outside = outside
+            chosen_cat.clan = clan
             if not alive:
                 chosen_cat.die()
 
@@ -713,6 +721,8 @@ def create_new_cat_block(
             thought=thought,
             alive=alive,
             outside=outside,
+            clan=clan,
+            npc_clan=npc,
             parent1=parent1.ID if parent1 else None,
             parent2=parent2.ID if parent2 else None,
             adoptive_parents=adoptive_parents if adoptive_parents else None,
