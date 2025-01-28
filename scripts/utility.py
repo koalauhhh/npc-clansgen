@@ -636,7 +636,7 @@ def create_new_cat_block(
         thought = i18n.t("hardcoded.thought_meeting")
         if age is not None and age <= 6 and not bs_override:
             chosen_backstory = "outsider1"
-    elif in_event_cats["m_c"].outside:
+    elif "m_c" in in_event_cats and in_event_cats["m_c"].outside:
         outside = True
         clan = in_event_cats["m_c"].clan
         npc = True
@@ -702,6 +702,31 @@ def create_new_cat_block(
                     )
 
             new_cats = [chosen_cat]
+    
+    # get cat from other clans
+    if cat_type == "former Clancat":
+        existing_clancats = [
+            i for i in Cat.all_cats.values() if (i.outside and i.clan == event.other_clan.name) and not i.dead
+        ]
+        possible_clancats = []
+        for cat in existing_clancats:
+            if status and status != cat.status:
+                continue
+            if gender and gender != cat.gender:
+                continue
+            possible_clancats.append(cat)
+
+        if possible_clancats:
+            chosen_cat = choice(possible_clancats)
+            game.clan.add_to_clan(chosen_cat)
+            chosen_cat.status = status
+            chosen_cat.outside = outside
+            chosen_cat.clan = clan
+            if not alive:
+                chosen_cat.die()
+
+            new_cats = [chosen_cat]
+
 
     # Now we generate the new cat
     if not chosen_cat:
@@ -931,7 +956,7 @@ def create_new_cat(
                 parent1=parent1,
                 parent2=parent2,
                 adoptive_parents=adoptive_parents if adoptive_parents else [],
-                clan=game.clan.name
+                clan=clan
             )
         else:
             # grab starting names and accs for loners/kittypets
@@ -970,7 +995,7 @@ def create_new_cat(
                         parent1=parent1,
                         parent2=parent2,
                         adoptive_parents=adoptive_parents if adoptive_parents else [],
-                        clan=game.clan.name
+                        clan=clan
                     )
                 else:  # completely new name
                     new_cat = Cat(
@@ -981,7 +1006,7 @@ def create_new_cat(
                         parent1=parent1,
                         parent2=parent2,
                         adoptive_parents=adoptive_parents if adoptive_parents else [],
-                        clan=game.clan.name
+                        clan=clan
                     )
             # these cats keep their old names
             else:
@@ -995,7 +1020,7 @@ def create_new_cat(
                     parent1=parent1,
                     parent2=parent2,
                     adoptive_parents=adoptive_parents if adoptive_parents else [],
-                    clan=game.clan.name
+                    clan=clan
                 )
 
         # give em a collar if they got one

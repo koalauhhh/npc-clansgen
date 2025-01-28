@@ -202,10 +202,13 @@ class HandleShortEvents:
 
         # create new cats (must happen here so that new cats can be included in further changes)
         if self.chosen_event.new_cat:
+            # dont want other clans to meet new cats for you
             if "meeting" in self.chosen_event.new_cat[0] and self.main_cat.clan != game.clan.name:
                 return
-            else:
-                self.handle_new_cats()
+            elif "clancat" in self.chosen_event.new_cat[0] and self.main_cat.clan == self.other_clan.name:
+                return
+        
+        self.handle_new_cats()
 
         # give accessory
         if self.chosen_event.new_accessory:
