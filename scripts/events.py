@@ -1209,7 +1209,7 @@ class Events:
         # PROMOTE DEPUTY TO LEADER, IF NEEDED -----------------------
         if cat_clan.leader:
             leader_dead = cat_clan.leader.dead
-            leader_outside = cat_clan.leader.outside and cat_clan is None or cat_clan is game.clan
+            leader_outside = cat_clan.leader.outside and cat_clan is game.clan
         else:
             leader_dead = True
             # If leader is None, treat them as dead (since they are dead - and faded away.)
@@ -1221,7 +1221,7 @@ class Events:
             if (
                 cat_clan.deputy is not None
                 and not cat_clan.deputy.dead
-                and not (cat_clan.deputy.outside and cat_clan is None or cat_clan is game.clan)
+                and not (cat_clan.deputy.outside and cat_clan is game.clan)
                 and (leader_dead or leader_outside)
             ):
                 cat_clan.new_leader(cat_clan.deputy)
