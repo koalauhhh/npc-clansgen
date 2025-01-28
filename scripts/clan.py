@@ -324,6 +324,7 @@ class Clan:
             cat.ID in Cat.all_cats
             and cat.dead
             and cat.ID not in self.starclan_cats
+            and cat.clan is not None
             and cat.df is False
         ):
             # The dead-value must be set to True before the cat can go to starclan
@@ -416,11 +417,11 @@ class Clan:
             cat.ID in Cat.all_cats
             and cat.outside
             and not cat.dead
-            and cat.clan == other_clan
+            and cat.clan == other_clan.name
             and cat.ID not in other_clan.clan_cats
         ):
             # The outside + other_clan-values must be set to True and clan value set correctly before the cat can go to oc
-            other_clan.clan_cats.update({cat.ID: cat})
+            other_clan.clan_cats.append(cat.ID)
 
     def remove_cat(self, ID):  # ID is cat.ID
         """

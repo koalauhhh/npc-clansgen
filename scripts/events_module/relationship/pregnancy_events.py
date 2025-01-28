@@ -911,7 +911,7 @@ class Pregnancy_Events:
             kit.pelt.accessory = None
             if kit.clan == game.clan.name:
                 clan.add_cat(kit)
-            else:
+            elif kit.clan is not None:
                 clan.add_to_oc(kit, cat_clan)
 
             #### GIVE HISTORY ######
