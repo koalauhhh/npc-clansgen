@@ -263,12 +263,9 @@ class Clan:
 
         # give thoughts,actions and relationships to cats
         for cat_id in Cat.all_cats:
-            Cat.all_cats.get(cat_id).init_all_relationships()
             Cat.all_cats.get(cat_id).backstory = "clan_founder"
             if Cat.all_cats.get(cat_id).status == "apprentice":
                 Cat.all_cats.get(cat_id).status_change("apprentice")
-            Cat.all_cats.get(cat_id).thoughts()
-
         game.save_cats()
         number_other_clans = randint(3, 5)
         for _ in range(number_other_clans):
@@ -284,6 +281,10 @@ class Clan:
             other_clan = OtherClan(name=other_clan_name)
             other_clan.create_clan_cats()
             self.all_clans.append(other_clan)
+
+        for cat_id in Cat.all_cats:
+            Cat.all_cats.get(cat_id).init_all_relationships()
+            Cat.all_cats.get(cat_id).thoughts()
 
         game.save_cats()
         self.save_clan()
