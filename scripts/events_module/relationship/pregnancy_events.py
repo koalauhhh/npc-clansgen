@@ -748,7 +748,7 @@ class Pregnancy_Events:
 
     @staticmethod
     def get_kits(
-        kits_amount, cat=None, other_cat=None, clan=game.clan, adoptive_parents=None
+        kits_amount, cat=None, other_cat=None, clan=None, adoptive_parents=None
     ):
         """Create some amount of kits
         No parents are specified, it will create a blood parents for all the
@@ -875,7 +875,7 @@ class Pregnancy_Events:
                 Condition_Events.handle_already_disabled(kit)
 
             # create and update relationships
-            for cat_id in cat_clan.clan_cats:
+            for cat_id in clan.clan_cats:
                 if cat_id == kit.ID:
                     continue
                 the_cat = Cat.all_cats.get(cat_id)
@@ -909,9 +909,8 @@ class Pregnancy_Events:
 
             #### REMOVE ACCESSORY ######
             kit.pelt.accessory = None
-            if kit.clan == game.clan.name:
-                clan.add_cat(kit)
-            elif kit.clan is not None:
+            clan.add_cat(kit)
+            if kit.clan is not None:
                 clan.add_to_oc(kit, cat_clan)
 
             #### GIVE HISTORY ######

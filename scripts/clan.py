@@ -261,7 +261,7 @@ class Clan:
                 Cat.all_cats[i].example = True
                 self.remove_cat(Cat.all_cats[i].ID)
 
-        # give thoughts,actions and relationships to cats
+        # ensure clan cat backstory and apprentices
         for cat_id in Cat.all_cats:
             Cat.all_cats.get(cat_id).backstory = "clan_founder"
             if Cat.all_cats.get(cat_id).status == "apprentice":
@@ -282,6 +282,7 @@ class Clan:
             other_clan.create_clan_cats()
             self.all_clans.append(other_clan)
 
+        # give thoughts, actions and relationships to cats
         for cat_id in Cat.all_cats:
             Cat.all_cats.get(cat_id).init_all_relationships()
             Cat.all_cats.get(cat_id).thoughts()

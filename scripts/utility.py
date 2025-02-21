@@ -719,6 +719,7 @@ def create_new_cat_block(
         if possible_clancats:
             chosen_cat = choice(possible_clancats)
             game.clan.add_to_clan(chosen_cat)
+            chosen_cat.backstory = chosen_backstory
             chosen_cat.status = status
             chosen_cat.outside = outside
             chosen_cat.clan = clan
@@ -2241,6 +2242,7 @@ def event_text_adjust(
         multi_cats: list = None,
         clan=None,
         other_clan=None,
+        oc_cats: list = None,
         chosen_herb: str = None,
 ):
     """
@@ -2333,6 +2335,20 @@ def event_text_adjust(
                 str(patrol_apprentices[i].name),
                 choice(patrol_apprentices[i].pronouns),
             )
+
+    # Other Clan Cats
+    if oc_cats:
+        for cat in oc_cats:
+            if cat is other_clan.leader and "o_c_leader" in text:
+                replace_dict["o_c_leader"] = (str(cat.name), choice(cat.pronouns))
+            if cat is other_clan.deputy and "o_c_dep" in text:
+                replace_dict["o_c_dep"] = (str(cat.name), choice(cat.pronouns))
+            if cat is other_clan.medicine_cat and "o_c_med" in text:
+                replace_dict["o_c_med"] = (str(cat.name), choice(cat.pronouns))
+            if cat.status == "apprentice" and "o_c_app" in text:
+                replace_dict["o_c_app"] = (str(cat.name), choice(cat.pronouns))
+            if "o_c_cat" in text:
+                replace_dict["o_c_cat"] = (str(cat.name), choice(cat.pronouns))
 
     # new_cats (include pre version)
     if "n_c" in text:

@@ -2627,10 +2627,8 @@ class Cat:
                 continue
             # if they are not outside of the Clan at the same time
             if (
-                self.outside
-                and not inter_cat.outside
-                or not self.outside
-                and inter_cat.outside
+                (self.outside and not inter_cat.outside)
+                or (not self.outside and inter_cat.outside)
             ):
                 continue
             inter_cat.relationships[self.ID] = Relationship(inter_cat, self)
