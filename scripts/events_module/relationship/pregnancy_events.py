@@ -565,7 +565,7 @@ class Pregnancy_Events:
             cat.age in [CatAgeEnum.NEWBORN, CatAgeEnum.KITTEN, CatAgeEnum.ADOLESCENT]
             or cat.moons < 15
         )
-        if not_correct_age or cat.no_kits or cat.dead:
+        if not_correct_age or cat.no_kits or cat.dead or (cat.outside and cat.clan == None):
             return False
 
         # check for mate

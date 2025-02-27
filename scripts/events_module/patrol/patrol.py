@@ -49,6 +49,11 @@ class Patrol:
         self.patrol_cats = []
         self.patrol_apprentices = []
         self.other_clan = None
+        self.oc_leader = None
+        self.oc_deputy = None
+        self.oc_med_cat = None
+        self.oc_patrol_cat = None
+        self.oc_patrol_app = None
         self.intro_text = ""
 
         self.patrol_statuses = {}
@@ -56,6 +61,7 @@ class Patrol:
 
         # Holds new cats for easy access
         self.new_cats: List[List[Cat]] = []
+        self.other_cats: List[List[Cat]] = []
 
         # the patrols
         self.HUNTING_SZN = None
@@ -121,6 +127,9 @@ class Patrol:
             self.patrol_event = romantic_event_choice
         else:
             self.patrol_event = normal_event_choice
+        
+        if self.patrol_event.oc_status:
+            self.add_other_cats(self.patrol_event.oc_status)
 
         Patrol.used_patrols.append(self.patrol_event.patrol_id)
 
@@ -247,6 +256,32 @@ class Patrol:
 
         print("Patrol Leader:", str(self.patrol_leader.name))
         print("Random Cat:", str(self.random_cat.name))
+
+    def add_other_cats(self, oc_status):
+        if "leader" in oc_status and self.other_clan.leader:
+            self.other_cats.append(self.other_clan.leader)
+        if "deputy" in oc_status and self.other_clan.deputy:
+            self.other_cats.append(self.other_clan.deputy)
+        if "medicine cat" in oc_status and self.other_clan.medicine_cat:
+            self.other_cats.append(self.other_clan.medicine_cat)
+        if "normal adult" in oc_status:
+            try:
+                self.other_cats.append(choice(
+                    [Cat.fetch_cat(i) for i in self.other_clan.clan_cats if Cat.fetch_cat(i).status not in ["elder", "kitten", "newborn", "apprentice", "medicine cat apprentice", "medicine cat", "leader", "deputy"]]
+                ))
+            except:
+                self.other_clan = choice(game.clan.all_clans)
+                self.add_other_cats(oc_status)
+        if "apprentice" in oc_status:
+            try:
+                self.other_cats.append(choice(
+                    [Cat.fetch_cat(i) for i in self.other_clan.clan_cats if Cat.fetch_cat(i).status == "apprentice"]
+                ))
+            except:
+                self.other_clan = choice(game.clan.all_clans)
+                self.add_other_cats(oc_status)
+
+
 
     def get_possible_patrols(
         self,
@@ -688,6 +723,7 @@ class Patrol:
                 min_cats=patrol.get("min_cats", 1),
                 max_cats=patrol.get("max_cats", 6),
                 min_max_status=patrol.get("min_max_status"),
+                oc_status=patrol.get("oc_status"),
                 antag_success_outcomes=PatrolOutcome.generate_from_info(
                     patrol.get("antag_success_outcomes"), antagonize=True
                 ),
@@ -1025,6 +1061,20 @@ class Patrol:
 
         if stat_cat:
             replace_dict["s_c"] = (str(stat_cat.name), choice(stat_cat.pronouns))
+
+        # Other Clan Cats
+        if self.other_cats:
+            for cat in self.other_cats:
+                if cat is self.other_clan.leader:
+                    replace_dict["o_c_leader"] = (str(cat.name), choice(cat.pronouns))
+                if cat is self.other_clan.deputy:
+                    replace_dict["o_c_dep"] = (str(cat.name), choice(cat.pronouns))
+                if cat is self.other_clan.medicine_cat:
+                    replace_dict["o_c_med"] = (str(cat.name), choice(cat.pronouns))
+                if cat.status == "apprentice":
+                    replace_dict["o_c_app"] = (str(cat.name), choice(cat.pronouns))
+                else:
+                    replace_dict["o_c_cat"] = (str(cat.name), choice(cat.pronouns))
 
         text = process_text(text, replace_dict)
         text = adjust_prey_abbr(text)

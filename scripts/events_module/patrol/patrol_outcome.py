@@ -228,6 +228,7 @@ class PatrolOutcome:
             new_cats=patrol.new_cats,
             clan=game.clan,
             other_clan=patrol.other_clan,
+            oc_cats=patrol.other_cats,
         )
 
         # This order is important.

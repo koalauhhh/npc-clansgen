@@ -11,9 +11,12 @@
         "min_max_status": {
             "leader": [-1, -1]
         },
+        "oc_status": [
+            "normal adult"
+        ],
         "weight": 20,
-        "intro_text": "While walking along the border, the patrol notices a o_c_n patrol renewing their scent marks up ahead.",
-        "decline_text": "The patrol decides to avoid the other Clan cats.",
+        "intro_text": "While walking along the border, the patrol notices a o_c_n patrol led by o_c_cat renewing their scent marks up ahead.",
+        "decline_text": "The patrol decides to avoid the o_c_n cats.",
         "chance_of_success": 50,
         "success_outcomes": [
             {
@@ -23,7 +26,7 @@
                 "other_clan_rep": 2
             },
             {
-                "text": "p_l approaches the other Clan patrol, striking up a conversation about the weather. After talking for a short time, the two patrols part ways. p_l remarks to the leader on the o_c_n cats' kindness once the patrol has returned to camp.",
+                "text": "p_l approaches the o_c_n patrol, striking up a conversation about the weather. After talking for a short time, the two patrols part ways. p_l remarks to the leader on the o_c_n cats' kindness once the patrol has returned to camp.",
                 "exp": 10,
                 "weight": 5,
                 "other_clan_rep": 2
@@ -87,8 +90,11 @@
         "min_max_status": {
             "leader": [-1, -1]
         },
+        "oc_status": [
+            "normal adult"
+        ],
         "weight": 20,
-        "intro_text": "While walking along the border, the patrol notices a o_c_n patrol renewing their scent marks up ahead.",
+        "intro_text": "While walking along the border, the patrol notices o_c_n patrol led by o_c_cat renewing their scent marks up ahead.",
         "decline_text": "The patrol decides to avoid the other Clan cats.",
         "chance_of_success": 50,
         "success_outcomes": [
@@ -169,6 +175,9 @@
         "min_cats": 2,
         "max_cats": 6,
         "min_max_status": {},
+        "oc_status": [
+            "normal adult"
+        ],
         "weight": 20,
         "intro_text": "r_c spies a fat rabbit on the other side of the o_c_n border. A tempting opportunity to be sure, but it may not be wise to hunt on a different Clan's territory.",
         "decline_text": "The patrol decides that one rabbit isn't worth making an enemy.",
@@ -184,10 +193,10 @@
                 "text": "r_c leaps for the rabbit.... and promptly trips over a rock. The rabbit hops away as r_c sheepishly picks {PRONOUN/r_c/self} up. It's probably for the better that {PRONOUN/r_c/subject} {VERB/r_c/weren't/wasn't} able to catch the rabbit. Trespassing could easily have damaged relations with o_c_n.",
                 "exp": 10,
                 "weight": 5,
-                "prey": ["medium"]
+                "prey": ["medium"] 
             },
             {
-                "text": "r_c leaps for the rabbit, making a swift kill just before a o_c_n patrol comes into view. The o_c_n cats bristle at the trespass and a fight seems to be brewing. Thankfully, s_c smooths things over with the other patrol by graciously gifting them the rabbit. They part ways without damaging the relationship between Clans.",
+                "text": "r_c leaps for the rabbit, making a swift kill just before a o_c_n patrol comes into view. The o_c_n cats bristle at the trespass and a fight seems to be brewing. Thankfully, s_c smooths things over with o_c_cat, the patrol leader by graciously gifting {PRONOUN/o_c_cat/object} the rabbit. They part ways without damaging the relationship between Clans.",
                 "exp": 10,
                 "weight": 20,
                 "stat_skill": ["SPEAKER,1"],
@@ -209,14 +218,14 @@
         ],
         "fail_outcomes": [
             {
-                "text": "r_c leaps for the rabbit.... and promptly trips over a rock. The rabbit hops away as r_c sheepishly picks {PRONOUN/r_c/self} up before noticing the o_c_n cat watching {PRONOUN/r_c/object} from the other side of the border. The other cat knows exactly what r_c was intending to do and turns away, presumably to report the incident to their own leader.",
+                "text": "r_c leaps for the rabbit.... and promptly trips over a rock. The rabbit hops away as r_c sheepishly picks {PRONOUN/r_c/self} up before noticing o_c_cat watching {PRONOUN/r_c/object} from the other side of the border. {PRONOUN/o_c_cat/subject/CAP} {VERB/o_c_cat/know/knows} exactly what r_c was intending to do and {VERB/o_c_cat/turn/turns} away, presumably to report the incident to {PRONOUN/o_c_cat/poss} leader.",
                 "exp": 0,
                 "weight": 20,
                 "other_clan_rep": -1,
 				"prey": ["medium"]
             },
             {
-                "text": "s_c pounces with no hesitation! {PRONOUN/s_c/subject/CAP} easily {VERB/s_c/kill/kills} the rabbit before glancing up and coming face-to-face with a o_c_n cat. s_c is promptly chased back over the border. The other cat glares, hissing and spitting until the patrol leaves the area.",
+                "text": "s_c pounces with no hesitation! {PRONOUN/s_c/subject/CAP} easily {VERB/s_c/kill/kills} the rabbit before glancing up and coming face-to-face with o_c_cat. s_c is promptly chased back over the border. o_c_cat glares, hissing and spitting until the patrol leaves the area.",
                 "exp": 0,
                 "weight": 20,
                 "stat_trait": [
@@ -230,7 +239,7 @@
                 "other_clan_rep": -1
             },
             {
-                "text": "r_c pounces with no hesitation! {PRONOUN/r_c/subject/CAP} easily {VERB/r_c/kill/kills} the rabbit before glancing up and coming face-to-face with a o_c_n cat. After a short tussle, r_c flees back over the border and limps {PRONOUN/r_c/poss} way home; that rabbit certainly wasn't worth the trouble.",
+                "text": "r_c pounces with no hesitation! {PRONOUN/r_c/subject/CAP} easily {VERB/r_c/kill/kills} the rabbit before glancing up and coming face-to-face with o_c_cat. After a short tussle, r_c flees back over the border and limps {PRONOUN/r_c/poss} way home; that rabbit certainly wasn't worth the trouble.",
                 "exp": 0,
                 "weight": 10,
                 "injury": [
@@ -248,7 +257,7 @@
         ],
         "antag_fail_outcomes": [
             {
-                "text": "r_c leaps for the rabbit.... and promptly trips over a rock. The rabbit hops away as r_c sheepishly picks {PRONOUN/r_c/self} up before noticing the o_c_n cat watching {PRONOUN/r_c/object} from the other side of the border. The other cat laughs at the pathetic display and turns to walk deeper into their own territory. They seem to be unfazed and unimpressed by the sad attempt.",
+                "text": "r_c leaps for the rabbit.... and promptly trips over a rock. The rabbit hops away as r_c sheepishly picks {PRONOUN/r_c/self} up before noticing o_c_cat watching {PRONOUN/r_c/object} from the other side of the border. o_c_cat laughs at the pathetic display and turns to walk deeper into {PRONOUN/o_c_cat/poss} own territory. {PRONOUN/o_c_cat/subject/CAP} {VERB/o_c_cat/seems/seem} to be unfazed and unimpressed by the sad attempt.",
                 "exp": 0,
                 "weight": 20,
                 "other_clan_rep": -1
@@ -275,13 +284,16 @@
         "min_max_status": {
             "leader": [1, 6]
         },
+        "oc_status": [
+            "normal adult"
+        ],
         "weight": 20,
-        "intro_text": "While walking along the border, the patrol notices a o_c_n patrol renewing their scent marks up ahead.",
+        "intro_text": "While walking along the border, the patrol notices o_c_n patrol led by o_c_cat renewing their scent marks up ahead.",
         "decline_text": "The patrol decides to avoid the other Clan cats.",
         "chance_of_success": 50,
         "success_outcomes": [
             {
-                "text": "When the two patrols get closer to each other, the patrol leader from o_c_n gives p_l a respectful nod, which they return. The patrols refocus on their tasks without stopping for a conversation, but a feeling of mutual respect has been fostered.",
+                "text": "When the two patrols get closer to each other, o_c_cat gives p_l a respectful nod, which {PRONOUN/p_l/subject} {VERB/p_l/return/returns}. The patrols refocus on their tasks without stopping for a conversation, but a feeling of mutual respect has been fostered.",
                 "exp": 10,
                 "weight": 20,
                 "other_clan_rep": 2
@@ -351,13 +363,16 @@
         "min_max_status": {
             "leader": [1, 6]
         },
+        "oc_status": [
+            "normal adult"
+        ],
         "weight": 20,
-        "intro_text": "While walking along the border, the patrol notices a o_c_n patrol renewing their scent marks up ahead.",
+        "intro_text": "While walking along the border, the patrol notices o_c_n patrol led by o_c_cat renewing their scent marks up ahead.",
         "decline_text": "The patrol decides to avoid the other Clan cats.",
         "chance_of_success": 50,
         "success_outcomes": [
             {
-                "text": "When the two patrols get closer to each other, the patrol leader from o_c_n gives p_l a respectful nod, which {PRONOUN/p_l/subject} {VERB/p_l/return/returns}. The patrols refocus on their tasks without stopping for a conversation, but a feeling of mutual respect has been fostered.",
+                "text": "When the two patrols get closer to each other, o_c_cat gives p_l a respectful nod, which {PRONOUN/p_l/subject} {VERB/p_l/return/returns}. The patrols refocus on their tasks without stopping for a conversation, but a feeling of mutual respect has been fostered.",
                 "exp": 10,
                 "weight": 20,
                 "other_clan_rep": 2
@@ -438,27 +453,31 @@
             "healer cats": [1, 6],
             "normal adult": [-1, -1]
         },
+        "oc_status": [
+            "medicine cat",
+            "normal adult"
+        ],
         "weight": 20,
         "intro_text": "p_l pads along, mouth open slightly as {PRONOUN/p_l/subject} {VERB/p_l/scent/scents} for any traces of herbs. Oh! {PRONOUN/p_l/subject/CAP} can smell some raspberries nearby - but it seems that they're just over the border.",
         "decline_text": "{PRONOUN/p_l/subject/CAP} {VERB/p_l/decide/decides} that trespassing isn't worth it in this case.",
         "chance_of_success": 50,
         "success_outcomes": [
             {
-                "text": "{PRONOUN/p_l/subject/CAP} {VERB/p_l/pad/pads} over to the border and {VERB/p_l/hesitate/hesitates} only momentarily before crossing. {PRONOUN/p_l/subject/CAP} quickly {VERB/p_l/gather/gathers} some of the berries, making sure to leave plenty for o_c_n's medicine cat if they need some too.",
+                "text": "{PRONOUN/p_l/subject/CAP} {VERB/p_l/pad/pads} over to the border and {VERB/p_l/hesitate/hesitates} only momentarily before crossing. {PRONOUN/p_l/subject/CAP} quickly {VERB/p_l/gather/gathers} some of the berries, making sure to leave plenty for o_c_med if {PRONOUN/o_c_med/subject} {VERB/o_c_cat/need/needs} some too.",
                 "exp": 20,
                 "weight": 20,
                 "herbs": ["raspberry"],
                 "other_clan_rep": 2
             },
             {
-                "text": "{PRONOUN/p_l/subject/CAP} {VERB/p_l/pad/pads} to the border and {VERB/p_l/pause/pauses} for a heartbeat to scent the air. o_c_n's scent is very strong, but there's something else... o_c_n's medicine cat appears at that moment. They're walking towards the raspberries when they spot p_l and wave their tail in greeting. They invite p_l to gather some, as there's plenty. p_l gratefully accepts.",
+                "text": "{PRONOUN/p_l/subject/CAP} {VERB/p_l/pad/pads} to the border and {VERB/p_l/pause/pauses} for a heartbeat to scent the air. o_c_n's scent is very strong, but there's something else... o_c_med appears at that moment. {PRONOUN/o_c_med/subject/CAP}'{VERB/o_c_med/re/s} walking towards the raspberries when {PRONOUN/o_c_med/subject} {VERB/o_c_med/spot/spots} p_l and {VERB/o_c_med/wave/waves} {PRONOUN/o_c_med/poss} tail in greeting. {PRONOUN/o_c_med/subject/CAP} {VERB/o_c_med/invite/invites} p_l to gather some, as there's plenty. p_l gratefully accepts.",
                 "exp": 20,
                 "weight": 5,
                 "herbs": ["raspberry"],
                 "other_clan_rep": 2
             },
             {
-                "text": "p_l is about to step over the border when a hiss stops {PRONOUN/p_l/object} in {PRONOUN/p_l/poss} tracks. A o_c_n warrior bounds into view, bristling. {PRONOUN/p_l/subject/CAP} quickly {VERB/p_l/explain/explains} that {PRONOUN/p_l/subject}{VERB/p_l/'re/'s} the medicine cat, that the Warrior Code allows {PRONOUN/p_l/object} to cross the border, and {VERB/p_l/assure/assures} the warrior that {PRONOUN/p_l/subject} won't take many of the berries. The warrior looks torn but agrees.",
+                "text": "p_l is about to step over the border when a hiss stops {PRONOUN/p_l/object} in {PRONOUN/p_l/poss} tracks. o_c_cat bounds into view, bristling. {PRONOUN/p_l/subject/CAP} quickly {VERB/p_l/explain/explains} that {PRONOUN/p_l/subject}{VERB/p_l/'re/'s} the medicine cat, that the Warrior Code allows {PRONOUN/p_l/object} to cross the border, and {VERB/p_l/assure/assures} the warrior that {PRONOUN/p_l/subject} won't take many of the berries. The warrior looks torn but agrees.",
                 "exp": 20,
                 "weight": 20,
                 "stat_skill": ["MEDIATOR,1"],
@@ -468,13 +487,13 @@
         ],
         "fail_outcomes": [
             {
-                "text": "p_l starts to step over the border but a hiss stops them in {PRONOUN/p_l/poss} tracks. A o_c_n patrol is running {PRONOUN/p_l/poss} way. They force {PRONOUN/p_l/poss} fur to lie flat as the patrol approaches and swiftly blurt out that they're a medicine cat. One of the warrior snarls that they can't spare any herbs for other Clans and p_l needs to leave. They oblige quickly.",
+                "text": "p_l starts to step over the border but a hiss stops {PRONOUN/p_l/object} in {PRONOUN/p_l/poss} tracks. o_c_cat's o_c_n patrol is running {PRONOUN/p_l/poss} way. {PRONOUN/p_l/subject/CAP} {VERB/p_l/force/forces} {PRONOUN/p_l/poss} fur to lie flat as the patrol approaches and swiftly {VERB/p_l/blurt/blurts} out that {PRONOUN/p_l/subject}'{VERB/p_l/re/s} a medicine cat. o_c_cat snarls that they can't spare any herbs for other Clans and p_l needs to leave. {PRONOUN/p_l/subject/CAP} {VERB/p_l/obliges/oblige} quickly.",
                 "exp": 0,
                 "weight": 20,
                 "other_clan_rep": -1
             },
             {
-                "text": "p_l starts to step over the border but a hiss stops {PRONOUN/p_l/object} in {PRONOUN/p_l/poss} tracks. A o_c_n patrol is running {PRONOUN/p_l/poss} way. {PRONOUN/p_l/subject/CAP} {VERB/p_l/force/forces} {PRONOUN/p_l/poss} fur to lie flat as the patrol approaches and swiftly {VERB/p_l/blurt/blurts} out that {PRONOUN/p_l/subject}{VERB/r_c/'re/'s} a medicine cat. The warriors either don't hear {PRONOUN/p_l/object} or don't care - they get in a good scratch before p_l can retreat.",
+                "text": "p_l starts to step over the border but a hiss stops {PRONOUN/p_l/object} in {PRONOUN/p_l/poss} tracks. o_c_cat's o_c_n patrol is running {PRONOUN/p_l/poss} way. {PRONOUN/p_l/subject/CAP} {VERB/p_l/force/forces} {PRONOUN/p_l/poss} fur to lie flat as the patrol approaches and swiftly {VERB/p_l/blurt/blurts} out that {PRONOUN/p_l/subject}{VERB/r_c/'re/'s} a medicine cat. The warriors either don't hear {PRONOUN/p_l/object} or don't care - o_c_cat gets in a good scratch before p_l can retreat.",
                 "exp": 0,
                 "weight": 10,
                 "injury": [
@@ -504,32 +523,37 @@
         "min_max_status": {
             "leader": [-1, -1]
         },
+        "oc_status": [
+            "apprentice",
+            "deputy",
+            "normal adult"
+        ],
         "weight": 20,
         "intro_text": "As the patrol is checking the border lines, they notice that a o_c_n scent has strayed into their territory.",
         "decline_text": "p_l decides that it isn't important. Maybe an apprentice simply lost their way.",
         "chance_of_success": 50,
         "success_outcomes": [
             {
-                "text": "After poking around a bit, the patrol discovers a o_c_n apprentice wandering nearby, hopelessly lost. The apprentice is distraught upon discovering they're on the wrong side of the border - while p_l understands it was an honest mistake, {PRONOUN/p_l/subject} still {VERB/p_l/lecture/lectures} the apprentice on the importance of respecting border lines.",
+                "text": "After poking around a bit, the patrol discovers o_c_app wandering nearby, hopelessly lost. {PRONOUN/o_c_app/subject/CAP} is distraught upon discovering {PRONOUN/o_c_app/subject}'{VERB/o_c_app/re/s} on the wrong side of the border - while p_l understands it was an honest mistake, {PRONOUN/p_l/subject} still {VERB/p_l/lecture/lectures} the o_c_n apprentice on the importance of respecting border lines.",
                 "exp": 10,
                 "weight": 20,
                 "other_clan_rep": 2
             },
             {
-                "text": "The patrol follows the scent deeper into their own territory, eventually stumbling upon the o_c_n deputy! The deputy explains that they've come bearing important news for the c_n leader. Suspicious but assured of their intentions, the patrol escorts them to the camp.",
+                "text": "The patrol follows the scent deeper into their own territory, eventually stumbling upon o_c_dep! The deputy explains that {PRONOUN/o_c_dep/subject}'{VERB/o_c_dep/ve/s} come bearing important news for the c_n leader. Suspicious but assured of {PRONOUN/o_c_dep/poss} intentions, the patrol escorts {PRONOUN/o_c_dep/object} to the camp.",
                 "exp": 10,
                 "weight": 5,
                 "other_clan_rep": 2
             },
             {
-                "text": "The patrol follows the scent to a o_c_n cat taking refuge up a tree. The cat yowls a warning and the patrol scatters when they hear the cry. Just in time, too, as a large dog jumps at the patrol! s_c rallies the patrol to drive the dog away, thankfully avoiding any injuries. The o_c_n cat is grateful for the rescue.",
+                "text": "The patrol follows the scent to o_c_cat taking refuge up a tree. {PRONOUN/o_c_cat/subject/CAP} {VERB/o_c_cat/yowl/yowls} a warning and the patrol scatters when they hear the cry. Just in time, too, as a large dog jumps at the patrol! s_c rallies the patrol to drive the dog away, thankfully avoiding any injuries. The o_c_n cat is grateful for the rescue.",
                 "exp": 10,
                 "weight": 20,
                 "stat_skill": ["FIGHTER,1"],
                 "other_clan_rep": 2
             },
             {
-                "text": "The patrol follows the scent and finds a wounded o_c_n warrior. It seems the cat had been caught by a dog and chased into c_n territory. The dog is gone now, but the warrior can't make it back across the border on their own. s_c insists that the patrol at least escort the wounded warrior to the border.",
+                "text": "The patrol follows the scent and finds a wounded o_c_cat. It seems {PRONOUN/o_c_cat/subject} had been caught by a dog and chased into c_n territory. The dog is gone now, but {PRONOUN/o_c_cat/subject} can't make it back across the border on {PRONOUN/o_c_cat/poss} own. s_c insists that the patrol at least escort the wounded warrior to the border.",
                 "exp": 10,
                 "weight": 20,
                 "stat_trait": ["compassionate", "calm"],
@@ -544,14 +568,14 @@
                 "other_clan_rep": -1
             },
             {
-                "text": "s_c can't contain {PRONOUN/s_c/poss} annoyance at the trespass when the patrol finds a lost o_c_n apprentice to be the source of the scent, reprimanding them heavily. The apprentice is nearly in tears when s_c finally lets them go and the patrol leads them back to the border line, tension thick in the air.",
+                "text": "s_c can't contain {PRONOUN/s_c/poss} annoyance at the trespass when the patrol finds a lost o_c_cat to be the source of the scent, reprimanding {PRONOUN/o_c_app/object} heavily. The apprentice is nearly in tears when s_c finally lets {PRONOUN/o_c_app/object} go and the patrol leads {PRONOUN/o_c_app/object} back to the border line, tension thick in the air.",
                 "exp": 0,
                 "weight": 20,
                 "stat_trait": ["bloodthirsty", "cold", "fierce", "strict", "vengeful"],
                 "other_clan_rep": -1
             },
             {
-                "text": "The patrol follows the scent to a o_c_n cat taking refuge up a tree. The cat yowls a warning, but they aren't quick enough and a large dog suddenly descends upon the patrol. r_c is killed before they can run and the rest of the patrol scatters in fear.",
+                "text": "The patrol follows the scent to o_c_cat taking refuge up a tree. {PRONOUN/o_c_cat/subject/CAP} {VERB/o_c_cat/yowl/yowls} a warning, but they aren't quick enough and a large dog suddenly descends upon the patrol. r_c is killed before {PRONOUN/r_c/subject} can run and the rest of the patrol scatters in fear.",
                 "exp": 0,
                 "weight": 10,
                 "dead_cats": ["r_c"],
@@ -563,7 +587,7 @@
                 "other_clan_rep": -1
             },
             {
-                "text": "The patrol follows the scent to a o_c_n cat taking refuge up a tree. The cat yowls a warning and the patrol scatters when they hear the cry. Just in time, too, as a large dog jumps at the patrol, catching r_c but thankfully only injuring {PRONOUN/r_c/object} before r_c tears {PRONOUN/r_c/self} free and sprints away.",
+                "text": "The patrol follows the scent to o_c_cat taking refuge up a tree. {PRONOUN/o_c_cat/subject/CAP} {VERB/o_c_cat/yowl/yowls} a warning and the patrol scatters when they hear the cry. Just in time, too, as a large dog jumps at the patrol, catching r_c but thankfully only injuring {PRONOUN/r_c/object} before {PRONOUN/r_c/subject} {VERB/r_c/tear/tears} {PRONOUN/r_c/self} free and {PRONOUN/r_c/sprint/sprints} away.",
                 "exp": 0,
                 "weight": 10,
                 "injury": [
@@ -583,7 +607,7 @@
         ],
         "antag_fail_outcomes": [
             {
-                "text": "How dare they trespass! The patrol bounds after the scent, hoping to find the source of it, eventually finding that it leads to the c_n camp. Inside, they find the o_c_n deputy conversing with your leader. They tell the patrol off for so hastily jumping to conclusions. The o_c_n deputy was only delivering some news.",
+                "text": "How dare they trespass! The patrol bounds after the scent, hoping to find the source of it, eventually finding that it leads to the c_n camp. Inside, they find o_c_dep conversing with your leader. They tell the patrol off for so hastily jumping to conclusions. The o_c_n deputy was only delivering some news.",
                 "exp": 0,
                 "weight": 20,
                 "other_clan_rep": -1
@@ -610,25 +634,30 @@
         "min_max_status": {
             "leader": [-1, -1]
         },
+        "oc_status": [
+            "apprentice",
+            "deputy",
+            "normal adult"
+        ],
         "weight": 20,
         "intro_text": "As p_l is checking the border lines, they notice that a o_c_n scent has strayed into their territory.",
         "decline_text": "p_l decides that it isn't important. Maybe an apprentice simply lost their way.",
         "chance_of_success": 50,
         "success_outcomes": [
             {
-                "text": "After poking around a bit, p_l discovers a o_c_n apprentice wandering nearby, hopelessly lost. The apprentice is distraught upon discovering they're on the wrong side of the border - while p_l understands that it was an honest mistake, {PRONOUN/p_l/subject} still {VERB/p_l/give/gives} the apprentice a firm lecture on the importance of respecting border lines.",
+                "text": "After poking around a bit, p_l discovers a o_c_app wandering nearby, hopelessly lost. {PRONOUN/o_c_app/subject/CAP} {VERB/o_c_app/are/is} distraught upon discovering {PRONOUN/o_c_app/subject}'{VERB/o_c_app/re/s} on the wrong side of the border - while p_l understands that it was an honest mistake, {PRONOUN/p_l/subject} still {VERB/p_l/give/gives} the o_c_n apprentice a firm lecture on the importance of respecting border lines.",
                 "exp": 10,
                 "weight": 20,
                 "other_clan_rep": 2
             },
             {
-                "text": "p_l follows the scent deeper into their own territory, eventually stumbling upon the o_c_n deputy! The deputy explains that they've come bearing important news for the c_n leader. Suspicious but assured of their intentions, p_l escorts them to the camp.",
+                "text": "p_l follows the scent deeper into their own territory, eventually stumbling upon o_c_dep! The deputy explains that {PRONOUN/o_c_dep/subject}'{VERB/o_c_dep/ve/s} come bearing important news for the c_n leader. Suspicious but assured of {PRONOUN/o_c_dep/poss} intentions, p_l escorts {PRONOUN/o_c_dep/object} to the camp.",
                 "exp": 10,
                 "weight": 5,
                 "other_clan_rep": 2
             },
             {
-                "text": "s_c follows the scent and finds a wounded o_c_n warrior. It seems the cat had been caught by a dog and chased into c_n territory. The dog is gone now, but the warrior can't make it back across the border on their own. s_c insists on helping the warrior back to the border.",
+                "text": "s_c follows the scent and finds a wounded o_c_cat. It seems {PRONOUN/o_c_cat/subject} had been caught by a dog and chased into c_n territory. The dog is gone now, but {PRONOUN/o_c_cat/subject} can't make it back across the border on {PRONOUN/o_c_cat/poss} own. s_c insists on helping the warrior back to the border.",
                 "exp": 10,
                 "weight": 20,
                 "stat_trait": ["compassionate", "calm"],
@@ -643,14 +672,14 @@
                 "other_clan_rep": -1
             },
             {
-                "text": "s_c can't contain {PRONOUN/s_c/poss} annoyance at the trespass when they find a lost o_c_n apprentice to be the source of the scent, reprimanding them heavily. The apprentice is nearly in tears when s_c finally lets them go and grumpily leads them back to the border line, tension thick in the air.",
+                "text": "s_c can't contain {PRONOUN/s_c/poss} annoyance at the trespass when they find a lost o_c_app to be the source of the scent, reprimanding {PRONOUN/o_c_app/object} heavily. The apprentice is nearly in tears when s_c finally lets {PRONOUN/o_c_app/object} go and grumpily leads {PRONOUN/o_c_app/object} back to the border line, tension thick in the air.",
                 "exp": 0,
                 "weight": 20,
                 "stat_trait": ["bloodthirsty", "cold", "fierce", "strict", "vengeful"],
                 "other_clan_rep": -1
             },
             {
-                "text": "r_c follows the scent to a o_c_n cat taking refuge up a tree. The cat yowls a warning, but they aren't quick enough and a large dog suddenly descends upon r_c. r_c is killed before they can run.",
+                "text": "r_c follows the scent to o_c_cat taking refuge up a tree. {PRONOUN/o_c_cat/subject/CAP} {VERB/o_c_cat/yowl/yowls} a warning, but they aren't quick enough and a large dog suddenly descends upon r_c. {PRONOUN/r_c/subject/subject} {VERB/r_c/are/is} killed before {PRONOUN/r_c/subject} can run.",
                 "exp": 0,
                 "weight": 10,
                 "dead_cats": ["r_c", "some_lives"],
@@ -662,7 +691,7 @@
                 "other_clan_rep": -1
             },
             {
-                "text": "r_c follows the scent to a o_c_n cat taking refuge up a tree. The cat yowls a warning and r_c sprints for the same tree when they hear the cry. Just in time, too, as a large dog jumps at them, catching r_c but thankfully only injuring {PRONOUN/r_c/object} before r_c tears {PRONOUN/r_c/self} free and scales the tree.",
+                "text": "r_c follows the scent to o_c_cat taking refuge up a tree. {PRONOUN/o_c_cat/subject/CAP} {VERB/o_c_cat/yowl/yowls} a warning and r_c sprints for the same tree when they hear the cry. Just in time, too, as a large dog jumps at them, catching r_c but thankfully only injuring {PRONOUN/r_c/object} before {PRONOUN/r_c/subject} {VERB/r_c/tear/tears} {PRONOUN/r_c/self} free and scales the tree.",
                 "exp": 0,
                 "weight": 10,
                 "injury": [
@@ -682,7 +711,7 @@
         ],
         "antag_fail_outcomes": [
             {
-                "text": "How dare they trespass! p_l bounds after the scent, hoping to find the source of it, eventually finding that it leads to the c_n camp. Inside, they find the o_c_n deputy conversing with your leader.  They tell p_l off for so hastily jumping to conclusions. The o_c_n deputy was only delivering some news.",
+                "text": "How dare they trespass! p_l bounds after the scent, hoping to find the source of it, eventually finding that it leads to the c_n camp. Inside, they find o_c_dep conversing with your leader. They tell p_l off for so hastily jumping to conclusions. The o_c_n deputy was only delivering some news.",
                 "exp": 0,
                 "weight": 20,
                 "other_clan_rep": -1
@@ -710,6 +739,10 @@
             "all apprentices": [-1, -1],
             "deputy": [-1, -1]
         },
+        "oc_status": [
+            "apprentice",
+            "normal adult"
+        ],
         "weight": 20,
         "intro_text": "r_c heads out onto the beach alone to check on the border.",
         "decline_text": "r_c reconsiders and turns back to camp, deciding that {PRONOUN/r_c/poss} other duties have to come first.",
@@ -722,20 +755,20 @@
                 "other_clan_rep": 2
             },
             {
-                "text": "r_c comes across a o_c_n apprentice on the wrong side of the border with a mouthful of prey. {PRONOUN/r_c/subject/CAP} {VERB/r_c/see/sees} the younger cat off with a furious yowl, claiming the prey for c_n. Impressed by the catch but not by the antics, r_c feels a begrudging respect for o_c_n as {PRONOUN/r_c/subject} {VERB/r_c/return/returns} home to report this to the deputy.",
+                "text": "r_c comes across o_c_app on the wrong side of the border with a mouthful of prey. {PRONOUN/r_c/subject/CAP} {VERB/r_c/see/sees} the younger cat off with a furious yowl, claiming the prey for c_n. Impressed by the catch but not by the antics, r_c feels a begrudging respect for o_c_n as {PRONOUN/r_c/subject} {VERB/r_c/return/returns} home to report this to the deputy.",
                 "exp": 20,
                 "weight": 5,
                 "other_clan_rep": 2
             },
             {
-                "text": "s_c comes across a o_c_n patrol, out on a similar mission, and decides to follow the same marking path as them. s_c strikes up a friendly conversation - while they don't give anything away about c_n, they're able to pick up on a lot of gossip about o_c_n through careful conversation.",
+                "text": "s_c comes across o_c_cat's o_c_n patrol, out on a similar mission, and decides to follow the same marking path as them. s_c strikes up a friendly conversation - while {PRONOUN/r_c/subject} {VERB/r_c/do/does}n't give anything away about c_n, {PRONOUN/r_c/subject}'{VERB/r_c/re/s} able to pick up on a lot of gossip about o_c_n through careful conversation.",
                 "exp": 20,
                 "weight": 20,
                 "stat_skill": ["SPEAKER,1"],
                 "other_clan_rep": 2
             },
             {
-                "text": "As s_c marks the border, {PRONOUN/s_c/subject} {VERB/s_c/encounter/encounters} a o_c_n border patrol. It even includes a young apprentice, who goes round-eyed and fluffy at encountering a real c_n cat! s_c plays along, acting very impressed with the hardworking apprentice, and the apprentice's mentor purrs gratefully.",
+                "text": "As s_c marks the border, {PRONOUN/s_c/subject} {VERB/s_c/encounter/encounters} a o_c_n border patrol. It even includes young o_c_app, who goes round-eyed and fluffy at encountering a real c_n cat! s_c plays along, acting very impressed with the hardworking apprentice, and the apprentice's mentor purrs gratefully.",
                 "exp": 20,
                 "weight": 20,
                 "stat_trait": [
@@ -757,7 +790,7 @@
                 "other_clan_rep": -1
             },
             {
-                "text": "s_c is marking along the territory line when {PRONOUN/s_c/subject} {VERB/s_c/encounter/encounters} a o_c_n patrol, out on a similar mission. They stare at the other Clan's patrol challengingly, following their every move until the shared border ends. Though no words are exchanged, the tension is palpable.",
+                "text": "s_c is marking along the territory line when {PRONOUN/s_c/subject} {VERB/s_c/encounter/encounters} o_c_cat's o_c_n patrol, out on a similar mission. {PRONOUN/s_c/subject} {VERB/r_c/stare/stares} at the other Clan's patrol challengingly, following their every move until the shared border ends. Though no words are exchanged, the tension is palpable.",
                 "exp": 0,
                 "weight": 20,
                 "stat_trait": [
@@ -773,7 +806,7 @@
                 "other_clan_rep": -1
             },
             {
-                "text": "r_c is having trouble focusing today and puts a mark in the wrong place - and at the worst possible moment, because a o_c_n patrol sees {PRONOUN/r_c/object} doing it! {PRONOUN/r_c/subject/CAP} {VERB/r_c/return/returns} to camp scratched up and embarrassed, and immediately {VERB/r_c/apologize/apologizes} to the deputy for the diplomatic incident {PRONOUN/r_c/subject}{VERB/r_c/'ve/'s} inadvertently caused.",
+                "text": "r_c is having trouble focusing today and puts a mark in the wrong place - and at the worst possible moment, because o_c_cat's o_c_n patrol sees {PRONOUN/r_c/object} doing it! {PRONOUN/r_c/subject/CAP} {VERB/r_c/return/returns} to camp scratched up and embarrassed, and immediately {VERB/r_c/apologize/apologizes} to the deputy for the diplomatic incident {PRONOUN/r_c/subject}{VERB/r_c/'ve/'s} inadvertently caused.",
                 "exp": 0,
                 "weight": 10,
                 "injury": [
@@ -800,6 +833,10 @@
         "min_max_status": {
             "deputy": [1, 1]
         },
+        "oc_status": [
+            "apprentice",
+            "normal adult"
+        ],
         "weight": 20,
         "intro_text": "r_c heads out onto the beach alone to check on the border.",
         "decline_text": "r_c reconsiders and turns back to camp, deciding that {PRONOUN/r_c/poss} other duties have to come first.",
@@ -812,20 +849,20 @@
                 "other_clan_rep": 2
             },
             {
-                "text": "r_c comes across a o_c_n apprentice on the wrong side of the border with a mouthful of prey. Furious, they snarl {PRONOUN/r_c/poss} anger. The young cat turns tail and flees, r_c hot on their tail. When they dart back across the border to hide behind their mentor, the o_c_n warrior's face goes slack with horror to see c_n's deputy.",
+                "text": "r_c comes across o_c_app on the wrong side of the border with a mouthful of prey. Furious, {PRONOUN/r_c/subject} {VERB/r_c/snarl/snarls} {PRONOUN/r_c/poss} anger. The young cat turns tail and flees, r_c hot on {PRONOUN/o_c_app/poss} tail. When {PRONOUN/o_c_app/subject} {VERB/o_c_app/dart/darts} back across the border to hide behind {PRONOUN/o_c_app/poss} mentor, the o_c_n warrior's face goes slack with horror to see c_n's deputy.",
                 "exp": 20,
                 "weight": 5,
                 "other_clan_rep": 2
             },
             {
-                "text": "s_c comes across a o_c_n patrol, out on a similar mission. They strike up a friendly conversation, and while s_c doesn't give anything away about c_n, they're able to pick up on a lot of gossip about o_c_n through careful conversation. It's always worth keeping an eye on the neighbors.",
+                "text": "s_c comes across o_c_cat's o_c_n patrol, out on a similar mission. {PRONOUN/s_c/subject/CAP} {VERB/s_c/strike/strikes} up a friendly conversation, and while s_c doesn't give anything away about c_n, {PRONOUN/s_c/subject}'{VERB/s_c/re/s} able to pick up on a lot of gossip about o_c_n through careful conversation. It's always worth keeping an eye on the neighbors.",
                 "exp": 20,
                 "weight": 20,
                 "stat_skill": ["SPEAKER,1"],
                 "other_clan_rep": 2
             },
             {
-                "text": "As s_c marks the border, {PRONOUN/s_c/subject} {VERB/s_c/encounter/encounters} a o_c_n border patrol, which includes a young apprentice. Their eyes go round and they tuck their paws together neatly, sitting pretty for inspection. s_c plays along, acting very impressed with the hardworking apprentice, and the apprentice's mentor purrs gratefully at the c_n deputy's kindness.",
+                "text": "As s_c marks the border, {PRONOUN/s_c/subject} {VERB/s_c/encounter/encounters} a o_c_n border patrol, which includes young o_c_app. {PRONOUN/o_c_app/poss/CAP} eyes go round and {PRONOUN/o_c_app/subject} {VERB/o_c_app/tuck/tucks} {PRONOUN/o_c_app/poss} paws together neatly, sitting pretty for inspection. s_c plays along, acting very impressed with the hardworking apprentice, and o_c_app's mentor purrs gratefully at the c_n deputy's kindness.",
                 "exp": 20,
                 "weight": 20,
                 "stat_trait": [
@@ -847,7 +884,7 @@
                 "other_clan_rep": -1
             },
             {
-                "text": "s_c is marking along the territory line when {PRONOUN/s_c/subject} {VERB/s_c/encounter/encounters} a o_c_n patrol, out on a similar mission. {PRONOUN/s_c/subject/CAP} {VERB/s_c/stare/stares} at the other Clan's patrol challengingly, following their every move until the shared border ends. Though no words are exchanged, the tension is palpable.",
+                "text": "s_c is marking along the territory line when {PRONOUN/s_c/subject} {VERB/s_c/encounter/encounters} o_c_cat's o_c_n patrol, out on a similar mission. {PRONOUN/s_c/subject/CAP} {VERB/s_c/stare/stares} at the other Clan's patrol challengingly, following their every move until the shared border ends. Though no words are exchanged, the tension is palpable.",
                 "exp": 0,
                 "weight": 20,
                 "stat_trait": [
@@ -863,7 +900,7 @@
                 "other_clan_rep": -1
             },
             {
-                "text": "r_c encounters a patrol from o_c_n on the border and greets them politely, but there's something different here. Something dangerous. . . r_c never returns to camp.",
+                "text": "r_c encounters o_c_cat's patrol from o_c_n on the border and greets them politely, but there's something different here. Something dangerous. . . r_c never returns to camp.",
                 "exp": 0,
                 "weight": 10,
                 "dead_cats": ["r_c"],
@@ -875,7 +912,7 @@
                 "other_clan_rep": -1
             },
             {
-                "text": "r_c is having trouble focusing today and puts a mark in the wrong place - and at the worst possible moment, because a o_c_n patrol sees them doing it! The diplomatic incident spirals into a full-blown conflict, and r_c hauls themselves back to camp, wounded and bleeding.",
+                "text": "r_c is having trouble focusing today and puts a mark in the wrong place - and at the worst possible moment, because o_c_cat's o_c_n patrol sees {PRONOUN/r_c/subject} doing it! The diplomatic incident spirals into a full-blown conflict, and r_c hauls {PRONOUN/r_c/self} back to camp, wounded and bleeding.",
                 "exp": 0,
                 "weight": 10,
                 "injury": [
@@ -906,9 +943,13 @@
         "min_max_status": {
             "leader": [1, 1]
         },
+        "oc_status": [
+            "apprentice",
+            "normal adult"
+        ],
         "weight": 20,
         "intro_text": "r_c heads out onto the beach alone to check on the border.",
-        "decline_text": "r_c reconsiders and turns back to camp, deciding that their other duties have to come first.",
+        "decline_text": "r_c reconsiders and turns back to camp, deciding that {PRONOUN/r_c/poss} other duties have to come first.",
         "chance_of_success": 30,
         "success_outcomes": [
             {
@@ -918,20 +959,20 @@
                 "other_clan_rep": 2
             },
             {
-                "text": "r_c comes across a o_c_n apprentice on the wrong side of the border with a mouthful of prey. Furious, they snarl their anger. The young cat turns tail and flees, r_c hot on their tail. When they dart back across the border to hide behind their mentor, the o_c_n warrior's tail tucks at the sight of c_n's outraged leader.",
+                "text": "r_c comes across o_c_app on the wrong side of the border with a mouthful of prey. Furious, {PRONOUN/r_c/subject} {VERB/r_c/snarl/snarls} {PRONOUN/r_c/poss} anger. The young cat turns tail and flees, r_c hot on {PRONOUN/o_c_app/poss} tail. When {PRONOUN/o_c_app/subject} {VERB/o_c_app/dart/darts} back across the border to hide behind {PRONOUN/o_c_app/poss} mentor, the o_c_n warrior's tail tucks at the sight of c_n's outraged leader.",
                 "exp": 20,
                 "weight": 5,
                 "other_clan_rep": 2
             },
             {
-                "text": "s_c comes across a o_c_n patrol, out on a similar mission. They strike up a friendly conversation, and while s_c doesn't give anything away about c_n, they're able to pick up on a lot of gossip about o_c_n through careful conversation. It's always worth keeping an eye on the neighbors. Trust, but verify.",
+                "text": "s_c comes across o_c_cat's o_c_n patrol, out on a similar mission. {PRONOUN/s_c/subject/CAP} {VERB/s_c/strike/strikes} up a friendly conversation, and while s_c doesn't give anything away about c_n, {PRONOUN/s_c/subject}'{VERB/s_c/re/s} able to pick up on a lot of gossip about o_c_n through careful conversation. It's always worth keeping an eye on the neighbors. Trust, but verify.",
                 "exp": 20,
                 "weight": 20,
                 "stat_skill": ["SPEAKER,1"],
                 "other_clan_rep": 2
             },
             {
-                "text": "As s_c marks the border, {PRONOUN/s_c/subject} {VERB/s_c/encounter/encounters} a o_c_n border patrol, which includes a young apprentice. Their eyes go round and they hide behind their mentor, but s_c gently coaxes them out. s_c praises the little apprentice to their mentor, who purrs gratefully at the c_n leader's kindness.",
+                "text": "As s_c marks the border, {PRONOUN/s_c/subject} {VERB/s_c/encounter/encounters} a o_c_n border patrol, which includes young o_c_app. {PRONOUN/o_c_app/poss/CAP} eyes go round and {PRONOUN/o_c_app/subject} {VERB/o_c_app/hide/hides} behind {PRONOUN/o_c_app/poss} mentor, but s_c gently coaxes {PRONOUN/o_c_app/object} out. s_c praises the little apprentice to {PRONOUN/o_c_app/poss} mentor, who purrs gratefully at the c_n leader's kindness.",
                 "exp": 20,
                 "weight": 20,
                 "stat_trait": [
@@ -953,7 +994,7 @@
                 "other_clan_rep": -1
             },
             {
-                "text": "s_c is marking along the territory line when {PRONOUN/s_c/subject} {VERB/s_c/encounter/encounters} a o_c_n patrol, out on a similar mission. {PRONOUN/s_c/subject/CAP} {VERB/s_c/stare/stares} at the other Clan's patrol challengingly, following their every move until the shared border ends. Though no words are exchanged, the tension is palpable.",
+                "text": "s_c is marking along the territory line when {PRONOUN/s_c/subject} {VERB/s_c/encounter/encounters} o_c_cat's o_c_n patrol, out on a similar mission. {PRONOUN/s_c/subject/CAP} {VERB/s_c/stare/stares} at the other Clan's patrol challengingly, following their every move until the shared border ends. Though no words are exchanged, the tension is palpable.",
                 "exp": 0,
                 "weight": 20,
                 "stat_trait": [
@@ -969,7 +1010,7 @@
                 "other_clan_rep": -1
             },
             {
-                "text": "r_c encounters a patrol from o_c_n on the border and greets them politely, but there's something different here. Something dangerous. . . r_c returns to camp late, blood soaked through their fur and a new hardness in their heart.",
+                "text": "r_c encounters o_c_cat's patrol from o_c_n on the border and greets them politely, but there's something different here. Something dangerous. . . r_c returns to camp late, blood soaked through {PRONOUN/r_c/poss} fur and a new hardness in {PRONOUN/r_c/poss} heart.",
                 "exp": 0,
                 "weight": 10,
                 "dead_cats": ["r_c"],
@@ -981,7 +1022,7 @@
                 "other_clan_rep": -1
             },
             {
-                "text": "r_c is having trouble focusing today and puts a mark in the wrong place - and at the worst possible moment, because a o_c_n patrol sees them doing it! The diplomatic incident spirals into a full-blown conflict, and r_c hauls themselves back to camp, wounded and bleeding.",
+                "text": "r_c is having trouble focusing today and puts a mark in the wrong place - and at the worst possible moment, because o_c_cat's o_c_n patrol sees {PRONOUN/r_c/poss} doing it! The diplomatic incident spirals into a full-blown conflict, and r_c hauls {PRONOUN/r_c/self} back to camp, wounded and bleeding.",
                 "exp": 0,
                 "weight": 10,
                 "injury": [
@@ -1012,9 +1053,13 @@
         "min_max_status": {
             "deputy": [1, 6]
         },
+        "oc_status": [
+            "deputy",
+            "normal adult"
+        ],
         "weight": 20,
         "intro_text": "r_c heads out onto the beach alone to check on the border.",
-        "decline_text": "r_c reconsiders and turns back to camp, deciding that their other duties have to come first.",
+        "decline_text": "r_c reconsiders and turns back to camp, deciding that {PRONOUN/r_c/poss} other duties have to come first.",
         "chance_of_success": 30,
         "success_outcomes": [
             {
@@ -1024,20 +1069,20 @@
                 "other_clan_rep": 2
             },
             {
-                "text": "r_c heads out to clarify a portion of the border that there's been confusion over recently and encounters the o_c_n deputy out doing the same thing. They commiserate over the incompetence of the apprentices on both sides that caused the issue, and walk away with greater respect for one another.",
+                "text": "r_c heads out to clarify a portion of the border that there's been confusion over recently and encounters o_c_dep out doing the same thing. They commiserate over the incompetence of the apprentices on both sides that caused the issue, and walk away with greater respect for one another.",
                 "exp": 20,
                 "weight": 5,
                 "other_clan_rep": 2
             },
             {
-                "text": "s_c comes across a o_c_n patrol, out on a similar mission and being led by their deputy. The deputies strike up a conversation, and the o_c_n warriors eventually wander off. The unexpected opportunity gives the two a chance to privately exchange news about an ongoing problem on the coast.",
+                "text": "s_c comes across a o_c_n patrol, out on a similar mission and being led by o_c_dep. The deputies strike up a conversation, and the o_c_n warriors eventually wander off. The unexpected opportunity gives the two a chance to privately exchange news about an ongoing problem on the coast.",
                 "exp": 20,
                 "weight": 20,
                 "stat_skill": ["SPEAKER,1"],
                 "other_clan_rep": 2
             },
             {
-                "text": "As s_c marks the border, {PRONOUN/s_c/subject} {VERB/s_c/encounter/encounters} the o_c_n deputy out with their new apprentice. The fellow deputy greets s_c and encourages their apprentice to quiz them. s_c plays along and compliments them both on how the young cat's training is progressing before parting ways.",
+                "text": "As s_c marks the border, {PRONOUN/s_c/subject} {VERB/s_c/encounter/encounters} o_c_dep out with {PRONOUN/o_c_dep/poss} new apprentice. The fellow deputy greets s_c and encourages {PRONOUN/o_c_dep/poss} apprentice to quiz {PRONOUN/s_c/object}. s_c plays along and compliments them both on how the young cat's training is progressing before parting ways.",
                 "exp": 20,
                 "weight": 20,
                 "stat_trait": [
@@ -1053,13 +1098,13 @@
         ],
         "fail_outcomes": [
             {
-                "text": "r_c heads out to clarify a portion of the border that there's been confusion over recently and encounters the o_c_n deputy out doing the same thing. Unable to agree on exactly where the borders are meant to lie, both deputies must return to camp and raise the issue with their leaders.",
+                "text": "r_c heads out to clarify a portion of the border that there's been confusion over recently and encounters o_c_dep out doing the same thing. Unable to agree on exactly where the borders are meant to lie, both deputies must return to camp and raise the issue with their leaders.",
                 "exp": 0,
                 "weight": 20,
                 "other_clan_rep": -1
             },
             {
-                "text": "r_c is having trouble focusing today and puts a mark in the wrong place - and at the worst possible moment, because a o_c_n patrol sees them doing it! The diplomatic incident spirals into a full-blown conflict, and r_c hauls themselves back to camp, wounded and bleeding.",
+                "text": "r_c is having trouble focusing today and puts a mark in the wrong place - and at the worst possible moment, because o_c_cat's o_c_n patrol sees {PRONOUN/r_c/object} doing it! The diplomatic incident spirals into a full-blown conflict, and r_c hauls {PRONOUN/r_c/self} back to camp, wounded and bleeding.",
                 "exp": 0,
                 "weight": 10,
                 "injury": [
@@ -1086,9 +1131,13 @@
         "min_max_status": {
             "leader": [1, 6]
         },
+        "oc_status": [
+            "leader",
+            "normal adult"
+        ],
         "weight": 20,
         "intro_text": "r_c heads out onto the beach alone to check on the border.",
-        "decline_text": "r_c reconsiders and turns back to camp, deciding that their other duties have to come first.",
+        "decline_text": "r_c reconsiders and turns back to camp, deciding that {PRONOUN/r_c/poss} other duties have to come first.",
         "chance_of_success": 30,
         "success_outcomes": [
             {
@@ -1098,20 +1147,20 @@
                 "other_clan_rep": 2
             },
             {
-                "text": "r_c heads out to clarify a portion of the border that there's been confusion over recently and encounters the o_c_n leader out doing the same thing. They commiserate over the incompetence of the apprentices on both sides that caused the issue, and walk away with greater respect for one another.",
+                "text": "r_c heads out to clarify a portion of the border that there's been confusion over recently and encounters o_c_leader out doing the same thing. They commiserate over the incompetence of the apprentices on both sides that caused the issue, and walk away with greater respect for one another.",
                 "exp": 20,
                 "weight": 5,
                 "other_clan_rep": 2
             },
             {
-                "text": "s_c comes across a o_c_n patrol, out on a similar mission and being led by their deputy. The leaders strike up a conversation, and the o_c_n warriors eventually wander off. The unexpected opportunity gives the two a chance to privately exchange news about an ongoing problem on the coast.",
+                "text": "s_c comes across a o_c_n patrol, out on a similar mission and being led by o_c_leader. The leaders strike up a conversation, and the o_c_n warriors eventually wander off. The unexpected opportunity gives the two a chance to privately exchange news about an ongoing problem on the coast.",
                 "exp": 20,
                 "weight": 20,
                 "stat_skill": ["SPEAKER,1"],
                 "other_clan_rep": 2
             },
             {
-                "text": "As s_c marks the border, {PRONOUN/s_c/subject} {VERB/s_c/encounter/encounters} the o_c_n leader out with their new apprentice. The fellow deputy greets s_c and encourages their apprentice to quiz them. s_c plays along and compliments them both on how the young cat's training is progressing before parting ways.",
+                "text": "As s_c marks the border, {PRONOUN/s_c/subject} {VERB/s_c/encounter/encounters} o_c_leader out with {PRONOUN/o_c_leader/poss} new apprentice. The fellow leader greets s_c and encourages {PRONOUN/o_c_leader/poss} apprentice to quiz {PRONOUN/s_c/object}. s_c plays along and compliments them both on how the young cat's training is progressing before parting ways.",
                 "exp": 20,
                 "weight": 20,
                 "stat_trait": [
@@ -1127,13 +1176,13 @@
         ],
         "fail_outcomes": [
             {
-                "text": "r_c heads out to clarify a portion of the border that there's been confusion over recently and encounters the o_c_n leader out doing the same thing. Unable to agree on exactly where the borders are meant to lie, both leaders agree to raise it at the next Gathering instead.",
+                "text": "r_c heads out to clarify a portion of the border that there's been confusion over recently and encounters o_c_leader out doing the same thing. Unable to agree on exactly where the borders are meant to lie, both leaders agree to raise it at the next Gathering instead.",
                 "exp": 0,
                 "weight": 20,
                 "other_clan_rep": -1
             },
             {
-                "text": "r_c is having trouble focusing today and puts a mark in the wrong place - and at the worst possible moment, because a o_c_n patrol sees them doing it! The diplomatic incident spirals into a full-blown conflict, and r_c hauls themselves back to camp, wounded and bleeding.",
+                "text": "r_c is having trouble focusing today and puts a mark in the wrong place - and at the worst possible moment, because o_c_cat's o_c_n patrol sees {PRONOUN/r_c/object} doing it! The diplomatic incident spirals into a full-blown conflict, and r_c hauls {PRONOUN/r_c/self} back to camp, wounded and bleeding.",
                 "exp": 0,
                 "weight": 10,
                 "injury": [
@@ -1158,6 +1207,10 @@
         "min_cats": 1,
         "max_cats": 1,
         "min_max_status": {},
+        "oc_status": [
+            "apprentice",
+            "normal adult"
+        ],
         "weight": 20,
         "intro_text": "r_c heads out into the desert alone, wanting to make a quick check on the border.",
         "decline_text": "r_c turns back to camp, deciding that {PRONOUN/r_c/poss} other duties have to come first.",
@@ -1170,20 +1223,20 @@
                 "other_clan_rep": 2
             },
             {
-                "text": "r_c comes across a o_c_n apprentice on the wrong side of the border and holding precious prey. {PRONOUN/r_c/subject/CAP} {VERB/r_c/see/sees} the young cat off with a furious yowl and then {VERB/r_c/bring/brings} the prey back to c_n camp to report the incident to the deputy.",
+                "text": "r_c comes across o_c_app on the wrong side of the border and holding precious prey. {PRONOUN/r_c/subject/CAP} {VERB/r_c/see/sees} the young cat off with a furious yowl and then {VERB/r_c/bring/brings} the prey back to c_n camp to report the incident to the deputy.",
                 "exp": 20,
                 "weight": 5,
                 "other_clan_rep": 2
             },
             {
-                "text": "s_c comes across a patrol from o_c_n, out on a similar mission to them. How unusual to meet a patrol in person! They strike up a friendly conversation, and while s_c doesn't give anything away about c_n, they're able to pick up on a lot of gossip about o_c_n through careful conversation.",
+                "text": "s_c comes across o_c_cat's patrol from o_c_n, out on a similar mission to {PRONOUN/s_c/object}. How unusual to meet a patrol in person! They strike up a friendly conversation, and while s_c doesn't give anything away about c_n, {PRONOUN/s_c/subject}'{VERB/s_c/re/s} able to pick up on a lot of gossip about o_c_n through careful conversation.",
                 "exp": 20,
                 "weight": 20,
                 "stat_skill": ["SPEAKER,1"],
                 "other_clan_rep": 2
             },
             {
-                "text": "As s_c marks the border, {PRONOUN/s_c/subject} {VERB/s_c/encounter/encounters} a o_c_n border patrol. It even includes a young apprentice, whose eyes go round and fur fluffs up at encountering a real c_n cat! s_c plays along, acting very impressed with the hardworking apprentice, and the apprentice's mentor purrs gratefully.",
+                "text": "As s_c marks the border, {PRONOUN/s_c/subject} {VERB/s_c/encounter/encounters} a o_c_n border patrol. It even includes young o_c_app, whose eyes go round and fur fluffs up at encountering a real c_n cat! s_c plays along, acting very impressed with the hardworking apprentice, and {PRONOUN/o_c_app/subject}'s mentor purrs gratefully.",
                 "exp": 20,
                 "weight": 20,
                 "stat_trait": [
@@ -1205,7 +1258,7 @@
                 "other_clan_rep": -1
             },
             {
-                "text": "s_c is marking along the territory line when they encounter a patrol from o_c_n, out on a similar mission. {PRONOUN/s_c/subject/CAP} {VERB/s_c/stare/stares} at the other Clan's patrol challengingly, following their every move until the shared border ends, and though no words are exchanged, it's very tense.",
+                "text": "s_c is marking along the territory line when {PRONOUN/s_c/subject} {VERB/s_c/encounter/encounters} o_c_cat's patrol from o_c_n, out on a similar mission. {PRONOUN/s_c/subject/CAP} {VERB/s_c/stare/stares} at the other Clan's patrol challengingly, following their every move until the shared border ends, and though no words are exchanged, it's very tense.",
                 "exp": 0,
                 "weight": 20,
                 "stat_trait": [
@@ -1234,6 +1287,10 @@
         "min_max_status": {
             "deputy": [1, 6]
         },
+        "oc_status": [
+            "apprentice",
+            "normal adult"
+        ],
         "weight": 20,
         "intro_text": "r_c heads out into the desert alone, wanting to make a quick check on the border.",
         "decline_text": "r_c turns back to camp, deciding that {PRONOUN/r_c/poss} other duties have to come first.",
@@ -1246,20 +1303,20 @@
                 "other_clan_rep": 2
             },
             {
-                "text": "r_c comes across a o_c_n apprentice on the wrong side of the border and holding precious prey. Furious, they snarl their anger. The apprentice turns tail and flees with r_c hot on their trail, and when the apprentice crosses the border to hide behind their mentor, the o_c_n warrior's face goes slack with horror to see c_n's deputy.",
+                "text": "r_c comes across o_c_app on the wrong side of the border and holding precious prey. Furious, {PRONOUN/r_c/subject} {VERB/r_c/snarl/snarls} {PRONOUN/r_c/poss} anger. The apprentice turns tail and flees with r_c hot on {PRONOUN/o_c_app/poss} trail, and when the apprentice crosses the border to hide behind {PRONOUN/o_c_app/poss} mentor, the o_c_n warrior's face goes slack with horror to see c_n's deputy.",
                 "exp": 20,
                 "weight": 5,
                 "other_clan_rep": 2
             },
             {
-                "text": "s_c comes across a patrol from o_c_n, out on a similar mission to them. How unusual to meet a patrol in person! They strike up a friendly conversation, and while s_c doesn't give anything away about c_n, they're able to pick up on a lot of gossip about o_c_n through careful conversation. It's always worth keeping an eye on their neighbors.",
+                "text": "s_c comes across o_c_cat's patrol from o_c_n, out on a similar mission to {PRONOUN/s_c/object}. How unusual to meet a patrol in person! They strike up a friendly conversation, and while s_c doesn't give anything away about c_n, {PRONOUN/s_c/subject}'{VERB/s_c/re/s} able to pick up on a lot of gossip about o_c_n through careful conversation. It's always worth keeping an eye on their neighbors.",
                 "exp": 20,
                 "weight": 20,
                 "stat_skill": ["SPEAKER,1"],
                 "other_clan_rep": 2
             },
             {
-                "text": "As s_c marks the border, {PRONOUN/s_c/subject} {VERB/s_c/encounter/encounters} a o_c_n border patrol, which includes a young apprentice. Their eyes go round and they tuck their paws together neatly, sitting pretty for inspection. s_c plays along, acting very impressed with the hardworking apprentice, and the apprentice's mentor purrs gratefully at the c_n deputy's kindness.",
+                "text": "As s_c marks the border, {PRONOUN/s_c/subject} {VERB/s_c/encounter/encounters} a o_c_n border patrol, which includes young o_c_app. {PRONOUN/o_c_app/poss/CAP} eyes go round and {PRONOUN/o_c_app/subject} {VERB/o_c_app/tuck/tucks} {PRONOUN/o_c_app/poss} paws together neatly, sitting pretty for inspection. s_c plays along, acting very impressed with the hardworking apprentice, and o_c_app's mentor purrs gratefully at the c_n deputy's kindness.",
                 "exp": 20,
                 "weight": 20,
                 "stat_trait": [
@@ -1281,7 +1338,7 @@
                 "other_clan_rep": -1
             },
             {
-                "text": "s_c is marking along the territory line when they encounter a patrol from o_c_n, out on a similar mission. {PRONOUN/s_c/subject/CAP} {VERB/s_c/stare/stares} at the other Clan's patrol challengingly, following their every move until the shared border ends, and though no words are exchanged, it's very tense.",
+                "text": "s_c is marking along the territory line when they encounter o_c_cat's patrol from o_c_n, out on a similar mission. {PRONOUN/s_c/subject/CAP} {VERB/s_c/stare/stares} at the other Clan's patrol challengingly, following their every move until the shared border ends, and though no words are exchanged, it's very tense.",
                 "exp": 0,
                 "weight": 20,
                 "stat_trait": [
@@ -1297,7 +1354,7 @@
                 "other_clan_rep": -1
             },
             {
-                "text": "r_c is having trouble focusing today and puts a mark in the wrong place - and at the worst possible moment, because a o_c_n patrol sees them doing it! The diplomatic incident spirals into a full blown conflict, and r_c hauls themselves back to camp wounded and bleeding.",
+                "text": "r_c is having trouble focusing today and puts a mark in the wrong place - and at the worst possible moment, because o_c_cat's o_c_n patrol sees {PRONOUN/r_c/object} doing it! The diplomatic incident spirals into a full blown conflict, and r_c hauls {PRONOUN/r_c/self} back to camp wounded and bleeding.",
                 "exp": 0,
                 "weight": 10,
                 "injury": [
@@ -1324,6 +1381,10 @@
         "min_max_status": {
             "leader": [1, 6]
         },
+        "oc_status": [
+            "apprentice",
+            "normal adult"
+        ],
         "weight": 20,
         "intro_text": "r_c heads out into the desert alone, wanting to make a quick check on the border.",
         "decline_text": "r_c turns back to camp, deciding that {PRONOUN/r_c/poss} other duties have to come first.",
@@ -1336,20 +1397,20 @@
                 "other_clan_rep": 2
             },
             {
-                "text": "r_c comes across a o_c_n apprentice on the wrong side of the border and holding prey. Furious, {PRONOUN/r_c/subject} {VERB/r_c/snarl/snarls} {PRONOUN/r_c/poss} anger. The apprentice turns tail and flees with r_c hot on their trail, and when the apprentice crosses the border to hide behind their mentor, the o_c_n warrior's tail tucks at the sight of c_n's outraged leader.",
+                "text": "r_c comes across o_c_app on the wrong side of the border and holding prey. Furious, {PRONOUN/r_c/subject} {VERB/r_c/snarl/snarls} {PRONOUN/r_c/poss} anger. The apprentice turns tail and flees with r_c hot on {PRONOUN/o_c_app/poss} trail, and when the apprentice crosses the border to hide behind {PRONOUN/o_c_app/poss} mentor, the o_c_n warrior's tail tucks at the sight of c_n's outraged leader.",
                 "exp": 20,
                 "weight": 5,
                 "other_clan_rep": 2
             },
             {
-                "text": "s_c comes across a patrol from o_c_n, out on a similar mission to them. How unusual to meet a patrol in person! They strike up a friendly conversation, and while s_c doesn't give anything away about c_n, they're able to pick up on a lot of gossip about o_c_n through careful conversation. Trust, but verify.",
+                "text": "s_c comes across o_c_cat's patrol from o_c_n, out on a similar mission to {PRONOUN/s_c/object}. How unusual to meet a patrol in person! They strike up a friendly conversation, and while s_c doesn't give anything away about c_n, {PRONOUN/s_c/subject}'{VERB/s_c/re/s} able to pick up on a lot of gossip about o_c_n through careful conversation. Trust, but verify.",
                 "exp": 20,
                 "weight": 20,
                 "stat_skill": ["SPEAKER,1"],
                 "other_clan_rep": 2
             },
             {
-                "text": "As s_c marks the border, {PRONOUN/s_c/subject} {VERB/s_c/encounter/encounters} a o_c_n border patrol, which includes a young apprentice. Their eyes go round and they hide behind their mentor, but s_c manages to coax them out, praising the little apprentice to their mentor, who purrs gratefully at the c_n leader's kindness.",
+                "text": "As s_c marks the border, {PRONOUN/s_c/subject} {VERB/s_c/encounter/encounters} a o_c_n border patrol, which includes young o_c_app. {PRONOUN/o_c_app/poss/CAP} eyes go round and {PRONOUN/o_c_app/poss} {VERB/o_c_app/hide/hides} behind {PRONOUN/o_c_app/poss} mentor, but s_c manages to coax {PRONOUN/o_c_app/object} out, praising the little apprentice to {PRONOUN/o_c_app/poss} mentor, who purrs gratefully at the c_n leader's kindness.",
                 "exp": 20,
                 "weight": 20,
                 "stat_trait": [
@@ -1371,7 +1432,7 @@
                 "other_clan_rep": -1
             },
             {
-                "text": "s_c is marking along the territory line when they encounter a patrol from o_c_n, out on a similar mission. {PRONOUN/s_c/subject/CAP} {VERB/s_c/stare/stares} at the other Clan's patrol challengingly, following their every move until the shared border ends, and though no words are exchanged, it's very tense.",
+                "text": "s_c is marking along the territory line when {PRONOUN/s_c/subject} {VERB/s_c/encounter/encounters} o_c_cat's patrol from o_c_n, out on a similar mission. {PRONOUN/s_c/subject/CAP} {VERB/s_c/stare/stares} at the other Clan's patrol challengingly, following their every move until the shared border ends, and though no words are exchanged, it's very tense.",
                 "exp": 0,
                 "weight": 20,
                 "stat_trait": [
@@ -1387,7 +1448,7 @@
                 "other_clan_rep": -1
             },
             {
-                "text": "r_c is having trouble focusing today and puts a mark in the wrong place - and at the worst possible moment, because a o_c_n patrol sees them doing it! The diplomatic incident spirals into a full blown conflict, and r_c hauls themselves back to camp wounded and bleeding.",
+                "text": "r_c is having trouble focusing today and puts a mark in the wrong place - and at the worst possible moment, because o_c_cat's o_c_n patrol sees {PRONOUN/r_c/poss} doing it! The diplomatic incident spirals into a full blown conflict, and r_c hauls {PRONOUN/r_c/self} back to camp wounded and bleeding.",
                 "exp": 0,
                 "weight": 10,
                 "injury": [
@@ -1414,6 +1475,9 @@
         "min_max_status": {
             "deputy": [1, 6]
         },
+        "oc_status": [
+            "deputy"
+        ],
         "weight": 20,
         "intro_text": "r_c heads out into the desert alone, wanting to make a quick check on the border.",
         "decline_text": "r_c turns back to camp, deciding that {PRONOUN/r_c/poss} other duties have to come first.",
@@ -1426,20 +1490,20 @@
                 "other_clan_rep": 2
             },
             {
-                "text": "r_c heads out to clarify a portion of the border that there's been confusion over recently and encounters the deputy of o_c_n out doing the same thing. They commiserate over the incompetence of the apprentices on both sides that caused the issue and walk away with a greater respect for one another.",
+                "text": "r_c heads out to clarify a portion of the border that there's been confusion over recently and encounters o_c_dep out doing the same thing. The deputies commiserate over the incompetence of the apprentices on both sides that caused the issue and walk away with a greater respect for one another.",
                 "exp": 20,
                 "weight": 5,
                 "other_clan_rep": 2
             },
             {
-                "text": "s_c comes across a patrol from o_c_n, out on a similar mission to them, led by their deputy. How unusual to meet a patrol in person! They strike up a friendly conversation. The unexpected opportunity turns into the perfect chance to casually but purposefully keep each other informed on an ongoing problem in the desert.",
+                "text": "s_c comes across o_c_cat's patrol from o_c_n, out on a similar mission to {PRONOUN/s_c/object}, led by o_c_dep. How unusual to meet a fellow deputy in person! They strike up a friendly conversation. The unexpected opportunity turns into the perfect chance to casually but purposefully keep each other informed on an ongoing problem in the desert.",
                 "exp": 20,
                 "weight": 20,
                 "stat_skill": ["SPEAKER,1"],
                 "other_clan_rep": 2
             },
             {
-                "text": "As s_c marks the border, {PRONOUN/s_c/subject} {VERB/s_c/encounter/encounters} the o_c_n deputy out with their new apprentice. Their fellow deputy encourages their apprentice to quiz s_c, and s_c compliments them both on how the young cat's training is progressing.",
+                "text": "As s_c marks the border, {PRONOUN/s_c/subject} {VERB/s_c/encounter/encounters} o_c_dep out with {PRONOUN/o_c_dep/poss} new apprentice. {PRONOUN/o_c_dep/poss/CAP} fellow deputy encourages {PRONOUN/o_c_dep/poss} apprentice to quiz s_c, and {PRONOUN/s_c/subject} {VERB/s_c/compliment/compliments} them both on how the young cat's training is progressing.",
                 "exp": 20,
                 "weight": 20,
                 "stat_trait": [
@@ -1455,7 +1519,7 @@
         ],
         "fail_outcomes": [
             {
-                "text": "r_c heads out to clarify a portion of the border that there's been confusion over recently and encounters the deputy of o_c_n out doing the same thing. Both deputies find a point where they can't agree on the right border path and return to their respective camps to discuss with their leaders.",
+                "text": "r_c heads out to clarify a portion of the border that there's been confusion over recently and encounters o_c_dep out doing the same thing. Both deputies find a point where they can't agree on the right border path and return to their respective camps to discuss with their leaders.",
                 "exp": 0,
                 "weight": 20,
                 "other_clan_rep": -1
@@ -1474,6 +1538,9 @@
         "min_max_status": {
             "leader": [1, 6]
         },
+        "oc_status": [
+            "leader"
+        ],
         "weight": 20,
         "intro_text": "r_c heads out into the desert alone, wanting to make a quick check on the border.",
         "decline_text": "r_c turns back to camp, deciding that {PRONOUN/r_c/poss} other duties have to come first.",
@@ -1486,20 +1553,20 @@
                 "other_clan_rep": 2
             },
             {
-                "text": "r_c heads out to clarify a portion of the border that there's been confusion over recently and encounters the leader of o_c_n out doing the same thing. They commiserate over the incompetence of the apprentices on both sides that caused the issue and walk away with a greater respect for one another.",
+                "text": "r_c heads out to clarify a portion of the border that there's been confusion over recently and encounters o_c_leader out doing the same thing. The leaders commiserate over the incompetence of the apprentices on both sides that caused the issue and walk away with a greater respect for one another.",
                 "exp": 20,
                 "weight": 5,
                 "other_clan_rep": 2
             },
             {
-                "text": "s_c comes across a patrol from o_c_n, out on a similar mission to s_c with their leader. How unusual to meet a patrol in person! They strike up a friendly conversation. The unexpected opportunity turns into the perfect chance to casually but purposefully keep each other informed on an ongoing problem in the desert.",
+                "text": "s_c comes across o_c_cat's patrol from o_c_n, out on a similar mission to s_c with o_c_leader. How unusual to meet a fellow leader in person! They strike up a friendly conversation. The unexpected opportunity turns into the perfect chance to casually but purposefully keep each other informed on an ongoing problem in the desert.",
                 "exp": 20,
                 "weight": 20,
                 "stat_skill": ["SPEAKER,1"],
                 "other_clan_rep": 2
             },
             {
-                "text": "As s_c marks the border, {PRONOUN/s_c/subject} {VERB/s_c/encounter/encounters} the o_c_n leader out with their new apprentice. Their fellow leader encourages their apprentice to quiz s_c, and s_c compliments them both on how the young cat's training is progressing.",
+                "text": "As s_c marks the border, {PRONOUN/s_c/subject} {VERB/s_c/encounter/encounters} o_c_leader out with {PRONOUN/o_c_leader/poss} new apprentice. {PRONOUN/o_c_leader/poss/CAP} fellow leader encourages {PRONOUN/o_c_leader/poss} apprentice to quiz s_c, and {PRONOUN/s_c/subject} {VERB/s_c/compliment/compliments} them both on how the young cat's training is progressing.",
                 "exp": 20,
                 "weight": 20,
                 "stat_trait": [
@@ -1515,7 +1582,7 @@
         ],
         "fail_outcomes": [
             {
-                "text": "r_c heads out to clarify a portion of the border that there's been confusion over recently and encounters the leader of o_c_n out doing the same thing. Both leaders find a point where they can't agree on the right border path and agree to bring the subject up at the next Gathering instead.",
+                "text": "r_c heads out to clarify a portion of the border that there's been confusion over recently and encounters o_c_leader doing the same thing. Both leaders find a point where they can't agree on the right border path and agree to bring the subject up at the next Gathering instead.",
                 "exp": 0,
                 "weight": 20,
                 "other_clan_rep": -1
@@ -1534,6 +1601,10 @@
         "min_max_status": {
             "all apprentices": [-1, -1]
         },
+        "oc_status": [
+            "apprentice",
+            "normal adult"
+        ],
         "weight": 20,
         "intro_text": "r_c heads out into the forest alone, wanting to make a quick check on the border.",
         "decline_text": "r_c turns back to camp, deciding that {PRONOUN/r_c/poss} other duties have to come first.",
@@ -1546,21 +1617,21 @@
                 "other_clan_rep": 2
             },
             {
-                "text": "r_c comes across a o_c_n apprentice on the wrong side of the border and holding prey. {PRONOUN/r_c/subject/CAP} {VERB/r_c/see/sees} the young cat off with a furious yowl and then {VERB/r_c/bring/brings} the prey back to c_n camp to report the incident to the deputy.",
+                "text": "r_c comes across o_c_app on the wrong side of the border and holding prey. {PRONOUN/r_c/subject/CAP} {VERB/r_c/see/sees} the young cat off with a furious yowl and then {VERB/r_c/bring/brings} the prey back to c_n camp to report the incident to the deputy.",
                 "exp": 20,
                 "weight": 5,
                 "prey": ["small"],
                 "other_clan_rep": -1
             },
             {
-                "text": "s_c comes across a patrol from o_c_n, out on a similar mission to them, and turns to follow the same marking path as them. They strike up a friendly conversation, and while s_c doesn't give anything away about c_n, they're able to pick up on a lot of gossip about o_c_n through careful conversation.",
+                "text": "s_c comes across o_c_cat's patrol from o_c_n, out on a similar mission to {PRONOUN/s_c/object}, and turns to follow the same marking path as them. They strike up a friendly conversation, and while s_c doesn't give anything away about c_n, {PRONOUN/s_c/subject}'{VERB/s_c/re/s} able to pick up on a lot of gossip about o_c_n through careful conversation.",
                 "exp": 20,
                 "weight": 20,
                 "stat_skill": ["SPEAKER,1"],
                 "other_clan_rep": 2
             },
             {
-                "text": "As s_c marks the border, {PRONOUN/s_c/subject} {VERB/s_c/encounter/encounters} a o_c_n border patrol. It even includes a young apprentice, whose eyes go round and fur fluffs up at encountering a real c_n cat! s_c plays along, acting very impressed with the hardworking apprentice, and the apprentice's mentor purrs gratefully.",
+                "text": "As s_c marks the border, {PRONOUN/s_c/subject} {VERB/s_c/encounter/encounters} a o_c_n border patrol. It even includes young o_c_app, whose eyes go round and fur fluffs up at encountering a real c_n cat! s_c plays along, acting very impressed with the hardworking apprentice, and o_c_app's mentor purrs gratefully.",
                 "exp": 20,
                 "weight": 20,
                 "stat_trait": [
@@ -1582,7 +1653,7 @@
                 "other_clan_rep": -1
             },
             {
-                "text": "s_c is marking along the territory line when they encounter a patrol from o_c_n, out on a similar mission. {PRONOUN/s_c/subject/CAP} {VERB/s_c/stare/stares} at the other Clan's patrol challengingly, following their every move until the shared border ends, and though no words are exchanged, it's very tense.",
+                "text": "s_c is marking along the territory line when they encounter o_c_cat's patrol from o_c_n, out on a similar mission. {PRONOUN/s_c/subject/CAP} {VERB/s_c/stare/stares} at the other Clan's patrol challengingly, following their every move until the shared border ends, and though no words are exchanged, it's very tense.",
                 "exp": 0,
                 "weight": 20,
                 "stat_trait": [
@@ -1598,7 +1669,7 @@
                 "other_clan_rep": -1
             },
             {
-                "text": "r_c is having trouble focusing today and puts a mark in the wrong place - and at the worst possible moment, because a o_c_n patrol sees {PRONOUN/r_c/object} doing it! {PRONOUN/r_c/subject/CAP} {VERB/r_c/come/comes} back to camp scratched up, and immediately {VERB/r_c/apologize/apologizes} to the deputy for the diplomatic incident {PRONOUN/r_c/subject}{VERB/r_c/'ve/'s} inadvertently caused.",
+                "text": "r_c is having trouble focusing today and puts a mark in the wrong place - and at the worst possible moment, because o_c_cat's o_c_n patrol sees {PRONOUN/r_c/object} doing it! {PRONOUN/r_c/subject/CAP} {VERB/r_c/come/comes} back to camp scratched up, and immediately {VERB/r_c/apologize/apologizes} to the deputy for the diplomatic incident {PRONOUN/r_c/subject}{VERB/r_c/'ve/'s} inadvertently caused.",
                 "exp": 0,
                 "weight": 10,
                 "injury": [
@@ -1626,6 +1697,10 @@
         "min_max_status": {
             "deputy": [1, 6]
         },
+        "oc_status": [
+            "apprentice",
+            "normal adult"
+        ],
         "weight": 20,
         "intro_text": "r_c heads out into the forest alone, wanting to make a quick check on the border.",
         "decline_text": "r_c turns back to camp, deciding that {PRONOUN/r_c/poss} other duties have to come first.",
@@ -1638,20 +1713,20 @@
                 "other_clan_rep": 2
             },
             {
-                "text": "r_c comes across a o_c_n apprentice on the wrong side of the border and holding prey. Furious, {PRONOUN/r_c/subject} {VERB/r_c/snarl/snarls} {PRONOUN/r_c/poss} anger. The apprentice turns tail and flees with r_c hot on their trail, and when the apprentice crosses the border to hide behind their mentor, the o_c_n warrior's face goes slack with horror to see c_n's deputy.",
+                "text": "r_c comes across o_c_app on the wrong side of the border and holding prey. Furious, {PRONOUN/r_c/subject} {VERB/r_c/snarl/snarls} {PRONOUN/r_c/poss} anger. The apprentice turns tail and flees with r_c hot on {PRONOUN/o_c_app/poss} trail, and when the apprentice crosses the border to hide behind {PRONOUN/o_c_app/poss} mentor, the o_c_n warrior's face goes slack with horror to see c_n's deputy.",
                 "exp": 20,
                 "weight": 5,
                 "other_clan_rep": 2
             },
             {
-                "text": "s_c comes across a patrol from o_c_n, out on a similar mission to them. They strike up a friendly conversation, and while s_c doesn't give anything away about c_n, they're able to pick up on a lot of gossip about o_c_n through careful conversation. It's always worth keeping an eye on their neighbors.",
+                "text": "s_c comes across o_c_cat's patrol from o_c_n, out on a similar mission to {PRONOUN/s_c/object}. They strike up a friendly conversation, and while s_c doesn't give anything away about c_n, {PRONOUN/s_c/subject}'{VERB/s_c/re/s} able to pick up on a lot of gossip about o_c_n through careful conversation. It's always worth keeping an eye on their neighbors.",
                 "exp": 20,
                 "weight": 20,
                 "stat_skill": ["SPEAKER,1"],
                 "other_clan_rep": 2
             },
             {
-                "text": "As s_c marks the border, {PRONOUN/s_c/subject} {VERB/s_c/encounter/encounters} a o_c_n border patrol, which includes a young apprentice. Their eyes go round and they tuck their paws together neatly, sitting pretty for inspection. s_c plays along, acting very impressed with the hardworking apprentice, and the apprentice's mentor purrs gratefully at the c_n deputy's kindness.",
+                "text": "As s_c marks the border, {PRONOUN/s_c/subject} {VERB/s_c/encounter/encounters} a o_c_n border patrol, which includes young o_c_app. {PRONOUN/o_c_app/poss/CAP} eyes go round and {PRONOUN/o_c_app/subject} {VERB/o_c_app/tuck/tucks} {PRONOUN/o_c_app/poss} paws together neatly, sitting pretty for inspection. s_c plays along, acting very impressed with the hardworking apprentice, and o_c_app's mentor purrs gratefully at the c_n deputy's kindness.",
                 "exp": 20,
                 "weight": 20,
                 "stat_trait": [
@@ -1673,7 +1748,7 @@
                 "other_clan_rep": -1
             },
             {
-                "text": "s_c is marking along the territory line when they encounter a patrol from o_c_n, out on a similar mission. {PRONOUN/s_c/subject/CAP} {VERB/s_c/stare/stares} at the other Clan's patrol challengingly, following their every move until the shared border ends, and though no words are exchanged, it's very tense.",
+                "text": "s_c is marking along the territory line when they encounter o_c_cat's patrol from o_c_n, out on a similar mission. {PRONOUN/s_c/subject/CAP} {VERB/s_c/stare/stares} at the other Clan's patrol challengingly, following their every move until the shared border ends, and though no words are exchanged, it's very tense.",
                 "exp": 0,
                 "weight": 20,
                 "stat_trait": [
@@ -1689,7 +1764,7 @@
                 "other_clan_rep": -1
             },
             {
-                "text": "r_c encounters a patrol from o_c_n on the border and greets them politely, but there's something different here. Something dangerous. {PRONOUN/r_c/subject/CAP} {VERB/r_c/do/does}'t make it back to camp.",
+                "text": "r_c encounters o_c_cat's patrol from o_c_n on the border and greets them politely, but there's something different here. Something dangerous. {PRONOUN/r_c/subject/CAP} {VERB/r_c/do/does}'t make it back to camp.",
                 "exp": 0,
                 "weight": 10,
                 "dead_cats": ["r_c"],
@@ -1701,7 +1776,7 @@
                 "other_clan_rep": -1
             },
             {
-                "text": "r_c is having trouble focusing today and puts a mark in the wrong place - and at the worst possible moment, because a o_c_n patrol sees them doing it! The diplomatic incident spirals into a full blown conflict, and r_c hauls themselves back to camp wounded and bleeding.",
+                "text": "r_c is having trouble focusing today and puts a mark in the wrong place - and at the worst possible moment, because o_c_cat's o_c_n patrol sees {PRONOUN/r_c/object} doing it! The diplomatic incident spirals into a full blown conflict, and r_c hauls {PRONOUN/r_c/self} back to camp wounded and bleeding.",
                 "exp": 0,
                 "weight": 10,
                 "injury": [
@@ -1732,6 +1807,10 @@
         "min_max_status": {
             "leader": [1, 6]
         },
+        "oc_status": [
+            "apprentice",
+            "normal adult"
+        ],
         "weight": 20,
         "intro_text": "r_c heads out into the forest alone, wanting to make a quick check on the border.",
         "decline_text": "r_c turns back to camp, deciding that {PRONOUN/r_c/poss} other duties have to come first.",
@@ -1744,20 +1823,20 @@
                 "other_clan_rep": 2
             },
             {
-                "text": "r_c comes across a o_c_n apprentice on the wrong side of the border and holding prey. Furious, {PRONOUN/r_c/subject} {VERB/r_c/snarl/snarls} {PRONOUN/r_c/poss} anger. The apprentice turns tail and flees with r_c hot on their trail, and when the apprentice crosses the border to hide behind their mentor, the o_c_n warrior's tail tucks at the sight of c_n's outraged leader.",
+                "text": "r_c comes across o_c_app on the wrong side of the border and holding prey. Furious, {PRONOUN/r_c/subject} {VERB/r_c/snarl/snarls} {PRONOUN/r_c/poss} anger. The apprentice turns tail and flees with r_c hot on {PRONOUN/o_c_app/poss} trail, and when the apprentice crosses the border to hide behind {PRONOUN/o_c_app/poss} mentor, the o_c_n warrior's tail tucks at the sight of c_n's outraged leader.",
                 "exp": 20,
                 "weight": 5,
                 "other_clan_rep": 2
             },
             {
-                "text": "s_c comes across a patrol from o_c_n, out on a similar mission to them. They strike up a friendly conversation, and while s_c doesn't give anything away about c_n, they're able to pick up on a lot of gossip about o_c_n through careful conversation. It's always worth keeping an eye on their neighbors. Trust, but verify.",
+                "text": "s_c comes across o_c_cat's patrol from o_c_n, out on a similar mission to {PRONOUN/s_c/object}. They strike up a friendly conversation, and while s_c doesn't give anything away about c_n, {PRONOUN/s_c/subject}'{VERB/s_c/re/s} able to pick up on a lot of gossip about o_c_n through careful conversation. It's always worth keeping an eye on their neighbors. Trust, but verify.",
                 "exp": 20,
                 "weight": 20,
                 "stat_skill": ["SPEAKER,1"],
                 "other_clan_rep": 2
             },
             {
-                "text": "As s_c marks the border, {PRONOUN/s_c/subject} {VERB/s_c/encounter/encounters} a o_c_n border patrol, which includes a young apprentice. Their eyes go round and they hide behind their mentor, but s_c manages to coax them out, praising the little apprentice to their mentor, who purrs gratefully at the c_n leader's kindness.",
+                "text": "As s_c marks the border, {PRONOUN/s_c/subject} {VERB/s_c/encounter/encounters} a o_c_n border patrol, which includes young o_c_app. {PRONOUN/o_c_app/poss/CAP} eyes go round and {PRONOUN/o_c_app/subject} {VERB/o_c_app/hide/hides} behind {PRONOUN/o_c_app/poss} mentor, but s_c manages to coax {PRONOUN/o_c_app/object} out, praising the little apprentice to {PRONOUN/o_c_app/poss} mentor, who purrs gratefully at the c_n leader's kindness.",
                 "exp": 20,
                 "weight": 20,
                 "stat_trait": [
@@ -1779,7 +1858,7 @@
                 "other_clan_rep": -1
             },
             {
-                "text": "s_c is marking along the territory line when they encounter a patrol from o_c_n, out on a similar mission. {PRONOUN/s_c/subject/CAP} {VERB/s_c/stare/stares} at the other Clan's patrol challengingly, following their every move until the shared border ends, and though no words are exchanged, it's very tense.",
+                "text": "s_c is marking along the territory line when they encounter o_c_cat's patrol from o_c_n, out on a similar mission. {PRONOUN/s_c/subject/CAP} {VERB/s_c/stare/stares} at the other Clan's patrol challengingly, following their every move until the shared border ends, and though no words are exchanged, it's very tense.",
                 "exp": 0,
                 "weight": 20,
                 "stat_trait": [
@@ -1795,7 +1874,7 @@
                 "other_clan_rep": -1
             },
             {
-                "text": "r_c encounters a patrol from o_c_n on the border and greets them politely, but there's something different here. Something dangerous. {PRONOUN/r_c/subject/CAP} {VERB/r_c/return/returns} to camp, blood soaked through {PRONOUN/r_c/poss} fur and a new hardness in {PRONOUN/r_c/poss} heart.",
+                "text": "r_c encounters o_c_cat's patrol from o_c_n on the border and greets them politely, but there's something different here. Something dangerous. {PRONOUN/r_c/subject/CAP} {VERB/r_c/return/returns} to camp, blood soaked through {PRONOUN/r_c/poss} fur and a new hardness in {PRONOUN/r_c/poss} heart.",
                 "exp": 0,
                 "weight": 10,
                 "dead_cats": ["r_c"],
@@ -1807,7 +1886,7 @@
                 "other_clan_rep": -1
             },
             {
-                "text": "r_c is having trouble focusing today and puts a mark in the wrong place - and at the worst possible moment, because a o_c_n patrol sees them doing it! The diplomatic incident spirals into a full blown conflict, and r_c hauls themselves back to camp wounded and bleeding.",
+                "text": "r_c is having trouble focusing today and puts a mark in the wrong place - and at the worst possible moment, because o_c_cat's o_c_n patrol sees {PRONOUN/r_c/object} doing it! The diplomatic incident spirals into a full blown conflict, and r_c hauls {PRONOUN/r_c/self} back to camp wounded and bleeding.",
                 "exp": 0,
                 "weight": 10,
                 "injury": [
@@ -1838,6 +1917,10 @@
         "min_max_status": {
             "deputy": [1, 6]
         },
+        "oc_status": [
+            "deputy",
+            "normal adult"
+        ],
         "weight": 20,
         "intro_text": "r_c heads out into the forest alone, wanting to make a quick check on the border.",
         "decline_text": "r_c turns back to camp, deciding that {PRONOUN/r_c/poss} other duties have to come first.",
@@ -1850,20 +1933,20 @@
                 "other_clan_rep": 2
             },
             {
-                "text": "r_c heads out to clarify a portion of the border that there's been confusion over recently and encounters the deputy of o_c_n out doing the same thing. They commiserate over the incompetence of the apprentices on both sides that caused the issue and walk away with a greater respect for one another.",
+                "text": "r_c heads out to clarify a portion of the border that there's been confusion over recently and encounters o_c_dep out doing the same thing. The deputies commiserate over the incompetence of the apprentices on both sides that caused the issue and walk away with a greater respect for one another.",
                 "exp": 20,
                 "weight": 5,
                 "other_clan_rep": 2
             },
             {
-                "text": "s_c comes across a patrol from o_c_n, out on a similar mission to them, led by their deputy. They strike up a friendly conversation, and eventually the o_c_n warriors drift away. The unexpected opportunity turns into the perfect chance to casually but purposefully keep each other informed on an ongoing problem in the forest.",
+                "text": "s_c comes across o_c_cat's patrol from o_c_n, out on a similar mission to {PRONOUN/s_c/object}, led by o_c_dep. The deputies strike up a friendly conversation, and eventually the o_c_n warriors drift away. The unexpected opportunity turns into the perfect chance to casually but purposefully keep each other informed on an ongoing problem in the forest.",
                 "exp": 20,
                 "weight": 20,
                 "stat_skill": ["SPEAKER,1"],
                 "other_clan_rep": 2
             },
             {
-                "text": "As s_c marks the border, {PRONOUN/s_c/subject} {VERB/s_c/encounter/encounters} the o_c_n deputy out with their new apprentice. Their fellow deputy encourages their apprentice to quiz s_c, and s_c compliments them both on how the young cat's training is progressing.",
+                "text": "As s_c marks the border, {PRONOUN/s_c/subject} {VERB/s_c/encounter/encounters} o_c_dep out with {PRONOUN/o_c_dep/poss} new apprentice. {PRONOUN/o_c_dep/poss/CAP} fellow deputy encourages {PRONOUN/o_c_dep/poss} apprentice to quiz s_c, and {PRONOUN/s_c/subject} {VERB/s_c/compliment/compliments} them both on how the young cat's training is progressing.",
                 "exp": 20,
                 "weight": 20,
                 "stat_trait": [
@@ -1879,13 +1962,13 @@
         ],
         "fail_outcomes": [
             {
-                "text": "r_c heads out to clarify a portion of the border that there's been confusion over recently and encounters the deputy of o_c_n out doing the same thing. Both deputies find a point where they can't agree on the right border path and return to their respective camps to discuss with their leaders.",
+                "text": "r_c heads out to clarify a portion of the border that there's been confusion over recently and encounters o_c_dep out doing the same thing. Both deputies find a point where they can't agree on the right border path and return to their respective camps to discuss with their leaders.",
                 "exp": 0,
                 "weight": 20,
                 "other_clan_rep": -1
             },
             {
-                "text": "r_c is having trouble focusing today and puts a mark in the wrong place - and at the worst possible moment, because a o_c_n patrol sees them doing it! The diplomatic incident spirals into a full blown conflict, and r_c hauls themselves back to camp wounded and bleeding.",
+                "text": "r_c is having trouble focusing today and puts a mark in the wrong place - and at the worst possible moment, because o_c_cat's o_c_n patrol sees {PRONOUN/r_c/object} doing it! The diplomatic incident spirals into a full blown conflict, and r_c hauls {PRONOUN/r_c/self} back to camp wounded and bleeding.",
                 "exp": 0,
                 "weight": 10,
                 "injury": [
@@ -1912,6 +1995,10 @@
         "min_max_status": {
             "leader": [1, 6]
         },
+        "oc_status": [
+            "leader",
+            "normal adult"
+        ],
         "weight": 20,
         "intro_text": "r_c heads out into the forest alone, wanting to make a quick check on the border.",
         "decline_text": "r_c turns back to camp, deciding that {PRONOUN/r_c/poss} other duties have to come first.",
@@ -1924,20 +2011,20 @@
                 "other_clan_rep": 2
             },
             {
-                "text": "r_c heads out to clarify a portion of the border that there's been confusion over recently and encounters the leader of o_c_n out doing the same thing. They commiserate over the incompetence of the apprentices on both sides that caused the issue and walk away with a greater respect for one another.",
+                "text": "r_c heads out to clarify a portion of the border that there's been confusion over recently and encounters the o_c_leader doing the same thing. The leaders commiserate over the incompetence of the apprentices on both sides that caused the issue and walk away with a greater respect for one another.",
                 "exp": 20,
                 "weight": 5,
                 "other_clan_rep": 2
             },
             {
-                "text": "s_c comes across a patrol from o_c_n, out on a similar mission to s_c with their leader. They strike up a friendly conversation, and eventually the o_c_n warriors drift away. The unexpected opportunity turns into the perfect chance to casually but purposefully keep each other informed on an ongoing problem in the forest.",
+                "text": "s_c comes across o_c_cat's patrol from o_c_n, out on a similar mission to {PRONOUN/s_c/object} with o_c_leader. The leaders strike up a friendly conversation, and eventually the o_c_n warriors drift away. The unexpected opportunity turns into the perfect chance to casually but purposefully keep each other informed on an ongoing problem in the forest.",
                 "exp": 20,
                 "weight": 20,
                 "stat_skill": ["SPEAKER,1"],
                 "other_clan_rep": 2
             },
             {
-                "text": "As s_c marks the border, {PRONOUN/s_c/subject} {VERB/s_c/encounter/encounters} the o_c_n leader out with their new apprentice. Their fellow leader encourages their apprentice to quiz s_c, and s_c compliments them both on how the young cat's training is progressing.",
+                "text": "As s_c marks the border, {PRONOUN/s_c/subject} {VERB/s_c/encounter/encounters} o_c_leader out with {PRONOUN/o_c_dep/poss} new apprentice. {PRONOUN/o_c_leader/poss/CAP} fellow leader encourages {PRONOUN/o_c_leader/poss} apprentice to quiz s_c, and {PRONOUN/s_c/subject} {VERB/s_c/compliment/compliments} them both on how the young cat's training is progressing.",
                 "exp": 20,
                 "weight": 20,
                 "stat_trait": [
@@ -1953,13 +2040,13 @@
         ],
         "fail_outcomes": [
             {
-                "text": "r_c heads out to clarify a portion of the border that there's been confusion over recently and encounters the leader of o_c_n out doing the same thing. Both leaders find a point where they can't agree on the right border path and agree to bring the subject up at the next Gathering instead.",
+                "text": "r_c heads out to clarify a portion of the border that there's been confusion over recently and encounters o_c_leader out doing the same thing. Both leaders find a point where they can't agree on the right border path and agree to bring the subject up at the next Gathering instead.",
                 "exp": 0,
                 "weight": 20,
                 "other_clan_rep": -1
             },
             {
-                "text": "r_c is having trouble focusing today and puts a mark in the wrong place - and at the worst possible moment, because a o_c_n patrol sees them doing it! The diplomatic incident spirals into a full blown conflict, and r_c hauls themselves back to camp wounded and bleeding.",
+                "text": "r_c is having trouble focusing today and puts a mark in the wrong place - and at the worst possible moment, because o_c_cat's o_c_n patrol sees {PRONOUN/r_c/object} doing it! The diplomatic incident spirals into a full blown conflict, and r_c hauls {PRONOUN/r_c/self} back to camp wounded and bleeding.",
                 "exp": 0,
                 "weight": 10,
                 "injury": [
@@ -1986,6 +2073,10 @@
         "min_max_status": {
             "deputy": [-1, -1]
         },
+        "oc_status": [
+            "apprentice",
+            "normal adult"
+        ],
         "weight": 20,
         "intro_text": "r_c heads out into the mountains alone, wanting to make a quick check on the border.",
         "decline_text": "r_c turns back to camp, deciding that {PRONOUN/r_c/poss} other duties have to come first.",
@@ -1998,20 +2089,20 @@
                 "other_clan_rep": 2
             },
             {
-                "text": "r_c comes across a o_c_n apprentice on the wrong side of the border and holding prey. The young cat seems distraught when they realize their mistake and apologizes profusely. r_c escorts them back to the o_c_n camp and explains the situation to their deputy, who thanks them for their restraint.",
+                "text": "r_c comes across o_c_app on the wrong side of the border and holding prey. The young cat seems distraught when {PRONOUN/o_c_app/subject} {VERB/o_c_app/realize/realizes} {PRONOUN/o_c_app/poss} mistake and {VERB/o_c_app/apologize/apologizes} profusely. r_c escorts {PRONOUN/o_c_app/object} back to the o_c_n camp and explains the situation to {PRONOUN/o_c_app/pos} deputy, who thanks {PRONOUN/r_c/subject} for {PRONOUN/r_c/poss} restraint.",
                 "exp": 20,
                 "weight": 5,
                 "other_clan_rep": 2
             },
             {
-                "text": "s_c comes across a patrol from o_c_n, out on a similar mission to them, and turns to follow the same marking path as them. They strike up a friendly conversation, and while s_c doesn't give anything away about c_n, they're able to pick up on a lot of gossip about o_c_n through careful conversation.",
+                "text": "s_c comes across o_c_cat's patrol from o_c_n, out on a similar mission to {PRONOUN/s_c/object}, and turns to follow the same marking path as them. They strike up a friendly conversation, and while s_c doesn't give anything away about c_n, {PRONOUN/s_c/subject}'{VERB/s_c/re/s} able to pick up on a lot of gossip about o_c_n through careful conversation.",
                 "exp": 20,
                 "weight": 20,
                 "stat_skill": ["SPEAKER,1"],
                 "other_clan_rep": 2
             },
             {
-                "text": "As s_c marks the border, {PRONOUN/s_c/subject} {VERB/s_c/encounter/encounters} a o_c_n border patrol. It even includes a young apprentice, whose eyes go round and fur fluffs up at encountering a real c_n cat! s_c plays along, acting very impressed with the hardworking apprentice, and the apprentice's mentor purrs gratefully.",
+                "text": "As s_c marks the border, {PRONOUN/s_c/subject} {VERB/s_c/encounter/encounters} a o_c_n border patrol. It even includes young o_c_app, whose eyes go round and fur fluffs up at encountering a real c_n cat! s_c plays along, acting very impressed with the hardworking apprentice, and o_c_app's mentor purrs gratefully.",
                 "exp": 20,
                 "weight": 20,
                 "stat_trait": [
@@ -2033,13 +2124,13 @@
                 "other_clan_rep": -1
             },
             {
-                "text": "r_c comes across a o_c_n apprentice on the wrong side of the border and holding prey. {PRONOUN/r_c/subject/CAP} {VERB/r_c/see/sees} the young cat off with a furious yowl and then {VERB/r_c/bring/brings} the prey back to c_n camp to report the incident to the deputy.",
+                "text": "r_c comes across o_c_app on the wrong side of the border and holding prey. {PRONOUN/r_c/subject/CAP} {VERB/r_c/see/sees} the young cat off with a furious yowl and then {VERB/r_c/bring/brings} the prey back to c_n camp to report the incident to the deputy.",
                 "exp": 0,
                 "weight": 5,
                 "other_clan_rep": -1
             },
             {
-                "text": "s_c is marking along the territory line when they encounter a patrol from o_c_n, out on a similar mission. {PRONOUN/s_c/subject/CAP} {VERB/s_c/stare/stares} at the other Clan's patrol challengingly, following their every move until the shared border ends, and though no words are exchanged, it's very tense.",
+                "text": "s_c is marking along the territory line when they encounter o_c_cat's patrol from o_c_n, out on a similar mission. {PRONOUN/s_c/subject/CAP} {VERB/s_c/stare/stares} at the other Clan's patrol challengingly, following their every move until the shared border ends, and though no words are exchanged, it's very tense.",
                 "exp": 0,
                 "weight": 20,
                 "stat_trait": [
@@ -2055,7 +2146,7 @@
                 "other_clan_rep": -1
             },
             {
-                "text": "r_c is having trouble focusing today and puts a mark in the wrong place - and at the worst possible moment, because a o_c_n patrol sees {PRONOUN/r_c/object} doing it! {PRONOUN/r_c/subject/CAP} {VERB/r_c/come/comes} back to camp scratched up, and immediately {VERB/r_c/apologize/apologizes} to the deputy for the diplomatic incident {PRONOUN/r_c/subject}{VERB/r_c/'ve/'s} inadvertently caused.",
+                "text": "r_c is having trouble focusing today and puts a mark in the wrong place - and at the worst possible moment, because o_c_cat's o_c_n patrol sees {PRONOUN/r_c/object} doing it! {PRONOUN/r_c/subject/CAP} {VERB/r_c/come/comes} back to camp scratched up, and immediately {VERB/r_c/apologize/apologizes} to the deputy for the diplomatic incident {PRONOUN/r_c/subject}{VERB/r_c/'ve/'s} inadvertently caused.",
                 "exp": 0,
                 "weight": 10,
                 "injury": [
@@ -2082,6 +2173,10 @@
         "min_max_status": {
             "deputy": [1, 6]
         },
+        "oc_status": [
+            "apprentice",
+            "normal adult"
+        ],
         "weight": 20,
         "intro_text": "r_c heads out into the mountains alone, wanting to make a quick check on the border.",
         "decline_text": "r_c turns back to camp, deciding that {PRONOUN/r_c/poss} other duties have to come first.",
@@ -2094,20 +2189,20 @@
                 "other_clan_rep": 2
             },
             {
-                "text": "r_c comes across a o_c_n apprentice on the wrong side of the border and holding prey. Furious, {PRONOUN/r_c/subject} {VERB/r_c/snarl/snarls} {PRONOUN/r_c/poss} anger. The apprentice turns tail and flees with r_c hot on their trail, and when the apprentice crosses the border to hide behind their mentor, the o_c_n warrior's face goes slack with horror to see c_n's deputy.",
+                "text": "r_c comes across o_c_app on the wrong side of the border and holding prey. Furious, {PRONOUN/r_c/subject} {VERB/r_c/snarl/snarls} {PRONOUN/r_c/poss} anger. The apprentice turns tail and flees with r_c hot on {PRONOUN/o_c_app/poss} trail, and when the apprentice crosses the border to hide behind {PRONOUN/o_c_app/poss} mentor, the o_c_n warrior's face goes slack with horror to see c_n's deputy.",
                 "exp": 20,
                 "weight": 5,
                 "other_clan_rep": 2
             },
             {
-                "text": "s_c comes across a patrol from o_c_n, out on a similar mission to them. They strike up a friendly conversation, and while s_c doesn't give anything away about c_n, they're able to pick up on a lot of gossip about o_c_n through careful conversation. It's always worth keeping an eye on their neighbors.",
+                "text": "s_c comes across o_c_cat's patrol from o_c_n, out on a similar mission to {PRONOUN/s_c/poss}. They strike up a friendly conversation, and while s_c doesn't give anything away about c_n, {PRONOUN/s_c/subject}'{VERB/s_c/re/s} able to pick up on a lot of gossip about o_c_n through careful conversation. It's always worth keeping an eye on their neighbors.",
                 "exp": 20,
                 "weight": 20,
                 "stat_skill": ["SPEAKER,1"],
                 "other_clan_rep": 2
             },
             {
-                "text": "As s_c marks the border, {PRONOUN/s_c/subject} {VERB/s_c/encounter/encounters} a o_c_n border patrol, which includes a young apprentice. Their eyes go round and they tuck their paws together neatly, sitting pretty for inspection. s_c plays along, acting very impressed with the hardworking apprentice, and the apprentice's mentor purrs gratefully at the c_n deputy's kindness.",
+                "text": "As s_c marks the border, {PRONOUN/s_c/subject} {VERB/s_c/encounter/encounters} a o_c_n border patrol, which includes young o_c_app. {PRONOUN/o_c_app/poss/CAP} eyes go round and {PRONOUN/o_c_app/subject} tuck {PRONOUN/o_c_app/poss} paws together neatly, sitting pretty for inspection. s_c plays along, acting very impressed with the hardworking apprentice, and o_c_app's mentor purrs gratefully at the c_n deputy's kindness.",
                 "exp": 20,
                 "weight": 20,
                 "stat_trait": [
@@ -2129,7 +2224,7 @@
                 "other_clan_rep": -1
             },
             {
-                "text": "s_c is marking along the territory line when they encounter a patrol from o_c_n, out on a similar mission. {PRONOUN/s_c/subject/CAP} {VERB/s_c/stare/stares} at the other Clan's patrol challengingly, following their every move until the shared border ends, and though no words are exchanged, it's very tense.",
+                "text": "s_c is marking along the territory line when {PRONOUN/s_c/subject} encounter o_c_cat's patrol from o_c_n, out on a similar mission. {PRONOUN/s_c/subject/CAP} {VERB/s_c/stare/stares} at the other Clan's patrol challengingly, following their every move until the shared border ends, and though no words are exchanged, it's very tense.",
                 "exp": 0,
                 "weight": 20,
                 "stat_trait": [
@@ -2145,7 +2240,7 @@
                 "other_clan_rep": -1
             },
             {
-                "text": "r_c is having trouble focusing today and puts a mark in the wrong place - and at the worst possible moment, because a o_c_n patrol sees them doing it! The diplomatic incident spirals into a full blown conflict, and r_c hauls themselves back to camp wounded and bleeding.",
+                "text": "r_c is having trouble focusing today and puts a mark in the wrong place - and at the worst possible moment, because o_c_cat's o_c_n patrol sees {PRONOUN/r_c/object} doing it! The diplomatic incident spirals into a full blown conflict, and r_c hauls {PRONOUN/r_c/self} back to camp wounded and bleeding.",
                 "exp": 0,
                 "weight": 10,
                 "injury": [
@@ -2172,6 +2267,10 @@
         "min_max_status": {
             "leader": [1, 6]
         },
+        "oc_status": [
+            "apprentice",
+            "normal adult"
+        ],
         "weight": 20,
         "intro_text": "r_c heads out into the mountains alone, wanting to make a quick check on the border.",
         "decline_text": "r_c turns back to camp, deciding that {PRONOUN/r_c/poss} other duties have to come first.",
@@ -2184,20 +2283,20 @@
                 "other_clan_rep": 2
             },
             {
-                "text": "r_c comes across a o_c_n apprentice on the wrong side of the border, holding prey. Calmly, they tell the apprentice they're on the wrong side of the territory and lead them back to their mentor and rightful side, where the apprentice scampers and is scolded by the o_c_n warrior.",
+                "text": "r_c comes across o_c_app on the wrong side of the border, holding prey. Calmly, {PRONOUN/r_c/subject} {VERB/r_c/tell/tells} the apprentice {PRONOUN/o_c_app/subject}'{VERB/o_c_app/re/s} on the wrong side of the territory and {VERB/r_c/lead/leads} {PRONOUN/o_c_app/object} back to {PRONOUN/o_c_app/poss} mentor and rightful side, where the apprentice scampers away and is scolded by the o_c_n warrior.",
                 "exp": 20,
                 "weight": 5,
                 "other_clan_rep": 2
             },
             {
-                "text": "s_c comes across a patrol from o_c_n, out on a similar mission to them. They strike up a friendly conversation, and while s_c doesn't give anything away about c_n, they're able to pick up on a lot of gossip about o_c_n through careful conversation. It's always worth keeping an eye on their neighbors. Trust, but verify.",
+                "text": "s_c comes across o_c_cat's patrol from o_c_n, out on a similar mission to {PRONOUN/s_c/object}. They strike up a friendly conversation, and while s_c doesn't give anything away about c_n, {PRONOUN/s_c/subject}'{VERB/s_c/re/s} able to pick up on a lot of gossip about o_c_n through careful conversation. It's always worth keeping an eye on their neighbors. Trust, but verify.",
                 "exp": 20,
                 "weight": 20,
                 "stat_skill": ["SPEAKER,1"],
                 "other_clan_rep": 2
             },
             {
-                "text": "As s_c marks the border, {PRONOUN/s_c/subject} {VERB/s_c/encounter/encounters} a o_c_n border patrol, which includes a young apprentice. Their eyes go round and they hide behind their mentor, but s_c manages to coax them out, praising the little apprentice to their mentor, who purrs gratefully at the c_n leader's kindness.",
+                "text": "As s_c marks the border, {PRONOUN/s_c/subject} {VERB/s_c/encounter/encounters} a o_c_n border patrol, which includes young o_c_app. {PRONOUN/o_c_app/poss} eyes go round and {PRONOUN/o_c_app/subject} {VERB/o_c_app/hide/hides} behind {PRONOUN/o_c_app/poss} mentor, but s_c manages to coax {PRONOUN/o_c_app/object} out, praising the little apprentice to {PRONOUN/o_c_app/poss} mentor, who purrs gratefully at the c_n leader's kindness.",
                 "exp": 20,
                 "weight": 20,
                 "stat_trait": [
@@ -2219,7 +2318,7 @@
                 "other_clan_rep": -1
             },
             {
-                "text": "s_c is marking along the territory line when they encounter a patrol from o_c_n, out on a similar mission. {PRONOUN/s_c/subject/CAP} {VERB/s_c/stare/stares} at the other Clan's patrol challengingly, following their every move until the shared border ends, and though no words are exchanged, it's very tense.",
+                "text": "s_c is marking along the territory line when they encounter o_c_cat's patrol from o_c_n, out on a similar mission. {PRONOUN/s_c/subject/CAP} {VERB/s_c/stare/stares} at the other Clan's patrol challengingly, following their every move until the shared border ends, and though no words are exchanged, it's very tense.",
                 "exp": 0,
                 "weight": 20,
                 "stat_trait": [
@@ -2235,7 +2334,7 @@
                 "other_clan_rep": -1
             },
             {
-                "text": "r_c is having trouble focusing today and puts a mark in the wrong place - and at the worst possible moment, because a o_c_n patrol sees them doing it! The diplomatic incident spirals into a full blown conflict, and r_c hauls themselves back to camp wounded and bleeding.",
+                "text": "r_c is having trouble focusing today and puts a mark in the wrong place - and at the worst possible moment, because o_c_cat's o_c_n patrol sees {PRONOUN/r_c/object} doing it! The diplomatic incident spirals into a full blown conflict, and r_c hauls {PRONOUN/r_c/self} back to camp wounded and bleeding.",
                 "exp": 0,
                 "weight": 10,
                 "injury": [
@@ -2262,6 +2361,9 @@
         "min_max_status": {
             "deputy": [1, 6]
         },
+        "oc_status": [
+            "deputy"
+        ],
         "weight": 20,
         "intro_text": "r_c heads out into the mountains alone, wanting to make a quick check on the border.",
         "decline_text": "r_c turns back to camp, deciding that {PRONOUN/r_c/poss} other duties have to come first.",
@@ -2274,20 +2376,20 @@
                 "other_clan_rep": 2
             },
             {
-                "text": "r_c heads out to clarify a portion of the border that there's been confusion over recently and encounters the deputy of o_c_n out doing the same thing. They commiserate over the incompetence of the apprentices on both sides that caused the issue and walk away with a greater respect for one another.",
+                "text": "r_c heads out to clarify a portion of the border that there's been confusion over recently and encounters o_c_dep out doing the same thing. The deputies commiserate over the incompetence of the apprentices on both sides that caused the issue and walk away with a greater respect for one another.",
                 "exp": 20,
                 "weight": 5,
                 "other_clan_rep": 2
             },
             {
-                "text": "s_c comes across a patrol from o_c_n, out on a similar mission to them, led by their deputy. They strike up a friendly conversation, and eventually the o_c_n warriors drift away. The unexpected opportunity turns into the perfect chance to casually but purposefully keep each other informed on an ongoing problem in the mountains.",
+                "text": "s_c comes across o_c_cat's patrol from o_c_n, out on a similar mission to {PRONOUN/s_c/object}, led by o_c_dep. They strike up a friendly conversation, and eventually the o_c_n warriors drift away. The unexpected opportunity turns into the perfect chance to casually but purposefully keep each other informed on an ongoing problem in the mountains.",
                 "exp": 20,
                 "weight": 20,
                 "stat_skill": ["SPEAKER,1"],
                 "other_clan_rep": 2
             },
             {
-                "text": "As s_c marks the border, {PRONOUN/s_c/subject} {VERB/s_c/encounter/encounters} the o_c_n deputy out with their new apprentice. Their fellow deputy encourages their apprentice to quiz s_c, and s_c compliments them both on how the young cat's training is progressing.",
+                "text": "As s_c marks the border, {PRONOUN/s_c/subject} {VERB/s_c/encounter/encounters} o_c_dep out with {PRONOUN/o_c_dep/poss} apprentice. {PRONOUN/o_c_dep/poss/CAP} fellow deputy encourages {PRONOUN/o_c_dep/poss} apprentice to quiz s_c, and s_c compliments them both on how the young cat's training is progressing.",
                 "exp": 20,
                 "weight": 20,
                 "stat_trait": [
@@ -2303,7 +2405,7 @@
         ],
         "fail_outcomes": [
             {
-                "text": "r_c heads out to clarify a portion of the border that there's been confusion over recently and encounters the deputy of o_c_n out doing the same thing. Both deputies find a point where they can't agree on the right border path and return to their respective camps to discuss with their leaders.",
+                "text": "r_c heads out to clarify a portion of the border that there's been confusion over recently and encounters o_c_dep out doing the same thing. Both deputies find a point where they can't agree on the right border path and return to their respective camps to discuss with their leaders.",
                 "exp": 0,
                 "weight": 20,
                 "other_clan_rep": -1
@@ -2322,6 +2424,9 @@
         "min_max_status": {
             "leader": [1, 6]
         },
+        "oc_status": [
+            "leader"
+        ],
         "weight": 20,
         "intro_text": "r_c heads out into the mountains alone, wanting to make a quick check on the border.",
         "decline_text": "r_c turns back to camp, deciding that {PRONOUN/r_c/poss} other duties have to come first.",
@@ -2334,20 +2439,20 @@
                 "other_clan_rep": 2
             },
             {
-                "text": "r_c heads out to clarify a portion of the border that there's been confusion over recently and encounters the leader of o_c_n out doing the same thing. They commiserate over the incompetence of the apprentices on both sides that caused the issue and walk away with a greater respect for one another.",
+                "text": "r_c heads out to clarify a portion of the border that there's been confusion over recently and encounters o_c_leader out doing the same thing. The leaders commiserate over the incompetence of the apprentices on both sides that caused the issue and walk away with a greater respect for one another.",
                 "exp": 20,
                 "weight": 5,
                 "other_clan_rep": 2
             },
             {
-                "text": "s_c comes across a patrol from o_c_n, out on a similar mission to s_c with their leader. They strike up a friendly conversation, and eventually the o_c_n warriors drift away. The unexpected opportunity turns into the perfect chance to casually but purposefully keep each other informed on an ongoing problem in the mountains.",
+                "text": "s_c comes across o_c_cat's patrol from o_c_n, out on a similar mission to s_c with o_c_leader. They strike up a friendly conversation, and eventually the o_c_n warriors drift away. The unexpected opportunity turns into the perfect chance to casually but purposefully keep each other informed on an ongoing problem in the mountains.",
                 "exp": 20,
                 "weight": 20,
                 "stat_skill": ["SPEAKER,1"],
                 "other_clan_rep": 2
             },
             {
-                "text": "As s_c marks the border, {PRONOUN/s_c/subject} {VERB/s_c/encounter/encounters} the o_c_n leader out with their new apprentice. Their fellow leader encourages their apprentice to quiz s_c, and s_c compliments them both on how the young cat's training is progressing.",
+                "text": "As s_c marks the border, {PRONOUN/s_c/subject} {VERB/s_c/encounter/encounters} o_c_leader out with {PRONOUN/o_c_leader/poss} apprentice. {PRONOUN/o_c_leader/poss/CAP} fellow leader encourages {PRONOUN/o_c_leader/poss} apprentice to quiz s_c, and s_c compliments them both on how the young cat's training is progressing.",
                 "exp": 20,
                 "weight": 20,
                 "stat_trait": [
@@ -2363,7 +2468,7 @@
         ],
         "fail_outcomes": [
             {
-                "text": "r_c heads out to clarify a portion of the border that there's been confusion over recently and encounters the leader of o_c_n out doing the same thing. Both leaders find a point where they can't agree on the right border path and agree to bring the subject up at the next Gathering instead.",
+                "text": "r_c heads out to clarify a portion of the border that there's been confusion over recently and encounters o_c_leader out doing the same thing. Both leaders find a point where they can't agree on the right border path and agree to bring the subject up at the next Gathering instead.",
                 "exp": 0,
                 "weight": 20
             }
@@ -2379,6 +2484,10 @@
         "min_cats": 1,
         "max_cats": 1,
         "min_max_status": {},
+        "oc_status": [
+            "apprentice",
+            "normal adult"
+        ],
         "weight": 20,
         "intro_text": "r_c heads out into the grasslands alone, wanting to make a quick check on the border.",
         "decline_text": "r_c turns back to camp, deciding that {PRONOUN/r_c/poss} other duties have to come first.",
@@ -2391,13 +2500,13 @@
                 "other_clan_rep": 2
             },
             {
-                "text": "r_c comes across a o_c_n apprentice on the wrong side of the border and holding prey. {PRONOUN/r_c/subject/CAP} {VERB/r_c/see/sees} the young cat off with a furious yowl and then {VERB/r_c/bring/brings} the prey back to c_n camp to report the incident to the deputy.",
+                "text": "r_c comes across o_c_app on the wrong side of the border and holding prey. {PRONOUN/r_c/subject/CAP} {VERB/r_c/see/sees} the young cat off with a furious yowl and then {VERB/r_c/bring/brings} the prey back to c_n camp to report the incident to the deputy.",
                 "exp": 20,
                 "weight": 5,
                 "other_clan_rep": 2
             },
             {
-                "text": "s_c comes across a patrol from o_c_n, out on a similar mission to them, and turns to follow the same marking path as them. They strike up a friendly conversation, and while s_c doesn't give anything away about c_n, they're able to pick up on a lot of gossip about o_c_n through careful conversation.",
+                "text": "s_c comes across o_c_cat's patrol from o_c_n, out on a similar mission to {PRONOUN/s_c/object}, and turns to follow the same marking path as them. They strike up a friendly conversation, and while s_c doesn't give anything away about c_n, {PRONOUN/s_c/subject}'{VERB/s_c/re/s} able to pick up on a lot of gossip about o_c_n through careful conversation.",
                 "exp": 20,
                 "weight": 20,
                 "stat_skill": ["SPEAKER,1"],
@@ -2426,7 +2535,7 @@
                 "other_clan_rep": -1
             },
             {
-                "text": "s_c is marking along the territory line when they encounter a patrol from o_c_n, out on a similar mission. {PRONOUN/s_c/subject/CAP} {VERB/s_c/stare/stares} at the other Clan's patrol challengingly, following their every move until the shared border ends, and though no words are exchanged, it's very tense.",
+                "text": "s_c is marking along the territory line when they encounter o_c_cat's patrol from o_c_n, out on a similar mission. {PRONOUN/s_c/subject/CAP} {VERB/s_c/stare/stares} at the other Clan's patrol challengingly, following their every move until the shared border ends, and though no words are exchanged, it's very tense.",
                 "exp": 0,
                 "weight": 20,
                 "stat_trait": [
@@ -2442,7 +2551,7 @@
                 "other_clan_rep": -1
             },
             {
-                "text": "r_c is having trouble focusing today and puts a mark in the wrong place - and at the worst possible moment, because a o_c_n patrol sees {PRONOUN/r_c/object} doing it! {PRONOUN/r_c/subject/CAP} {VERB/r_c/come/comes} back to camp scratched up, and immediately {VERB/r_c/apologize/apologizes} to the deputy for the diplomatic incident {PRONOUN/r_c/subject}{VERB/r_c/'ve/'s} inadvertently caused.",
+                "text": "r_c is having trouble focusing today and puts a mark in the wrong place - and at the worst possible moment, because o_c_cat's o_c_n patrol sees {PRONOUN/r_c/object} doing it! {PRONOUN/r_c/subject/CAP} {VERB/r_c/come/comes} back to camp scratched up, and immediately {VERB/r_c/apologize/apologizes} to the deputy for the diplomatic incident {PRONOUN/r_c/subject}{VERB/r_c/'ve/'s} inadvertently caused.",
                 "exp": 0,
                 "weight": 10,
                 "injury": [
@@ -2469,6 +2578,10 @@
         "min_max_status": {
             "deputy": [1, 6]
         },
+        "oc_status": [
+            "apprentice",
+            "normal adult"
+        ],
         "weight": 20,
         "intro_text": "r_c heads out into the grasslands alone, wanting to make a quick check on the border.",
         "decline_text": "r_c turns back to camp, deciding that {PRONOUN/r_c/poss} other duties have to come first.",
@@ -2481,20 +2594,20 @@
                 "other_clan_rep": 2
             },
             {
-                "text": "r_c comes across a o_c_n apprentice on the wrong side of the border and holding prey. Furious, {PRONOUN/r_c/subject} {VERB/r_c/snarl/snarls} {PRONOUN/r_c/poss} anger. The apprentice turns tail and flees with r_c hot on their trail, and when the apprentice crosses the border to hide behind their mentor, the o_c_n warrior's face goes slack with horror to see c_n's deputy.",
+                "text": "r_c comes across o_c_app on the wrong side of the border and holding prey. Furious, {PRONOUN/r_c/subject} {VERB/r_c/snarl/snarls} {PRONOUN/r_c/poss} anger. The apprentice turns tail and flees with r_c hot on {PRONOUN/o_c_app/poss} trail, and when {PRONOUN/o_c_app/subject} crosses the border to hide behind {PRONOUN/o_c_app/poss} mentor, the o_c_n warrior's face goes slack with horror to see c_n's deputy.",
                 "exp": 20,
                 "weight": 5,
                 "other_clan_rep": 2
             },
             {
-                "text": "s_c comes across a patrol from o_c_n, out on a similar mission to them. They strike up a friendly conversation, and while s_c doesn't give anything away about c_n, they're able to pick up on a lot of gossip about o_c_n through careful conversation. It's always worth keeping an eye on their neighbors.",
+                "text": "s_c comes across o_c_cat's patrol from o_c_n, out on a similar mission to {PRONOUN/s_c/object}. They strike up a friendly conversation, and while s_c doesn't give anything away about c_n, {PRONOUN/s_c/subject}'{VERB/s_c/re/s} able to pick up on a lot of gossip about o_c_n through careful conversation. It's always worth keeping an eye on their neighbors.",
                 "exp": 20,
                 "weight": 20,
                 "stat_skill": ["SPEAKER,1"],
                 "other_clan_rep": 2
             },
             {
-                "text": "As s_c marks the border, {PRONOUN/s_c/subject} {VERB/s_c/encounter/encounters} a o_c_n border patrol, which includes a young apprentice. Their eyes go round and they tuck their paws together neatly, sitting pretty for inspection. s_c plays along, acting very impressed with the hardworking apprentice, and the apprentice's mentor purrs gratefully at the c_n deputy's kindness.",
+                "text": "As s_c marks the border, {PRONOUN/s_c/subject} {VERB/s_c/encounter/encounters} a o_c_n border patrol, which includes young o_c_app. {PRONOUN/o_c_app/poss/CAP} eyes go round and {PRONOUN/o_c_app/subject} {VERB/o_c_app/tuck/tucks} {PRONOUN/o_c_app/poss} paws together neatly, sitting pretty for inspection. s_c plays along, acting very impressed with the hardworking apprentice, and o_c_app's mentor purrs gratefully at the c_n deputy's kindness.",
                 "exp": 20,
                 "weight": 20,
                 "stat_trait": [
@@ -2516,7 +2629,7 @@
                 "other_clan_rep": -1
             },
             {
-                "text": "s_c is marking along the territory line when they encounter a patrol from o_c_n, out on a similar mission. {PRONOUN/s_c/subject/CAP} {VERB/s_c/stare/stares} at the other Clan's patrol challengingly, following their every move until the shared border ends, and though no words are exchanged, it's very tense.",
+                "text": "s_c is marking along the territory line when they encounter o_c_cat's patrol from o_c_n, out on a similar mission. {PRONOUN/s_c/subject/CAP} {VERB/s_c/stare/stares} at the other Clan's patrol challengingly, following their every move until the shared border ends, and though no words are exchanged, it's very tense.",
                 "exp": 0,
                 "weight": 20,
                 "stat_trait": [
@@ -2532,7 +2645,7 @@
                 "other_clan_rep": -1
             },
             {
-                "text": "r_c encounters a patrol from o_c_n on the border and greets them politely, but there's something different here. Something dangerous. {PRONOUN/r_c/subject/CAP} {VERB/r_c/do/does}'t make it back to camp.",
+                "text": "r_c encounters o_c_cat's patrol from o_c_n on the border and greets them politely, but there's something different here. Something dangerous. {PRONOUN/r_c/subject/CAP} {VERB/r_c/do/does}'t make it back to camp.",
                 "exp": 0,
                 "weight": 10,
                 "dead_cats": ["r_c"],
@@ -2544,7 +2657,7 @@
                 "other_clan_rep": -1
             },
             {
-                "text": "r_c is having trouble focusing today and puts a mark in the wrong place - and at the worst possible moment, because a o_c_n patrol sees them doing it! The diplomatic incident spirals into a full blown conflict, and r_c hauls themselves back to camp wounded and bleeding.",
+                "text": "r_c is having trouble focusing today and puts a mark in the wrong place - and at the worst possible moment, because o_c_cat's o_c_n patrol sees {PRONOUN/r_c/object} doing it! The diplomatic incident spirals into a full blown conflict, and r_c hauls {PRONOUN/r_c/self} back to camp wounded and bleeding.",
                 "exp": 0,
                 "weight": 10,
                 "injury": [
@@ -2575,6 +2688,10 @@
         "min_max_status": {
             "leader": [1, 6]
         },
+        "oc_status": [
+            "apprentice",
+            "normal adult"
+        ],
         "weight": 20,
         "intro_text": "r_c heads out into the grasslands alone, wanting to make a quick check on the border.",
         "decline_text": "r_c turns back to camp, deciding that {PRONOUN/r_c/poss} other duties have to come first.",
@@ -2587,20 +2704,20 @@
                 "other_clan_rep": 2
             },
             {
-                "text": "r_c comes across a o_c_n apprentice on the wrong side of the border and holding prey. Furious, {PRONOUN/r_c/subject} {VERB/r_c/snarl/snarls} {PRONOUN/r_c/poss} anger. The apprentice turns tail and flees with r_c hot on their trail, and when the apprentice crosses the border to hide behind their mentor, the o_c_n warrior's tail tucks at the sight of c_n's outraged leader.",
+                "text": "r_c comes across o_c_app on the wrong side of the border and holding prey. Furious, {PRONOUN/r_c/subject} {VERB/r_c/snarl/snarls} {PRONOUN/r_c/poss} anger. The apprentice turns tail and flees with r_c hot on {PRONOUN/o_c_app/poss} trail, and when {PRONOUN/o_c_app/subject} crosses the border to hide behind {PRONOUN/o_c_app/poss} mentor, the o_c_n warrior's tail tucks at the sight of c_n's outraged leader.",
                 "exp": 20,
                 "weight": 5,
                 "other_clan_rep": 2
             },
             {
-                "text": "s_c comes across a patrol from o_c_n, out on a similar mission to them. They strike up a friendly conversation, and while s_c doesn't give anything away about c_n, they're able to pick up on a lot of gossip about o_c_n through careful conversation. It's always worth keeping an eye on their neighbors. Trust, but verify.",
+                "text": "s_c comes across o_c_cat's patrol from o_c_n, out on a similar mission to {PRONOUN/s_c/object}. They strike up a friendly conversation, and while s_c doesn't give anything away about c_n, {PRONOUN/s_c/subject}'{VERB/s_c/re/s} able to pick up on a lot of gossip about o_c_n through careful conversation. It's always worth keeping an eye on their neighbors. Trust, but verify.",
                 "exp": 20,
                 "weight": 20,
                 "stat_skill": ["SPEAKER,1"],
                 "other_clan_rep": 2
             },
             {
-                "text": "As s_c marks the border, {PRONOUN/s_c/subject} {VERB/s_c/encounter/encounters} a o_c_n border patrol, which includes a young apprentice. Their eyes go round and they hide behind their mentor, but s_c manages to coax them out, praising the little apprentice to their mentor, who purrs gratefully at the c_n leader's kindness.",
+                "text": "As s_c marks the border, {PRONOUN/s_c/subject} {VERB/s_c/encounter/encounters} a o_c_n border patrol, which includes young o_c_app. {PRONOUN/o_c_app/poss/CAP} eyes go round and {PRONOUN/o_c_app/subject} {VERB/o_c_app/hide/hides} behind {PRONOUN/o_c_app/poss} mentor, but s_c manages to coax {PRONOUN/o_c_app/object} out, praising the little apprentice to {PRONOUN/o_c_app/poss} mentor, who purrs gratefully at the c_n leader's kindness.",
                 "exp": 20,
                 "weight": 20,
                 "stat_trait": [
@@ -2622,7 +2739,7 @@
                 "other_clan_rep": -1
             },
             {
-                "text": "s_c is marking along the territory line when they encounter a patrol from o_c_n, out on a similar mission. {PRONOUN/s_c/subject/CAP} {VERB/s_c/stare/stares} at the other Clan's patrol challengingly, following their every move until the shared border ends, and though no words are exchanged, it's very tense.",
+                "text": "s_c is marking along the territory line when they encounter o_c_cat's patrol from o_c_n, out on a similar mission. {PRONOUN/s_c/subject/CAP} {VERB/s_c/stare/stares} at the other Clan's patrol challengingly, following their every move until the shared border ends, and though no words are exchanged, it's very tense.",
                 "exp": 0,
                 "weight": 20,
                 "stat_trait": [
@@ -2638,7 +2755,7 @@
                 "other_clan_rep": -1
             },
             {
-                "text": "r_c encounters a patrol from o_c_n on the border and greets them politely, but there's something different here. Something dangerous. {PRONOUN/r_c/subject/CAP} {VERB/r_c/return/returns} to camp, blood soaked through {PRONOUN/r_c/poss} fur and a new hardness in {PRONOUN/r_c/poss} heart.",
+                "text": "r_c encounters o_c_cat's patrol from o_c_n on the border and greets them politely, but there's something different here. Something dangerous. {PRONOUN/r_c/subject/CAP} {VERB/r_c/return/returns} to camp, blood soaked through {PRONOUN/r_c/poss} fur and a new hardness in {PRONOUN/r_c/poss} heart.",
                 "exp": 0,
                 "weight": 10,
                 "dead_cats": ["r_c"],
@@ -2650,7 +2767,7 @@
                 "other_clan_rep": -1
             },
             {
-                "text": "r_c is having trouble focusing today and puts a mark in the wrong place - and at the worst possible moment, because a o_c_n patrol sees them doing it! The diplomatic incident spirals into a full blown conflict, and r_c hauls themselves back to camp wounded and bleeding.",
+                "text": "r_c is having trouble focusing today and puts a mark in the wrong place - and at the worst possible moment, because o_c_cat's o_c_n patrol sees {PRONOUN/r_c/object} doing it! The diplomatic incident spirals into a full blown conflict, and r_c hauls {PRONOUN/r_c/self} back to camp wounded and bleeding.",
                 "exp": 0,
                 "weight": 10,
                 "injury": [
@@ -2681,6 +2798,9 @@
         "min_max_status": {
             "deputy": [1, 6]
         },
+        "oc_status": [
+            "deputy"
+        ],
         "weight": 20,
         "intro_text": "r_c heads out into the grasslands alone, wanting to make a quick check on the border.",
         "decline_text": "r_c turns back to camp, deciding that {PRONOUN/r_c/poss} other duties have to come first.",
@@ -2693,20 +2813,20 @@
                 "other_clan_rep": 2
             },
             {
-                "text": "r_c heads out to clarify a portion of the border that there's been confusion over recently and encounters the deputy of o_c_n out doing the same thing. They commiserate over the incompetence of the apprentices on both sides that caused the issue and walk away with a greater respect for one another.",
+                "text": "r_c heads out to clarify a portion of the border that there's been confusion over recently and encounters o_c_dep out doing the same thing. The deputies commiserate over the incompetence of the apprentices on both sides that caused the issue and walk away with a greater respect for one another.",
                 "exp": 20,
                 "weight": 5,
                 "other_clan_rep": 2
             },
             {
-                "text": "s_c comes across a patrol from o_c_n, out on a similar mission to them, led by their deputy. They strike up a friendly conversation, and eventually the o_c_n warriors drift away. The unexpected opportunity turns into the perfect chance to casually but purposefully keep each other informed on an ongoing problem in the grasslands.",
+                "text": "s_c comes across o_c_cat's patrol from o_c_n, out on a similar mission to {PRONOUN/s_c/object}, led by o_c_dep. They strike up a friendly conversation, and eventually the o_c_n warriors drift away. The unexpected opportunity turns into the perfect chance to casually but purposefully keep each other informed on an ongoing problem in the grasslands.",
                 "exp": 20,
                 "weight": 20,
                 "stat_skill": ["SPEAKER,1"],
                 "other_clan_rep": 2
             },
             {
-                "text": "As s_c marks the border, {PRONOUN/s_c/subject} {VERB/s_c/encounter/encounters} the o_c_n deputy out with their new apprentice. Their fellow deputy encourages their apprentice to quiz s_c, and s_c compliments them both on how the young cat's training is progressing.",
+                "text": "As s_c marks the border, {PRONOUN/s_c/subject} {VERB/s_c/encounter/encounters} o_c_dep out with {PRONOUN/o_c_dep/poss} apprentice. {PRONOUN/o_c_dep/poss/CAP} fellow deputy encourages {PRONOUN/o_c_dep/poss} apprentice to quiz s_c, and s_c compliments them both on how the young cat's training is progressing.",
                 "exp": 20,
                 "weight": 20,
                 "stat_trait": [
@@ -2728,7 +2848,7 @@
                 "other_clan_rep": -1
             },
             {
-                "text": "r_c is having trouble focusing today and puts a mark in the wrong place - and at the worst possible moment, because a o_c_n patrol sees them doing it! The diplomatic incident spirals into a full blown conflict, and r_c hauls themselves back to camp wounded and bleeding.",
+                "text": "r_c is having trouble focusing today and puts a mark in the wrong place - and at the worst possible moment, because o_c_cat's o_c_n patrol sees {PRONOUN/r_c/object} doing it! The diplomatic incident spirals into a full blown conflict, and r_c hauls {PRONOUN/r_c/self} back to camp wounded and bleeding.",
                 "exp": 0,
                 "weight": 10,
                 "injury": [
@@ -2755,6 +2875,9 @@
         "min_max_status": {
             "leader": [1, 6]
         },
+        "oc_status": [
+            "leader"
+        ],
         "weight": 20,
         "intro_text": "r_c heads out into the grasslands alone, wanting to make a quick check on the border.",
         "decline_text": "r_c turns back to camp, deciding that {PRONOUN/r_c/poss} other duties have to come first.",
@@ -2767,20 +2890,20 @@
                 "other_clan_rep": 2
             },
             {
-                "text": "r_c heads out to clarify a portion of the border that there's been confusion over recently and encounters the leader of o_c_n out doing the same thing. They commiserate over the incompetence of the apprentices on both sides that caused the issue and walk away with a greater respect for one another.",
+                "text": "r_c heads out to clarify a portion of the border that there's been confusion over recently and encounters o_c_leader out doing the same thing. The leaders commiserate over the incompetence of the apprentices on both sides that caused the issue and walk away with a greater respect for one another.",
                 "exp": 20,
                 "weight": 5,
                 "other_clan_rep": 2
             },
             {
-                "text": "s_c comes across a patrol from o_c_n, out on a similar mission to s_c with their leader. They strike up a friendly conversation, and eventually the o_c_n warriors drift away. The unexpected opportunity turns into the perfect chance to casually but purposefully keep each other informed on an ongoing problem in the grasslands.",
+                "text": "s_c comes across o_c_cat's patrol from o_c_n, out on a similar mission to s_c with o_c_leader. They strike up a friendly conversation, and eventually the o_c_n warriors drift away. The unexpected opportunity turns into the perfect chance to casually but purposefully keep each other informed on an ongoing problem in the grasslands.",
                 "exp": 20,
                 "weight": 20,
                 "stat_skill": ["SPEAKER,1"],
                 "other_clan_rep": 2
             },
             {
-                "text": "As s_c marks the border, {PRONOUN/s_c/subject} {VERB/s_c/encounter/encounters} the o_c_n leader out with their new apprentice. Their fellow leader encourages their apprentice to quiz s_c, and s_c compliments them both on how the young cat's training is progressing.",
+                "text": "As s_c marks the border, {PRONOUN/s_c/subject} {VERB/s_c/encounter/encounters} o_c_leader out with {PRONOUN/o_c_leader/poss} apprentice. {PRONOUN/o_c_leader/poss/CAP} fellow leader encourages {PRONOUN/o_c_leader/poss} apprentice to quiz s_c, and s_c compliments them both on how the young cat's training is progressing.",
                 "exp": 20,
                 "weight": 20,
                 "stat_trait": [
@@ -2796,13 +2919,13 @@
         ],
         "fail_outcomes": [
             {
-                "text": "r_c heads out to clarify a portion of the border that there's been confusion over recently and encounters the leader of o_c_n out doing the same thing. Both leaders find a point where they can't agree on the right border path and agree to bring the subject up at the next Gathering instead.",
+                "text": "r_c heads out to clarify a portion of the border that there's been confusion over recently and encounters o_c_leader out doing the same thing. Both leaders find a point where they can't agree on the right border path and agree to bring the subject up at the next Gathering instead.",
                 "exp": 0,
                 "weight": 20,
                 "other_clan_rep": -1
             },
             {
-                "text": "r_c is having trouble focusing today and puts a mark in the wrong place - and at the worst possible moment, because a o_c_n patrol sees them doing it! The diplomatic incident spirals into a full blown conflict, and r_c hauls themselves back to camp wounded and bleeding.",
+                "text": "r_c is having trouble focusing today and puts a mark in the wrong place - and at the worst possible moment, because o_c_cat's o_c_n patrol sees {PRONOUN/r_c/object} doing it! The diplomatic incident spirals into a full blown conflict, and r_c hauls {PRONOUN/r_c/self} back to camp wounded and bleeding.",
                 "exp": 0,
                 "weight": 10,
                 "injury": [
@@ -2830,6 +2953,9 @@
             "warrior": [1, 1],
             "apprentice": [1, 1]
         },
+        "oc_status": [
+            "normal adult"
+        ],
         "weight": 20,
         "chance_of_success": 20,
         "relationship_constraint": ["dislike_10"],
@@ -2897,7 +3023,7 @@
         ],
             "fail_outcomes": [
             {
-                "text": "In hindsight, maybe it wasn't the best idea to suggest app1 sneak onto o_c_n territory. But app1 wasn't going to steal any prey, truly, p_l insists to the o_c_n patrol, {PRONOUN/app1/subject} just got overexcited! p_l's rambling excuses and apologies do little to soothe tensions, and the pair eventually return back to camp with heads and tails hung low. This was not going to be fun to explain.",
+                "text": "In hindsight, maybe it wasn't the best idea to suggest app1 sneak onto o_c_n territory. But app1 wasn't going to steal any prey, truly, p_l insists to o_c_cat's o_c_n patrol, {PRONOUN/app1/subject} just got overexcited! p_l's rambling excuses and apologies do little to soothe tensions, and the pair eventually return back to camp with heads and tails hung low. This was not going to be fun to explain.",
                 "exp": 0,
                 "weight": 20,
                 "art": "gen_bord_otherclan_hostile",
@@ -2913,7 +3039,7 @@
                 ]
             },
             {
-                "text": "Of course, s_c wouldn't risk <i>{PRONOUN/s_c/poss}</i> reputation stealing o_c_n's prey. But {PRONOUN/s_c/subject} wouldn't be too upset if a particularly irritating apprentice did. It only takes a few sly words of encouragement for app1 to sneak across the border... right as a furious o_c_n patrol arrives. s_c allows the scuffle to go on for a bit, before ever-so-apologetically excusing the apprentice's recklessness.",
+                "text": "Of course, s_c wouldn't risk <i>{PRONOUN/s_c/poss}</i> reputation stealing o_c_n's prey. But {PRONOUN/s_c/subject} wouldn't be too upset if a particularly irritating apprentice did. It only takes a few sly words of encouragement for app1 to sneak across the border... right as o_c_cat's furious o_c_n patrol arrives. s_c allows the scuffle to go on for a bit, before ever-so-apologetically excusing the apprentice's recklessness.",
                 "exp": 0,
                 "weight": 20,
                 "art": "gen_battle_app_other_clan",
@@ -2950,8 +3076,8 @@
     
         ]
         
-      },
-      {
+    },
+    {
         "patrol_id": "gen_bord_otherclanapp",
         "biome": [ "any" ],
         "season": [ "any" ],
@@ -2964,13 +3090,16 @@
             "apprentice": [ 1, 5],
             "warrior": [1, 5]
         },
+        "oc_status": [
+            "apprentice"
+        ],
         "weight": 20,
         "chance_of_success": 40,
-        "intro_text": "The patrol reaches o_c_n's border just as a o_c_n patrol approaches from the other side. The cats of both Clans shift uneasily, waiting for someone to break the silence. app1 perks up when {PRONOUN/app1/subject} {VERB/app1/spot/spots} another apprentice in the o_c_n patrol.",
+        "intro_text": "The patrol reaches o_c_n's border just as o_c_cat's o_c_n patrol approaches from the other side. The cats of both Clans shift uneasily, waiting for someone to break the silence. app1 perks up when {PRONOUN/app1/subject} {VERB/app1/spot/spots} o_c_app in the o_c_n patrol.",
         "decline_text": "p_l quickly marks the border and then steers {PRONOUN/p_l/poss} patrol away from the o_c_n patrol. Best not to risk a confrontation.",
         "success_outcomes": [
             {
-                "text": "app1 calls out a greeting to the other apprentice, {PRONOUN/app1/poss} eyes shining and tail raised. It's exciting to chat with another Clan's apprentice somewhere other than a Gathering, where {PRONOUN/app1/subject}{VERB/app1/'re/'s} supposed to be on {PRONOUN/app1/poss} best behavior. The ice is broken between the patrols, and they stop for a chat before each carrying on their way.",
+                "text": "app1 calls out a greeting to the other apprentice and o_c_app matches it, {PRONOUN/o_c_app/poss} eyes shining and tail raised. It's exciting to chat with another Clan's apprentice somewhere other than a Gathering, where {PRONOUN/app1/subject}{VERB/app1/'re/'s} supposed to be on {PRONOUN/app1/poss} best behavior. The ice is broken between the patrols, and they stop for a chat before each carrying on their way.",
                 "exp": 15,
                 "weight": 40,
                 "stat_skill": [ "SPEAKER,1", "CLEVER,1", "MEDIATOR,1" ],
@@ -2990,7 +3119,7 @@
 				]
             },
             {
-                "text": "app1 watches the other apprentice from across the border as the two patrols get on with marking their side of the border in silence. Every so often, app1 looks up and catches the other apprentice's eye; would they have been friends, if they were born in the same Clan? The patrol passes without incident, and app1 can't help casting a look back at the border as {PRONOUN/app1/subject} {VERB/app1/leave/leaves}.",
+                "text": "app1 watches the other apprentice from across the border as the two patrols get on with marking their side of the border in silence. Every so often, app1 looks up and catches o_c_app's eye; would they have been friends, if they were born in the same Clan? The patrol passes without incident, and app1 can't help casting a look back at the border as {PRONOUN/app1/subject} {VERB/app1/leave/leaves}.",
                 "exp": 15,
                 "weight": 40,
                 "art": "gen_train_speakingromance1",
@@ -3022,7 +3151,7 @@
                 "other_clan_rep": -1
             },
             {
-                "text": "app1 calls out a greeting to the other apprentice, {PRONOUN/app1/poss} eyes shining and tail raised. The other apprentice glances at their mentor for a cue, and their mentor scowls at app1. Once they've left the border, r_c chides app1, reminding {PRONOUN/app1/object} not to be overly friendly with o_c_n.",
+                "text": "app1 calls out a greeting to the other apprentice, {PRONOUN/app1/poss} eyes shining and tail raised. o_c_app glances at {PRONOUN/o_c_app/poss} mentor for a cue, and {PRONOUN/o_c_app/poss} mentor scowls at app1. Once they've left the border, r_c chides app1, reminding {PRONOUN/app1/object} not to be overly friendly with o_c_n.",
                 "exp": 0,
                 "weight": 40,
                 "art": "gen_train_argueWA",
@@ -3041,7 +3170,7 @@
                 ]
             },
             {
-                "text": "app1 waves {PRONOUN/app1/poss} tail to the other apprentice, but s_c yanks {PRONOUN/app1/object} back. With {PRONOUN/s_c/poss} lip curled, s_c lectures app1 not to nurture friendships with other Clans, since they might one day meet in battle. The o_c_n patrol is well within earshot of this lecture, and app1 slinks back to camp with humiliation burning under {PRONOUN/app1/poss} pelt.",
+                "text": "app1 waves {PRONOUN/app1/poss} tail to the other apprentice, but s_c yanks {PRONOUN/app1/object} back. With {PRONOUN/s_c/poss} lip curled, s_c lectures app1 not to nurture friendships with other Clans, since they might one day meet in battle. The o_c_n patrol and certainly o_c_app is well within earshot of this lecture, and app1 slinks back to camp with humiliation burning under {PRONOUN/app1/poss} pelt.",
                 "exp": 0,
                 "weight": 40,
                 "art": "gen_train_patrolapprenticesessionfail",
@@ -3060,7 +3189,7 @@
                 ]
             },
             {
-                "text": "app1 greets the other apprentice confidently, and {PRONOUN/app1/poss} Clanmates strike up a conversation with the o_c_n patrol as well. app1 tells the other apprentice all about {PRONOUN/app1/poss} mastery of some of the trickiest battle moves and the most advanced hunting strategies. The other apprentice rolls their eyes, unimpressed with app1's braggadocio, and the o_c_n patrol moves on.",
+                "text": "app1 greets the other apprentice confidently, and {PRONOUN/app1/poss} Clanmates strike up a conversation with the o_c_n patrol as well. app1 tells o_c_app all about {PRONOUN/app1/poss} mastery of some of the trickiest battle moves and the most advanced hunting strategies. {PRONOUN/o_c_app/subject} {VERB/o_c_app/roll/rolls} {PRONOUN/o_c_app/poss} eyes, unimpressed with app1's braggadocio, and the o_c_n patrol moves on.",
                 "exp": 0,
                 "weight": 40,
                 "stat_trait": [ "bloodthirsty", "fierce", "daring", "competitive", "shameless", "arrogant", "oblivious", "troublesome", "confident", "flamboyant", "bold" ],
@@ -3117,7 +3246,7 @@
                 ]
             },
             {
-                "text": "app1 takes the opportunity to extol the virtues of c_n and how much {PRONOUN/app1/subject} {VERB/app1/pity/pities} this other apprentice for having the misfortune to be born into o_c_n. By the end of {PRONOUN/app1/poss} tirade, the other apprentice is seething with irritation and embarrassment. The patrols part ways with pinned-back ears and prickling pelts.",
+                "text": "app1 takes the opportunity to extol the virtues of c_n and how much {PRONOUN/app1/subject} {VERB/app1/pity/pities} this other apprentice for having the misfortune to be born into o_c_n. By the end of {PRONOUN/app1/poss} tirade, o_c_app is seething with irritation and embarrassment. The patrols part ways with pinned-back ears and prickling pelts.",
                 "exp": 15,
                 "weight": 40,
                 "art": "gen_bord_twocat_hostile_app_warrior",
@@ -3126,14 +3255,14 @@
                 "other_clan_rep": -2
             },
             {
-                "text": "app1 glances up at the other apprentice from time to time while marking the border. {PRONOUN/app1/subject/CAP} never {VERB/app1/get/gets} a chance to meow hello, because r_c spots the o_c_n apprentice peering over the border and coolly asks them to focus on their own territory. An o_c_n warrior responds that r_c should concern {PRONOUN/r_c/self} with <i>{PRONOUN/r_c/poss}</i> apprentices, not o_c_n's. Pelts bristle and ears flatten before the patrols part ways.",
+                "text": "app1 glances up at o_c_app from time to time while marking the border. {PRONOUN/app1/subject/CAP} never {VERB/app1/get/gets} a chance to meow hello, because r_c spots the o_c_n apprentice peering over the border and coolly asks {PRONOUN/o_c_app/object} to focus on {PRONOUN/o_c_app/poss} own territory. An o_c_n warrior responds that r_c should concern {PRONOUN/r_c/self} with <i>{PRONOUN/r_c/poss}</i> apprentices, not o_c_n's. Pelts bristle and ears flatten before the patrols part ways.",
                 "exp": 15,
                 "weight": 20,
                 "art": "gen_bord_twocat_hostile_app_warrior",
                 "other_clan_rep": -2
             },
                 {
-                "text": "app1 arches {PRONOUN/app1/poss} back and spits an insult at the o_c_n apprentice. They're as scrawny as a mouse in leaf-bare! Doesn't o_c_n bother feeding their kits? Oh, sorry, they're an <i>apprentice?</i> Wow, app1 didn't think an apprentice could even <i>be</i> that small.",
+                "text": "app1 arches {PRONOUN/app1/poss} back and spits an insult at the o_c_n apprentice. {PRONOUN/o_c_app/subject/CAP}'{VERB/o_c_app/re/s} as scrawny as a mouse in leaf-bare! Doesn't o_c_n bother feeding their kits? Oh, sorry, {PRONOUN/o_c_app/subject}'{VERB/o_c_app/re/s} an <i>apprentice?</i> Wow, app1 didn't think an apprentice could even <i>be</i> that small.",
                 "exp": 15,
                 "weight": 40,
                 "art": "gen_bord_twocat_hostile_app_warrior",
@@ -3144,7 +3273,7 @@
         ],
         "antag_fail_outcomes": [
             {
-                "text": "The sneering comment has barely left app1's mouth before the other apprentice bunches their hind legs and springs across the border, claws out! The two apprentices tussle for a moment, hissing and spitting, then r_c and a o_c_n warrior drag them off each other. app1 trades spiteful looks with the other apprentice as the patrols hurry away from each other. {PRONOUN/app1/subject/CAP}'ll be hearing about this back at camp.",
+                "text": "The sneering comment has barely left app1's mouth before the other apprentice bunches {PRONOUN/o_c_app/poss} hind legs and springs across the border, claws out! The two apprentices tussle for a moment, hissing and spitting, then r_c and a o_c_n warrior drag them off each other. app1 trades spiteful looks with o_c_app as the patrols hurry away from each other. {PRONOUN/app1/subject/CAP}'ll be hearing about this back at camp.",
                 "exp": 0,
                 "weight": 20,
                 "art": "gen_battle_app_app",
@@ -3239,6 +3368,10 @@
         "min_max_status": {
             "normal adult": [1, 6]
         },
+        "oc_status": [
+            "leader",
+            "normal adult"
+        ],
         "weight": 20,
         "intro_text": "p_l sees two kits from o_c_n playing close to the border.",
         "decline_text": "It's not {PRONOUN/p_l/poss} problem that those kits are alone and vulnerable. o_c_n should keep a closer eye on their kits.",
@@ -3260,7 +3393,7 @@
                 "other_clan_rep": 2
             },
             {
-                "text": "p_l orders the patrol except r_c back to camp. p_l and r_c grab the kits by their scruffs despite their protests, and on their journey to o_c_n they are greeted by a concerned patrol that is very happy and grateful to see the kits safe, thanking them profusely.",
+                "text": "p_l orders the patrol except r_c back to camp. p_l and r_c grab the kits by their scruffs despite their protests, and on their journey to o_c_n they are greeted by o_c_cat's concerned patrol that is very happy and grateful to see the kits safe, thanking them profusely.",
                 "exp": 20,
                 "weight": 5,
                 "relationships": [
@@ -3292,7 +3425,7 @@
                 "other_clan_rep": 2
             },
             {
-                "text": "p_l decides to bring r_c with {PRONOUN/p_l/object} to o_c_n and orders the others back to camp. As they approach o_c_n, they are immediately greeted by the leader, who recognizes p_l - knowing {PRONOUN/p_l/object} to be a kind and caring cat - and thanks both of them sincerely.",
+                "text": "p_l decides to bring r_c with {PRONOUN/p_l/object} to o_c_n and orders the others back to camp. As they approach o_c_n, they are immediately greeted by o_c_leader, who recognizes p_l - knowing {PRONOUN/p_l/object} to be a kind and caring cat - and thanks both of them sincerely.",
                 "exp": 20,
                 "weight": 20,
                 "stat_trait": ["compassionate", "loving", "charismatic"],
@@ -3311,7 +3444,7 @@
         ],
         "fail_outcomes": [
             {
-                "text": "As p_l goes to step over the border with r_c to retrieve the kits and bring them to their Clan, they stop as they hear a o_c_n patrol shouting for the kits. p_l is relieved to know they will be safe with their own Clan and resume {PRONOUN/p_l/poss} patrol. The patrol doesn't realize that the o_c_n cats saw them cross the border and now look upon their departing backs with fury.",
+                "text": "As p_l goes to step over the border with r_c to retrieve the kits and bring them to their Clan, they stop as they hear o_c_cat's patrol shouting for the kits. p_l is relieved to know they will be safe with their own Clan and resume {PRONOUN/p_l/poss} patrol. The patrol doesn't realize that the o_c_n cats saw them cross the border and now look upon their departing backs with fury.",
                 "exp": 0,
                 "weight": 20,
                 "relationships": [
@@ -3326,7 +3459,7 @@
                 "other_clan_rep": -1
             },
             {
-                "text": "As p_l crosses the border with r_c to grab the kits by their scruff, a o_c_n patrol suddenly appears, looking furious, with their claws out and fangs bared! r_c gently drops the kit and attempts to explain the situation but is immediately and viciously killed. p_l races back over to their side of the border, just barely escaping the wrath of o_c_n warriors.",
+                "text": "As p_l crosses the border with r_c to grab the kits by their scruff, o_c_cat's patrol suddenly appears, looking furious, with their claws out and fangs bared! r_c gently drops the kit and attempts to explain the situation but is immediately and viciously killed. p_l races back over to their side of the border, just barely escaping the wrath of o_c_n warriors.",
                 "exp": 0,
                 "weight": 10,
                 "dead_cats": ["r_c"],
@@ -3348,13 +3481,13 @@
         ],
         "antag_fail_outcomes": [
             {
-                "text": "p_l and the patrol cross the border to attack the two kits when they are thwarted by an o_c_n patrol that was looking for the kits. Fox-dung, a good opportunity to weaken o_c_n has failed.",
+                "text": "p_l and the patrol cross the border to attack the two kits when they are thwarted by o_c_cat's o_c_n patrol that was looking for the kits. Fox-dung, a good opportunity to weaken o_c_n has failed.",
                 "exp": 0,
                 "weight": 20,
                 "other_clan_rep": -1
             },
             {
-                "text": "p_l and the patrol cross the border to steal the two kits when they are thwarted by an o_c_n patrol that was looking for the kits. Fox-dung, a good opportunity to weaken o_c_n has failed.",
+                "text": "p_l and the patrol cross the border to steal the two kits when they are thwarted by o_c_cat's o_c_n patrol that was looking for the kits. Fox-dung, a good opportunity to weaken o_c_n has failed.",
                 "exp": 0,
                 "weight": 20,
                 "other_clan_rep": -1
@@ -3406,6 +3539,10 @@
             "leader": [-1, -1],
             "normal adult": [1, 6]
         },
+        "oc_status": [
+            "leader",
+            "normal adult"
+        ],
         "weight": 5,
         "intro_text": "The patrol spots a badger making a den on o_c_n territory.",
         "decline_text": "It's not c_n's problem, but {PRONOUN/p_l/subject} {VERB/p_l/make/makes} a mental note to mention the badger to {PRONOUN/p_l/poss} leader later.",
@@ -3427,7 +3564,7 @@
                 "other_clan_rep": 2
             },
             {
-                "text": "As luck would have it, p_l smells an o_c_n patrol approaching. {PRONOUN/p_l/subject/CAP} {VERB/p_l/call/calls} out to the patrol and tells them about the badger and where {PRONOUN/p_l/subject} saw it making a den. The o_c_n patrol is grateful and return to camp immediately to report the badger to their leader.",
+                "text": "As luck would have it, p_l smells o_c_cat's o_c_n patrol approaching. {PRONOUN/p_l/subject/CAP} {VERB/p_l/call/calls} out to the patrol and tells them about the badger and where {PRONOUN/p_l/subject} saw it making a den. The o_c_n patrol is grateful and return to camp immediately to report the badger to their leader.",
                 "exp": 10,
                 "weight": 5,
                 "relationships": [
@@ -3442,7 +3579,7 @@
                 "other_clan_rep": 2
             },
             {
-                "text": "p_l tells the patrol to continue on and hops over the border to walk to o_c_n's camp. {PRONOUN/p_l/subject/CAP} {VERB/p_l/are/is} greeted at the camp entrance with bristled fur, angry hisses and the leader demanding to know what {PRONOUN/p_l/subject} {VERB/p_l/are/is} doing there. {PRONOUN/p_l/subject/CAP} {VERB/p_l/explain/explains} the situation and with {PRONOUN/p_l/poss} smooth talking skills manage to convince the cats of {PRONOUN/p_l/poss} good intentions. The leader thanks {PRONOUN/p_l/object} and orders a patrol to escort {PRONOUN/p_l/object} back to the border.",
+                "text": "p_l tells the patrol to continue on and hops over the border to walk to o_c_n's camp. {PRONOUN/p_l/subject/CAP} {VERB/p_l/are/is} greeted at the camp entrance with bristled fur, angry hisses and o_c_leader demanding to know what {PRONOUN/p_l/subject} {VERB/p_l/are/is} doing there. {PRONOUN/p_l/subject/CAP} {VERB/p_l/explain/explains} the situation and with {PRONOUN/p_l/poss} smooth talking skills manage to convince the cats of {PRONOUN/p_l/poss} good intentions. The leader thanks {PRONOUN/p_l/object} and orders a patrol to escort {PRONOUN/p_l/object} back to the border.",
                 "exp": 10,
                 "weight": 20,
                 "stat_skill": ["SPEAKER,1", "MEDIATOR,1"],
@@ -3477,7 +3614,7 @@
         ],
         "antag_fail_outcomes": [
             {
-                "text": "An o_c_n patrol approaches and asks if they have seen anything odd. At the same time that p_l says no, r_c tells the o_c_n cats about the huge badger {PRONOUN/r_c/subject} saw. The o_c_n patrols thanks r_c for {PRONOUN/r_c/poss} honesty, looking angrily at p_l at the same time.",
+                "text": "An o_c_n patrol approaches and asks if they have seen anything odd. At the same time that p_l says no, r_c tells the o_c_n cats about the huge badger {PRONOUN/r_c/subject} saw. o_c_cat thanks r_c for {PRONOUN/r_c/poss} honesty, looking angrily at p_l at the same time.",
                 "exp": 0,
                 "weight": 20,
                 "other_clan_rep": -1
@@ -3485,7 +3622,7 @@
         ],
         "antag_success_outcomes": [
             {
-                "text": "{PRONOUN/p_l/subject/CAP} {VERB/p_l/continue/continues} {PRONOUN/p_l/poss} patrol and sometime later a patrol from o_c_n calls out and asks if they have seen anything suspicious. p_l tells them coldly that {PRONOUN/p_l/poss} Clan doesn't owe them anything and continues {PRONOUN/p_l/poss} patrol.",
+                "text": "{PRONOUN/p_l/subject/CAP} {VERB/p_l/continue/continues} {PRONOUN/p_l/poss} patrol and sometime later o_c_cat's patrol from o_c_n calls out and asks if they have seen anything suspicious. p_l tells them coldly that {PRONOUN/p_l/poss} Clan doesn't owe them anything and continues {PRONOUN/p_l/poss} patrol.",
                 "exp": 10,
                 "weight": 20,
                 "other_clan_rep": -2
@@ -3505,9 +3642,12 @@
             "apprentice":[1, 6],
             "normal adult": [1, 6]
         },
+        "oc_status": [
+            "apprentice"
+        ],
         "weight": 40,
         "pl_skill_constraint": ["LORE,1"],
-        "intro_text": "The border patrol, busy remarking, comes across an o_c_n patrol doing the same, and the apprentices from both sides perk up at the chance for a break in the monotony. Chuckling, p_l offers the chance for a small tale - <i>if</i> they can all sit still for it!",
+        "intro_text": "The border patrol, busy remarking, comes across o_c_cat's patrol doing the same, and the apprentices from both sides perk up at the chance for a break in the monotony. Chuckling, p_l offers the chance for a small tale - <i>if</i> they can all sit still for it!",
         "decline_text": "The apprentices can't sit still, but it's no great loss, the patrol just continue on with their work.",
         "chance_of_success": 50,
         "success_outcomes": [
@@ -3559,7 +3699,7 @@
         ],
         "antag_fail_outcomes": [
             {
-                "text": "Once, there was a cat called Scrap. Possessed of few talents and no courage, she- Oh, she was a typical c_n cat then, the o_c_n apprentice laughs. p_l glares, breaking into a hiss that startles the impudent adolescent away from the border.",
+                "text": "Once, there was a cat called Scrap. Possessed of few talents and no courage, she- Oh, she was a typical c_n cat then, o_c_app laughs. p_l glares, breaking into a hiss that startles the impudent adolescent away from the border.",
                 "exp": 0,
                 "weight": 20,
                 "other_clan_rep": -1
