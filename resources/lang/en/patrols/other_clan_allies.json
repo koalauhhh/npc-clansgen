@@ -329,7 +329,7 @@
         "chance_of_success": 60,
         "success_outcomes": [
             {
-                "text": "After poking around a bit, the patrol discovers o_c_app wandering nearby, hopelessly lost. The apprentice is distraught upon discovering {PRONOUN/o_c_app/subject/CAP}'{VERB/o_c_app/re/s} on the wrong side of the border, but p_l only chuckles and gently guides the young cat back to {PRONOUN/o_c_app/poss} own territory.",
+                "text": "After poking around a bit, the patrol discovers o_c_app wandering nearby, hopelessly lost. The apprentice is distraught upon discovering {PRONOUN/o_c_app/subject}'{VERB/o_c_app/re/s} on the wrong side of the border, but p_l only chuckles and gently guides the young cat back to {PRONOUN/o_c_app/poss} own territory.",
                 "exp": 10,
                 "weight": 20,
                 "other_clan_rep": 2
@@ -438,13 +438,13 @@
         "chance_of_success": 60,
         "success_outcomes": [
             {
-                "text": "After poking around a bit, p_l discovers o_c_app wandering nearby, hopelessly lost. The apprentice is distraught upon discovering {PRONOUN/o_c_app/subject/CAP}'{VERB/o_c_app/re/s} on the wrong side of the border, but p_l only chuckles and gently guides the young cat back to {PRONOUN/o_c_app/poss} own territory.",
+                "text": "After poking around a bit, p_l discovers o_c_app wandering nearby, hopelessly lost. The apprentice is distraught upon discovering {PRONOUN/o_c_app/subject}'{VERB/o_c_app/re/s} on the wrong side of the border, but p_l only chuckles and gently guides the young cat back to {PRONOUN/o_c_app/poss} own territory.",
                 "exp": 10,
                 "weight": 20,
                 "other_clan_rep": 2
             },
             {
-                "text": "p_l follows the scent deeper into their own territory, eventually stumbling upon o_c_med! It seems there's an herb shortage and the medicine cat was hoping to borrow from c_n's own stores to treat a badly wounded warrior. p_l hastily escorts {PRONOUN/o_c_med/poss} to the c_n camp.",
+                "text": "p_l follows the scent deeper into their own territory, eventually stumbling upon o_c_med! It seems there's an herb shortage and the medicine cat was hoping to borrow from c_n's own stores to treat a badly wounded warrior. p_l hastily escorts {PRONOUN/o_c_med/object} to the c_n camp.",
                 "exp": 10,
                 "weight": 5,
                 "other_clan_rep": 2
@@ -582,7 +582,7 @@
                 "other_clan_rep": -1
             },
             {
-                "text": "r_c is having trouble focusing today and puts a mark in the wrong place - at the worst possible moment, because o_c_cat's o_c_n patrol sees {PRONOUN/r_c/object} doing it! {PRONOUN/r_c/subject/CAP} immediately {VERB/r_c/apologize/apologizes} to the o_c_n patrol for the diplomatic incident {PRONOUN/r_c/subject}{VERB/r_c/'ve/'s} inadvertently caused.",
+                "text": "r_c is having trouble focusing today and puts a mark in the wrong place - at the worst possible moment, because o_c_cat's patrol sees {PRONOUN/r_c/object} doing it! {PRONOUN/r_c/subject/CAP} immediately {VERB/r_c/apologize/apologizes} to the o_c_n patrol for the diplomatic incident {PRONOUN/r_c/subject}{VERB/r_c/'ve/'s} inadvertently caused.",
                 "exp": 0,
                 "weight": 20,
                 "stat_trait": [
