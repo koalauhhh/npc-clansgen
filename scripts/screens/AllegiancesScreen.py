@@ -24,6 +24,8 @@ from scripts.utility import (
 )
 from .Screens import Screens
 from scripts.ui.generate_button import ButtonStyles, get_button_dict
+from ..cat.enums import CatRank
+from ..game_structure.ui_elements import UIModifiedScrollingContainer
 
 
 class AllegiancesScreen(Screens):
@@ -185,9 +187,10 @@ class AllegiancesScreen(Screens):
         self.set_disabled_menu_buttons(["allegiances"])
         self.update_heading_text(f"{game.clan.name}Clan")
 
-        self.scroll_container = pygame_gui.elements.UIScrollingContainer(
+        self.scroll_container = UIModifiedScrollingContainer(
             ui_scale(pygame.Rect((50, 165), (715, 470))),
             allow_scroll_x=False,
+            allow_scroll_y=True,
             manager=MANAGER,
         )
 
@@ -356,9 +359,11 @@ class AllegiancesScreen(Screens):
                     object_id=get_text_box_theme("#text_box_30_horizleft"),
                     container=self.scroll_container,
                     manager=MANAGER,
-                    anchors={"top_target": self.names_boxes[-1]}
-                    if len(self.names_boxes) > 0
-                    else None,
+                    anchors=(
+                        {"top_target": self.names_boxes[-1]}
+                        if len(self.names_boxes) > 0
+                        else None
+                    ),
                 )
             )
             self.ranks_boxes[-1].disable()
@@ -389,7 +394,7 @@ class AllegiancesScreen(Screens):
         """
         self.current_group = "clan"
         self.living_cats = [
-            cat for cat in Cat.all_cats_list if not cat.dead and not cat.outside
+            cat for cat in Cat.all_cats_list if cat.status.alive_in_player_clan
         ]
 
     def get_cotc_cats(self):
@@ -397,25 +402,23 @@ class AllegiancesScreen(Screens):
         grabs cats outside the clan
         """
         self.current_group = "cotc"
-        self.living_cats = []
-        for the_cat in Cat.all_cats_list:
-            if not the_cat.dead and the_cat.outside and the_cat.clan is None and not the_cat.driven_out:
-                self.living_cats.append(the_cat)
+        self.living_cats = [cat for cat in Cat.all_cats_list if cat.status.is_outsider]
     
     def get_oc_cats(self, clan_number):
         """
         grabs cats from other clans
         """
         self.current_group = "oc" + str(clan_number)
-        self.living_cats = []
-        for the_cat in Cat.all_cats_list:
-            if not the_cat.dead and the_cat.outside and the_cat.clan == (game.clan.all_clans[clan_number]).name:
-                self.living_cats.append(the_cat)
+        self.living_cats = [cat for cat in Cat.all_cats_list if cat.status.is_clancat and get_cat_clan(cat.status.group) == game.clan.all_clans[clan_number]]
 
     def get_allegiances_text(self):
         """Determine Text. Ouputs list of tuples."""
         living_leader = None
         living_deputy = None
+
+        living_cats = [
+            i for i in Cat.all_cats.values() if i.status.alive_in_player_clan
+        ]
         living_meds = []
         living_mediators = []
         living_warriors = []
@@ -423,25 +426,21 @@ class AllegiancesScreen(Screens):
         living_kits = []
         living_elders = []
         for cat in self.living_cats:
-            if cat.status == "leader":
+            if cat.status.rank == CatRank.LEADER:
                 living_leader = cat
-            if cat.status == "deputy":
+            if cat.status.rank == CatRank.DEPUTY:
                 living_deputy = cat
-            if cat.status == "medicine cat":
+            if cat.status.rank == CatRank.MEDICINE_CAT:
                 living_meds.append(cat)
-            elif cat.status == "warrior":
+            elif cat.status.rank == CatRank.WARRIOR:
                 living_warriors.append(cat)
-            elif cat.status == "mediator":
+            elif cat.status.rank == CatRank.MEDIATOR:
                 living_mediators.append(cat)
-            elif cat.status in [
-                "apprentice",
-                "medicine cat apprentice",
-                "mediator apprentice",
-            ]:
+            elif cat.status.rank.is_any_apprentice_rank():
                 living_apprentices.append(cat)
-            elif cat.status in ["kitten", "newborn"]:
+            elif cat.status.rank.is_baby():
                 living_kits.append(cat)
-            elif cat.status == "elder":
+            elif cat.status.rank == CatRank.ELDER:
                 living_elders.append(cat)
 
         # Find Queens:
@@ -460,7 +459,7 @@ class AllegiancesScreen(Screens):
         # Clan Leader Box:
         # Pull the Clan leaders
         outputs = []
-        if living_leader and game.clan.leader and not (game.clan.leader.dead or game.clan.leader.outside):
+        if living_leader and game.clan.leader and game.clan.leader.status.alive_in_player_clan:
             outputs.append(
                 [
                     f"<b><u>{i18n.t('general.leader', count=1).upper()}</u></b>",
@@ -476,7 +475,7 @@ class AllegiancesScreen(Screens):
             )
 
         # Deputy Box:
-        if living_deputy and game.clan.deputy and not (game.clan.deputy.dead or game.clan.deputy.outside):
+        if living_deputy and game.clan.deputy and game.clan.deputy.status.alive_in_player_clan:
             outputs.append(
                 [
                     f"<b><u>{i18n.t('general.deputy', count=1).upper()}</u></b>",
