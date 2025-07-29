@@ -1283,9 +1283,9 @@ class MakeClanScreen(Screens):
             self.symbol_selected = f"symbol{self.clan_name.upper()}0"
         else:
             self.symbol_selected = choice(sprites.clan_symbols)
-        self.leader = create_cat(rank=CatRank.WARRIOR, clan=self.clan_name)
-        self.deputy = create_cat(rank=CatRank.WARRIOR, clan=self.clan_name)
-        self.med_cat = create_cat(rank=CatRank.WARRIOR, clan=self.clan_name)
+        self.leader = create_cat(rank=CatRank.WARRIOR)
+        self.deputy = create_cat(rank=CatRank.WARRIOR)
+        self.med_cat = create_cat(rank=CatRank.WARRIOR)
         for _ in range(randrange(4, 8)):
             random_rank = choice(
                 [
@@ -2165,8 +2165,7 @@ class MakeClanScreen(Screens):
     def save_clan(self):
         game.mediated.clear()
         game.patrolled.clear()
-        game.cat_to_fade.clear()
-
+        save_load.faded_ids.clear()
         Cat.outside_cats.clear()
         Patrol.used_patrols.clear()
         convert_camp = {1: "camp1", 2: "camp2", 3: "camp3", 4: "camp4"}

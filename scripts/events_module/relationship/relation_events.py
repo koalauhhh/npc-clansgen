@@ -14,7 +14,7 @@ from scripts.utility import (
     get_cats_same_age,
     get_cats_of_romantic_interest,
     get_free_possible_mates,
-    get_other_clan,
+    get_cat_clan,
 )
 
 
@@ -96,7 +96,7 @@ class Relation_Events:
             if inter_cat.status.is_outsider:
                 continue
 
-            if inter_cat.ID not in cat.relationships and inter_cat.clan != cat.clan:
+            if inter_cat.ID not in cat.relationships and inter_cat.status.group != cat.status.group:
                 continue
             if inter_cat.ID not in cat.relationships:
                 cat.create_one_relationship(inter_cat)
@@ -171,7 +171,7 @@ class Relation_Events:
         First it will be decided if a special type of group (found in relationship_events/group_interactions/group_types.json).
         As default all cats will be a possible 'group' of interaction.
         """
-        cat_clan = get_other_clan(cat.clan)
+        cat_clan = get_cat_clan(cat.status.group)
         if not Relation_Events.can_trigger_events(cat):
             return
 
@@ -290,7 +290,7 @@ class Relation_Events:
 
             if inter_cat.ID == main_cat.ID:
                 continue
-            if cat_to.ID not in cat_from.relationships and cat_to.clan != cat_from.clan:
+            if cat_to.ID not in cat_from.relationships and cat_to.status.group != cat_from.status.group:
                 continue
             if cat_to.ID not in cat_from.relationships:
                 cat_from.create_one_relationship(cat_to)

@@ -28,7 +28,7 @@ from scripts.game_structure.ui_elements import (
 from scripts.screens.Screens import Screens
 from scripts.ui.generate_button import ButtonStyles, get_button_dict
 from scripts.ui.icon import Icon
-from scripts.utility import ui_scale, get_text_box_theme, ui_scale_value
+from scripts.utility import ui_scale, get_text_box_theme, ui_scale_value, get_cat_clan
 
 
 class ListScreen(Screens):
@@ -57,9 +57,7 @@ class ListScreen(Screens):
         "general.cotc", 
         "general.oc0", 
         "general.oc1", 
-        "general.oc2", 
-        "general.oc3", 
-        "general.oc4"
+        "general.oc2",
     )
     
     dead_group_names = (
@@ -255,6 +253,14 @@ class ListScreen(Screens):
 
         self.set_disabled_menu_buttons(["catlist_screen"])
         self.show_menu_buttons()
+
+        if not "general.oc3" in self.living_group_names:
+            # self.living_group_names += ("general.oc0", "general.oc1", "general.oc2",)
+            
+            if (len(game.clan.all_clans) >= 4) :
+                self.living_group_names += ("general.oc3",)
+                if (len(game.clan.all_clans) == 5) :
+                    self.living_group_names += ("general.oc4",)
 
         # SCREEN CONTAINER - everything should come back to here
         self.list_screen_container = pygame_gui.core.UIContainer(
@@ -546,9 +552,9 @@ class ListScreen(Screens):
                 self.get_oc_cats(1)
             elif new_group == "oc2":
                 self.get_oc_cats(2)
-            elif new_group == "oc3":
+            elif len(game.clan. all_clans) >= 4 and new_group == "oc3":
                 self.get_oc_cats(3)
-            elif new_group == "oc4":
+            elif len(game.clan. all_clans) == 5 and new_group == "oc4":
                 self.get_oc_cats(4)
             elif new_group == "starclan":
                 self.get_sc_cats()
@@ -703,19 +709,19 @@ class ListScreen(Screens):
             self.update_heading_text("general.cotc")
         elif self.current_group == "oc0":
             self.set_bg(None)
-            self.update_heading_text("general.oc0")
+            self.update_heading_text(game.clan.all_clans[0].name + "Clan")
         elif self.current_group == "oc1":
             self.set_bg(None)
-            self.update_heading_text("general.oc1")
+            self.update_heading_text(game.clan.all_clans[1].name + "Clan")
         elif self.current_group == "oc2":
             self.set_bg(None)
-            self.update_heading_text("general.oc2")
-        elif self.current_group == "oc3":
+            self.update_heading_text(game.clan.all_clans[2].name + "Clan")
+        elif len(game.clan. all_clans) >= 4 and self.current_group == "oc3":
             self.set_bg(None)
-            self.update_heading_text("general.oc3")
-        elif self.current_group == "oc4":
+            self.update_heading_text(game.clan.all_clans[3].name + "Clan")
+        elif len(game.clan. all_clans) == 5 and self.current_group == "oc4":
             self.set_bg(None)
-            self.update_heading_text("general.oc4")
+            self.update_heading_text(game.clan.all_clans[4].name + "Clan")
         elif self.current_group == "starclan":
             self.set_bg("starclan")
             self.update_heading_text("general.starclan")

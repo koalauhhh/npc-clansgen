@@ -132,7 +132,7 @@ class Events:
         # Calling of "one_moon" functions.
         for cat in Cat.all_cats.copy().values():
             cat_clan = get_cat_clan(cat.status.group)
-            if cat.status.is_outsider:
+            if cat.status.is_outsider and not cat.dead:
                 self.one_moon_outside_cat(cat)
             elif cat.status.is_clancat or cat.status.group.is_afterlife():
                 self.one_moon_cat(cat, cat_clan)
@@ -175,7 +175,7 @@ class Events:
             shaken_cats = []
             extra_event = None
             for ghost in Cat.dead_cats:
-                if ghost.status.is_other_clan_group:
+                if ghost.status.group != CatGroup.PLAYER_CLAN:
                     pass
                 ghost_names.append(str(ghost.name))
             insert = adjust_list_text(ghost_names)
@@ -943,7 +943,7 @@ class Events:
         if (
             game.clan.game_mode in ("expanded", "cruel season")
             and game.clan.freshkill_pile
-            and cat.clan == game.clan.name
+            and cat.status.alive_in_player_clan
         ):
             Condition_Events.handle_nutrient(
                 cat, game.clan.freshkill_pile.nutrition_info
@@ -1004,7 +1004,7 @@ class Events:
 
 
         # now we make sure ill and injured cats don't get interactions they shouldn't
-        if cat.is_ill() or cat.is_injured() and cat.clan == game.clan.name:
+        if cat.is_ill() or cat.is_injured() and cat.status.alive_in_player_clan:
             return
 
         self.invite_new_cats(cat)
@@ -1193,9 +1193,14 @@ class Events:
 
                 text = event_text_adjust(Cat, text, main_cat=cat)
 
-                game.cur_events_list.append(
-                    Single_Event(text, "ceremony", cat_clan.deputy.ID)
-                )
+                if cat.status.group.is_other_clan_group() or (cat.status.get_last_living_group()).is_other_clan_group():
+                    game.cur_events_list.append(
+                        Single_Event(text, ["ceremony", "other_clans"], cat_clan.deputy.ID)
+                    )
+                else:
+                    game.cur_events_list.append(
+                        Single_Event(text, "ceremony", cat_clan.deputy.ID)
+                    )
                 self.ceremony_accessory = True
                 self.gain_accessories(cat, cat_clan)
                 cat_clan.deputy = None
@@ -1382,18 +1387,18 @@ class Events:
                             preparedness = "prepared"
 
                     if cat.status.rank == CatRank.APPRENTICE:
-                        self.ceremony(cat, CatRank.WARRIOR, preparedness)
+                        self.ceremony(cat, CatRank.WARRIOR, game.clan, preparedness)
                         self.ceremony_accessory = True
                         self.gain_accessories(cat, cat_clan)
 
                     # promote to med cat
                     elif cat.status.rank == CatRank.MEDICINE_APPRENTICE:
-                        self.ceremony(cat, CatRank.MEDICINE_CAT, preparedness)
+                        self.ceremony(cat, CatRank.MEDICINE_CAT, game.clan, preparedness)
                         self.ceremony_accessory = True
                         self.gain_accessories(cat, cat_clan)
 
                     elif cat.status.rank == CatRank.MEDIATOR_APPRENTICE:
-                        self.ceremony(cat, CatRank.MEDIATOR, preparedness)
+                        self.ceremony(cat, CatRank.MEDIATOR, game.clan, preparedness)
                         self.ceremony_accessory = True
                         self.gain_accessories(cat, cat_clan)
 
@@ -1833,7 +1838,7 @@ class Events:
             filter(
                 lambda kitty: (
                     kitty.status.rank != CatRank.LEADER
-                    and kitty.status.alive_in_player_clan
+                    and kitty.status.group == cat.status.group
                 ),
                 Cat.all_cats.values(),
             )
@@ -1847,7 +1852,11 @@ class Events:
         elif clan_size < 30:
             base_chance = 300
 
-        reputation = game.clan.reputation
+        if cat.status.alive_in_player_clan:
+            reputation = game.clan.reputation
+        else:
+            reputation = 50
+
         # hostile
         if 1 <= reputation <= 30:
             if clan_size < 10:
@@ -2342,7 +2351,7 @@ class Events:
                 possible_deputies = list(
                     filter(
                         lambda x: x.status.is_clancat
-                        and x.status.group == iter_clan.group
+                        and get_cat_clan(x.status.group) == iter_clan
                         and x.status.rank == CatRank.WARRIOR
                         and (x.apprentice or x.former_apprentices),
                         Cat.all_cats_list,
@@ -2408,7 +2417,7 @@ class Events:
                     all_warriors = list(
                         filter(
                         lambda x: x.status.is_clancat
-                        and x.status.group == iter_clan.group
+                        and get_cat_clan(x.status.group) == iter_clan
                         and x.status.rank == CatRank.WARRIOR,
                         Cat.all_cats_list,
                         )
@@ -2420,18 +2429,22 @@ class Events:
 
                     else:
                         # If there are no warriors at all, no one is named deputy.
-                        game.cur_events_list.append(
-                            Single_Event(
-                                i18n.t("hardcoded.ceremony_deputy_none"), "ceremony"
+                        if iter_clan == game.clan:
+                            game.cur_events_list.append(
+                                Single_Event(
+                                    i18n.t("hardcoded.ceremony_deputy_none"), "ceremony"
+                                )
                             )
-                        )
-                        return
+                        continue
 
                 text = event_text_adjust(Cat, text, main_cat=random_cat, clan=game.clan)
                 random_cat.rank_change(CatRank.DEPUTY)
                 iter_clan.deputy = random_cat
 
-                game.cur_events_list.append(Single_Event(text, "ceremony", involved_cats))
+                if iter_clan != game.clan:
+                        game.cur_events_list.append(Single_Event(text, ["ceremony", "other_clans"], involved_cats))
+                else:
+                    game.cur_events_list.append(Single_Event(text, "ceremony", involved_cats))
 
 
 events_class = Events()

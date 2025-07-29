@@ -240,7 +240,7 @@ def get_cats_same_age(Cat, cat, age_range=10):
         if inter_cat.ID == cat.ID:
             continue
         
-        if inter_cat.ID not in cat.relationships and inter_cat.clan != cat.clan:
+        if inter_cat.ID not in cat.relationships and inter_cat.status.group != cat.status.group:
             continue
         if inter_cat.ID not in cat.relationships:
             cat.create_one_relationship(inter_cat)
@@ -266,7 +266,7 @@ def get_free_possible_mates(cat):
         if inter_cat.ID == cat.ID:
             continue
         
-        if (inter_cat.ID not in cat.relationships) and (inter_cat.clan != cat.clan):
+        if (inter_cat.ID not in cat.relationships) and (inter_cat.status.group != cat.status.group):
             continue
         if inter_cat.ID not in cat.relationships:
             cat.create_one_relationship(inter_cat)
@@ -472,7 +472,7 @@ def create_new_cat_block(
             break
 
     # GROUP - # for now, this just gets set to None. event formats don't yet pass group info
-    cat_group = None
+    cat_group = CatGroup.PLAYER_CLAN
 
     # SET AGE
     age = None
@@ -598,8 +598,6 @@ def create_new_cat_block(
 
     # MEETING - DETERMINE IF THIS IS AN OUTSIDE CAT
     outside = False
-    clan = game.clan.name
-    npc = False
     if "meeting" in attribute_list:
         outside = True
         rank = None
@@ -607,10 +605,9 @@ def create_new_cat_block(
         thought = i18n.t("hardcoded.thought_meeting")
         if age is not None and age <= 6 and not bs_override:
             chosen_backstory = "outsider1"
-    elif "m_c" in in_event_cats and in_event_cats["m_c"].outside:
+    elif "m_c" in in_event_cats and (in_event_cats["m_c"].status.group).is_other_clan_group():
         outside = True
-        clan = in_event_cats["m_c"].clan
-        npc = True
+        cat_group = in_event_cats["m_c"].status.group
 
     # IS THE CAT DEAD?
     alive = True
@@ -720,7 +717,8 @@ def create_new_cat_block(
             backstory=chosen_backstory,
             rank=rank,
             original_social=cat_social,
-            original_group=cat_group,
+            original_group=None,
+            new_group=cat_group,
             moons=age,
             gender=gender,
             thought=thought,
@@ -838,6 +836,7 @@ def create_new_cat(
     rank: CatRank = None,
     original_social: CatSocial = CatSocial.CLANCAT,
     original_group: CatGroup = None,
+    new_group: CatGroup = CatGroup.PLAYER_CLAN,
     moons: int = None,
     gender: str = None,
     thought: str = None,
@@ -959,8 +958,8 @@ def create_new_cat(
         new_cat.status.change_current_moons_as(moons)
 
         # now we actually add them to the clan, if they should be joining
-        if not outside and alive:
-            new_cat.add_to_clan()
+        if not outside and alive and new_group == CatGroup.PLAYER_CLAN or outside and alive and new_group.is_other_clan_group():
+            new_cat.add_to_clan(new_group)
             # check if cat is the correct rank
             if new_cat.status.rank != rank:
                 new_cat.status._change_rank(CatRank(rank))
@@ -975,48 +974,49 @@ def create_new_cat(
         # NAMES and accs
         # clancat adults should have already generated with a clan-ish name, thus they skip all of this re-naming
         # little babies will take a clancat name, we love indoctrination
-        if (kit or litter or moons < 12) and (
-            not original_group or not original_group.is_other_clan_group()
-        ):
-            # babies change name, in case their initial name isn't clan-ish
-            new_cat.change_name()
-        else:
-            # give kittypets a kittypet name
-            if original_social == CatSocial.KITTYPET:
-                name = choice(names.names_dict["loner_names"])
-                # check if the kittypets come with a pretty acc
-                if bool(getrandbits(1)):
-                    # TODO: refactor this entire function to remove this call amongst other things
-                    from scripts.cat.pelts import Pelt
-
-                    new_cat.pelt.accessory.append(choice(Pelt.collars))
-
-            # try to give name from full loner name list
-            elif original_social in (CatSocial.LONER, CatSocial.ROGUE) and bool(
-                getrandbits(1)
+        if outside and not new_cat.status.is_clancat:
+            if (kit or litter or moons < 12) and (
+                not original_group or not original_group.is_other_clan_group()
             ):
-                name = choice(names.names_dict["loner_names"])
-            # otherwise give name from prefix list (more nature-y names)
+                # babies change name, in case their initial name isn't clan-ish
+                new_cat.change_name()
             else:
-                name = choice(names.names_dict["normal_prefixes"])
+                # give kittypets a kittypet name
+                if original_social == CatSocial.KITTYPET:
+                    name = choice(names.names_dict["loner_names"])
+                    # check if the kittypets come with a pretty acc
+                    if bool(getrandbits(1)):
+                        # TODO: refactor this entire function to remove this call amongst other things
+                        from scripts.cat.pelts import Pelt
 
-                # now, if this cat should take a new clan name, we give them such
-            if new_name:
-                # check if adding suffix to OG name
-                if bool(getrandbits(1)):
-                    spaces = name.count(" ")
-                    if spaces > 0:
-                        # make a list of the words within the name, then add the OG name back in the list
-                        words = name.split(" ")
-                        words.append(name)
-                        new_prefix = choice(words)  # pick new prefix from that list
-                        new_cat.change_name(new_prefix=new_prefix)
-                # else, take a whole new name
+                        new_cat.pelt.accessory.append(choice(Pelt.collars))
+
+                # try to give name from full loner name list
+                elif original_social in (CatSocial.LONER, CatSocial.ROGUE) and bool(
+                    getrandbits(1)
+                ):
+                    name = choice(names.names_dict["loner_names"])
+                # otherwise give name from prefix list (more nature-y names)
                 else:
-                    new_cat.change_name()
-            # else, let them keep their old name
-            else:
-                new_cat.change_name(new_prefix=name, new_suffix="")
+                    name = choice(names.names_dict["normal_prefixes"])
+
+                    # now, if this cat should take a new clan name, we give them such
+                if new_name:
+                    # check if adding suffix to OG name
+                    if bool(getrandbits(1)):
+                        spaces = name.count(" ")
+                        if spaces > 0:
+                            # make a list of the words within the name, then add the OG name back in the list
+                            words = name.split(" ")
+                            words.append(name)
+                            new_prefix = choice(words)  # pick new prefix from that list
+                            new_cat.change_name(new_prefix=new_prefix)
+                    # else, take a whole new name
+                    else:
+                        new_cat.change_name()
+                # else, let them keep their old name
+                else:
+                    new_cat.change_name(new_prefix=name, new_suffix="")
 
         # Remove disabling scars, if they generated.
         # these are removed bc the cat won't have the associated perm condition
@@ -1206,7 +1206,7 @@ def get_cats_of_romantic_interest(cat):
         if inter_cat.ID == cat.ID:
             continue
 
-        if inter_cat.ID not in cat.relationships and inter_cat.clan != cat.clan:
+        if inter_cat.ID not in cat.relationships and inter_cat.status.group != cat.status.group:
             continue
         if inter_cat.ID not in cat.relationships:
             cat.create_one_relationship(inter_cat)

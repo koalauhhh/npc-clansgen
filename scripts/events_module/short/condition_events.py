@@ -34,7 +34,7 @@ from scripts.utility import (
     event_text_adjust,
     find_alive_cats_with_rank,
     get_leader_life_notice,
-    get_other_clan,
+    get_cat_clan,
 )
 
 
@@ -335,6 +335,8 @@ class Condition_Events:
             types = ["health"]
             if cat.dead:
                 types.append("birth_death")
+            if cat.status.group.is_other_clan_group() or (cat.status.get_last_living_group()).is_other_clan_group():
+                types.append("other_clans")
             game.cur_events_list.append(
                 Single_Event(event_string, types, cat.ID, cat_dict={"m_c": cat})
             )
@@ -541,7 +543,7 @@ class Condition_Events:
 
     @staticmethod
     def handle_already_ill(cat):
-        cat_clan = get_other_clan(cat.clan)
+        cat_clan = get_cat_clan(cat.status.group)
         starting_life_count = cat_clan.leader_lives
         cat.healed_condition = False
         event_list = []
@@ -844,6 +846,8 @@ class Condition_Events:
             types = ["health"]
             if cat.dead:
                 types.append("birth_death")
+            if cat.status.group.is_other_clan_group() or (cat.status.get_last_living_group()).is_other_clan_group():
+                types.append("other_clans")
             game.cur_events_list.append(Single_Event(event_string, types, cat.ID))
 
         return triggered
@@ -982,6 +986,8 @@ class Condition_Events:
 
         if len(event_list) > 0:
             event_string = " ".join(event_list)
+            if cat.status.group.is_other_clan_group() or (cat.status.get_last_living_group()).is_other_clan_group():
+                event_types.append("other_clans")
             game.cur_events_list.append(
                 Single_Event(event_string, event_types, [cat.ID], cat_dict=cat_dict)
             )
@@ -1056,14 +1062,24 @@ class Condition_Events:
 
                     cat.retire_cat()
                     # Don't add this to the condition event list: instead make it its own event, a ceremony.
-                    game.cur_events_list.append(
-                        Single_Event(
-                            event_text_adjust(Cat, event, main_cat=cat),
-                            "ceremony",
-                            retire_involved,
-                            cat_dict=cat_dict,
+                    if cat.status.group.is_other_clan_group() or (cat.status.get_last_living_group()).is_other_clan_group():
+                        game.cur_events_list.append(
+                            Single_Event(
+                                event_text_adjust(Cat, event, main_cat=cat),
+                                ["ceremony", "other_clans"],
+                                retire_involved,
+                                cat_dict=cat_dict,
+                            )
                         )
-                    )
+                    else:
+                        game.cur_events_list.append(
+                            Single_Event(
+                                event_text_adjust(Cat, event, main_cat=cat),
+                                "ceremony",
+                                retire_involved,
+                                cat_dict=cat_dict,
+                            )
+                        )
 
     @staticmethod
     def give_risks(cat, event_list, condition, progression, conditions, dictionary):

@@ -380,7 +380,7 @@ class GenerateEvents:
                     continue
 
             # other Clan related checks
-            if event.other_clan:
+            if event.other_clan and cat.status.alive_in_player_clan:
                 if not other_clan:
                     continue
 
@@ -391,7 +391,7 @@ class GenerateEvents:
 
                 # during a war we want to encourage the clans to have positive events
                 # when the overall war notice was positive
-                if "war" in event.sub_type:
+                if "war" in event.sub_type and cat.status.alive_in_player_clan:
                     rel_change_type = switch_get_value(Switch.war_rel_change_type)
                     if (
                         event.other_clan["changed"] < 0
@@ -400,7 +400,7 @@ class GenerateEvents:
                         continue
 
             # clans below a certain age can't have their supplies messed with
-            if game.clan.age < 5 and event.supplies:
+            if game.clan.age < 5 and event.supplies or event.supplies and cat.status.group.is_other_clan_group():
                 continue
 
             elif event.supplies:
@@ -439,7 +439,7 @@ class GenerateEvents:
             return None, None
 
         cat_list = [
-            c for c in Cat_class.all_cats.values() if c.status.alive_in_player_clan
+            c for c in Cat_class.all_cats.values() if c.status.group == cat.status.group
         ]
         chosen_cat = None
         chosen_event = None

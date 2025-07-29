@@ -269,7 +269,7 @@ class HerbSupply:
             for stock in self.storage[herb]:
                 total += stock
         if herb in self.collected:
-            total += self.collected[herb]
+            total += (self.collected[herb])
 
         return total
 

@@ -161,21 +161,6 @@ class Clan:
             self.med_cat_list.append(self.medicine_cat.ID)
             if self.medicine_cat.status != "medicine cat":
                 Cat.all_cats[self.medicine_cat.ID].rank_change(CatRank.MEDICINE_CAT)
-        
-        for other_clan in self.all_clans:
-            if other_clan.deputy is not None:
-                other_clan.deputy.status_change("deputy")
-                other_clan.clan_cats.append(other_clan.deputy.ID)
-
-            if other_clan.leader:
-                other_clan.leader.status_change("leader")
-                other_clan.clan_cats.append(other_clan.leader.ID)
-
-            if other_clan.medicine_cat is not None:
-                other_clan.clan_cats.append(other_clan.medicine_cat.ID)
-                other_clan.med_cat_list.append(other_clan.medicine_cat.ID)
-                if other_clan.medicine_cat.status != "medicine cat":
-                    Cat.all_cats[other_clan.medicine_cat.ID].status_change("medicine cat")
             
             @property
             def settings(self):
@@ -300,7 +285,7 @@ class Clan:
 
     def add_to_clan(self, cat, other_clan=None):
         """
-        just removes cat from other lists
+        remove outside/other clan cat from respective lists
         """
         if (
             cat.ID in Cat.all_cats
@@ -466,7 +451,6 @@ class Clan:
         clan_data["patrolled_cats"] = [str(i) for i in game.patrolled]
 
         # OTHER CLANS
-        # TODO: watch other clan save order in order to figure out load order
         clan_data["other_clans"] = []
         for other_clan in self.all_clans:
             other_clan_data = {
@@ -829,11 +813,27 @@ class Clan:
         )
         if "other_clans" in clan_data:
             for other_clan, enum in zip(clan_data["other_clans"], other_clan_enums):
+                if other_clan["leader"]:
+                    leader = Cat.all_cats[other_clan["leader"]]
+                    leader_lives = other_clan["leader_lives"]
+                else:
+                    leader = None
+                    leader_lives = 0
+
+                if other_clan["deputy"]:
+                    deputy = Cat.all_cats[other_clan["deputy"]]
+                else:
+                    deputy = None
+
+                if other_clan["medicine_cat"]:
+                    med_cat = Cat.all_cats[other_clan["medicine_cat"]]
+                else:
+                    med_cat = None
                 oc = OtherClan(
                         name=other_clan["name"],
-                        leader=Cat.all_cats[other_clan["leader"]],
-                        deputy=Cat.all_cats[other_clan["deputy"]],
-                        medicine_cat=Cat.all_cats[other_clan["medicine_cat"]],
+                        leader=leader,
+                        deputy=deputy,
+                        medicine_cat=med_cat,
                         biome=other_clan["biome"],
                         chosen_symbol=other_clan["chosen_symbol"],
                         relations=int(other_clan["relations"]),
@@ -1356,6 +1356,7 @@ class OtherClan:
         self.medicine_cat = medicine_cat
         self.med_cat_list = []
         self.clan_cats = []
+        self.group = None
         self.med_cat_number = len(
             self.med_cat_list
         )  # Must do this after the medicine cat is added to the list.
@@ -1402,7 +1403,7 @@ class OtherClan:
             Cat,
             backstory="clanborn",
             rank= CatRank.LEADER,
-            original_group= self.other_clan_enums[0].index(game.clan.other_clans.index(self)),
+            original_group=self.group,
             alive=True,
             outside=True
         )[0]
@@ -1411,7 +1412,7 @@ class OtherClan:
             Cat,
             backstory="clanborn",
             rank= CatRank.DEPUTY,
-            original_group= self.other_clan_enums[0].index(game.clan.other_clans.index(self)),
+            original_group=self.group,
             alive=True,
             outside=True
         )[0]
@@ -1420,7 +1421,7 @@ class OtherClan:
             Cat,
             backstory="clanborn",
             rank= CatRank.MEDICINE_CAT,
-            original_group= self.other_clan_enums[0].index(game.clan.other_clans.index(self)),
+            original_group=self.group,
             alive=True,
             outside=True
         )[0]
@@ -1434,6 +1435,7 @@ class OtherClan:
             Cat,
             backstory="clanborn",
             rank= random_rank,
+            original_group=self.group,
             alive=True,
             outside=True
         )[0].ID)
@@ -1473,6 +1475,27 @@ class OtherClan:
             self.med_cat_number = len(self.med_cat_list)
             self.clan_cats.append(med_cat)
 
+    def add_to_clan(self, cat, other_clan=None):
+        """
+        remove outside/other clan cat from respective lists into clan list
+        """
+        if (
+            cat.ID in Cat.all_cats
+            and cat.ID in Cat.outside_cats
+            and cat.status.group == self.group
+        ):
+            Cat.outside_cats.pop(cat.ID)
+            self.clan_cats.append(cat.ID)
+        elif (
+            cat.ID in Cat.all_cats
+            and cat.status.group == self.group
+            and other_clan is not None
+            and other_clan != CatGroup.PLAYER_CLAN
+        ): # if cat from other clan
+            other_clan.clan_cats.pop(cat.ID)
+            self.clan_cats.append(cat.ID)
+        else: # if cat from player clan or born
+            self.clan_cats.append(cat.ID)
 class StarClan:
     """
     TODO: DOCS

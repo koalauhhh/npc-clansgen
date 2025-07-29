@@ -879,16 +879,17 @@ class Cat:
         for x in self.apprentice:
             Cat.fetch_cat(x).update_mentor()
 
-    def add_to_clan(self) -> list:
+    def add_to_clan(self, new_group) -> list:
         """Makes an "outside cat" a Clan cat. Returns a list of IDs for any additional cats that
         are coming with them."""
 
-        if not self.status.is_exiled(CatGroup.PLAYER_CLAN):
+        if new_group == CatGroup.PLAYER_CLAN and not self.status.is_exiled(CatGroup.PLAYER_CLAN):
             self.history.add_beginning()
 
-        self.status.add_to_group(new_group=CatGroup.PLAYER_CLAN, age=self.age)
+        self.status.add_to_group(new_group=new_group, age=self.age)
 
-        game.clan.add_to_clan(self)
+        cat_clan = get_cat_clan(new_group)
+        cat_clan.add_to_clan(self)
 
         # check if there are kits under 12 moons with this cat and also add them to the clan
         children = self.get_children()
@@ -897,10 +898,10 @@ class Cat:
             child = Cat.all_cats[child_id]
             if (
                 not child.dead
-                and not child.status.is_exiled(CatGroup.PLAYER_CLAN)
+                and (new_group == CatGroup.PLAYER_CLAN and not child.status.is_exiled(CatGroup.PLAYER_CLAN))
                 and child.moons < 12
             ):
-                child.status.add_to_group(new_group=CatGroup.PLAYER_CLAN, age=self.age)
+                child.status.add_to_group(new_group=new_group, age=self.age)
                 child.add_to_clan()
                 child.history.add_beginning()
                 ids.append(child_id)
@@ -1632,6 +1633,7 @@ class Cat:
 
     def moon_skip_illness(self, illness):
         """handles the moon skip for illness"""
+        cat_clan = get_cat_clan(self.status.group)
         if not self.is_ill():
             return True
 
@@ -1650,7 +1652,7 @@ class Cat:
         if mortality and not int(random() * mortality):
             if self.status.is_leader:
                 self.leader_death_heal = True
-                game.clan.leader_lives -= 1
+                cat_clan.leader_lives -= 1
 
             self.die()
             return False
@@ -1670,12 +1672,14 @@ class Cat:
         elif (
             get_clan_setting("rest and recover")
             and self.illnesses[illness]["duration"] + moons_prior - moons_with <= 0
+            and self.status.alive_in_player_clan
         ):
             self.healed_condition = True
             return False
 
     def moon_skip_injury(self, injury):
         """handles the moon skip for injury"""
+        cat_clan = get_cat_clan(self.status.group)
         if not self.is_injured():
             return True
 
@@ -1693,7 +1697,7 @@ class Cat:
 
         if mortality and not int(random() * mortality):
             if self.status.is_leader:
-                game.clan.leader_lives -= 1
+                cat_clan.leader_lives -= 1
             self.die()
             return False
 
@@ -1717,12 +1721,14 @@ class Cat:
             not self.injuries[injury]["complication"]
             and get_clan_setting("rest and recover")
             and self.injuries[injury]["duration"] + moons_prior - moons_with <= 0
+            and self.status.alive_in_player_clan
         ):
             self.healed_condition = True
             return False
 
     def moon_skip_permanent_condition(self, condition):
         """handles the moon skip for permanent conditions"""
+        cat_clan = get_cat_clan(self.status.group)
         if not self.is_disabled():
             return "skip"
 
@@ -1755,7 +1761,7 @@ class Cat:
 
         if mortality and not int(random() * mortality):
             if self.status.is_leader:
-                game.clan.leader_lives -= 1
+                cat_clan.leader_lives -= 1
             self.die()
             return "continue"
 

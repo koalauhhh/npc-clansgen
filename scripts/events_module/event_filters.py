@@ -53,9 +53,10 @@ def event_for_tags(tags: list, cat, other_cat=None) -> bool:
     """
         checks if current tags disqualify the event
         """
-    cat_clan = get_cat_clan(cat.status.group)
     if not tags:
         return True
+    
+    # cat_clan = get_cat_clan(cat.status.group)
 
     # some events are mode specific
     mode = game.clan.game_mode
@@ -67,7 +68,7 @@ def event_for_tags(tags: list, cat, other_cat=None) -> bool:
     # check leader life tags
     if hasattr(cat, "ID"):
         if cat.status.is_leader:
-            leader_lives = cat_clan.leader_lives
+            leader_lives = game.clan.leader_lives
 
             life_lookup = {
                 "some_lives": 4,
